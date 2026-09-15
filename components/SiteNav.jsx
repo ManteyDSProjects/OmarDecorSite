@@ -113,10 +113,10 @@ export default function SiteNav({ variant = "light", current }) {
                     <Icon name="whatsapp" size={18} style={{ color: "var(--od-brass)", flexShrink: 0 }} />
                     +44 7766 355099
                   </a>
-                  <div style={{ display: "flex", gap: 10, alignItems: "center", fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 16, lineHeight: 1.3, color: "rgba(255,255,255,0.7)" }}>
-                    <Icon name="contact-location" size={18} style={{ color: "var(--od-brass)", flexShrink: 0 }} />
-                    Based in Vauxhall, London
-                  </div>
+                  <a href="mailto:hello@omardecor.co.uk" onClick={() => setOpen(false)} className="od-inline-link" style={{ display: "flex", gap: 10, alignItems: "center", fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 16, lineHeight: 1.3, color: "var(--od-white)", textDecoration: "none" }}>
+                    <Icon name="contact-mail" size={18} style={{ color: "var(--od-brass)", flexShrink: 0 }} />
+                    hello@omardecor.co.uk
+                  </a>
                 </div>
                 <Button as={Link} href="/contact/" onClick={() => setOpen(false)} variant="primary" ground="dark" style={{ marginTop: "auto", width: "100%", color: "var(--od-white)", textDecoration: "none" }}>Book a Site Visit</Button>
               </nav>
