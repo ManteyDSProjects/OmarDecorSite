@@ -1,6 +1,5 @@
 import Link from "next/link";
 import ODLogo from "./ODLogo";
-import Icon from "./Icon";
 import { odBand } from "@/lib/styles";
 
 const head = { fontFamily: "var(--font-text)", fontWeight: 700, fontSize: 14, lineHeight: "normal", color: "var(--od-white)" };
@@ -44,10 +43,7 @@ export default function Footer({ style, ...rest }) {
         <div style={{ width: 240, display: "flex", flexDirection: "column", gap: 16, alignItems: "flex-start" }}>
           <span style={head}>Direct Contact</span>
           <span style={item}>hello@omardecor.co.uk</span>
-          <span style={{ ...item, display: "flex", alignItems: "center", gap: 8 }}>
-            <Icon name="chat-bubble" size={14} style={{ flexShrink: 0, color: "var(--od-brass)" }} />
-            07766 355099
-          </span>
+          <span className="od-footer-phone" style={item}>+44 7766 355099</span>
           <span style={fine}>Based in Vauxhall, London</span>
         </div>
       </div>

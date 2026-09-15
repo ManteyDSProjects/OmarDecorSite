@@ -110,8 +110,8 @@ export default function SiteNav({ variant = "light", current }) {
                 <div style={{ alignSelf: "stretch", height: 1, background: "var(--od-border-on-navy)", margin: "24px 0" }} />
                 <div style={{ display: "flex", flexDirection: "column", gap: 14, alignItems: "center", marginBottom: 24 }}>
                   <a href="https://wa.me/447766355099" target="_blank" rel="noopener" onClick={() => setOpen(false)} className="od-inline-link" style={{ display: "flex", gap: 10, alignItems: "center", fontFamily: "var(--font-text)", fontWeight: 500, fontSize: 16, color: "var(--od-white)", textDecoration: "none" }}>
-                    <Icon name="chat-bubble" size={18} style={{ color: "var(--od-brass)", flexShrink: 0 }} />
-                    07766 355099
+                    <Icon name="whatsapp" size={22} style={{ color: "var(--od-brass)", flexShrink: 0 }} />
+                    +44 7766 355099
                   </a>
                   <div style={{ display: "flex", gap: 10, alignItems: "center", fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 14, color: "rgba(255,255,255,0.7)" }}>
                     <Icon name="contact-location" size={18} style={{ color: "var(--od-brass)", flexShrink: 0 }} />

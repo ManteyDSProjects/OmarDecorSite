@@ -49,9 +49,9 @@ function Hero() {
         <h1 className="od-h1" style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 64, lineHeight: 1.1, color: "var(--od-navy)", margin: 0, alignSelf: "stretch" }}>Quality Home Improvements, Done Properly.</h1>
         <span style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 16, lineHeight: 1.6, color: "var(--od-text-muted)", alignSelf: "stretch" }}>Reliable handyman and home improvement services across Central London and surrounding areas.</span>
         <div className="od-btn-row" style={{ display: "flex", gap: 16, alignItems: "flex-start", flexWrap: "wrap" }}>
-          <Button as={Link} href="/contact/" variant="primary" ground="dark" style={{ width: 195, height: 45, letterSpacing: "0.05em", color: "var(--od-white)", textDecoration: "none" }}>Book a Site Visit</Button>
-          <Button as="a" href="https://wa.me/447766355099" target="_blank" rel="noopener" variant="ghost" ground="light" style={{ width: 192, height: 45, gap: 10, letterSpacing: "0.05em", color: "var(--od-navy)", textDecoration: "none" }}>
-            <Icon name="chat-bubble" size={16} />07766 355099
+          <Button as={Link} href="/contact/" variant="primary" ground="dark" style={{ width: 220, height: 45, letterSpacing: "0.05em", color: "var(--od-white)", textDecoration: "none" }}>Book a Site Visit</Button>
+          <Button as="a" href="https://wa.me/447766355099" target="_blank" rel="noopener" variant="ghost" ground="light" style={{ width: 220, height: 45, padding: "11px 16px", gap: 10, letterSpacing: "0.05em", fontSize: 16, color: "var(--od-navy)", textDecoration: "none" }}>
+            <Icon name="whatsapp" size={22} />+447766 355099
           </Button>
         </div>
       </div>
@@ -112,7 +112,7 @@ export default function HomePage() {
             <div className="od-btn-row od-btn-row-wide" style={{ display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap" }}>
               <Button as={Link} href="/contact/" variant="primary" ground="light" style={{ width: 189, height: 49, borderRadius: 6, fontWeight: 700, letterSpacing: "normal", textDecoration: "none" }}>Request a Quote</Button>
               <a href="https://wa.me/447766355099" target="_blank" rel="noopener" className="od-white-btn" style={{ width: 185, height: 48, borderRadius: 6, background: "var(--od-white)", boxShadow: "var(--hairline-soft)", display: "inline-flex", gap: 10, padding: "15px 24px", alignItems: "center", boxSizing: "border-box", fontFamily: "var(--font-text)", fontWeight: 700, fontSize: 15, lineHeight: "100%", color: "var(--od-navy)", textDecoration: "none" }}>
-                <Icon name="chat-bubble" size={16} />07766 355099
+                <Icon name="whatsapp" size={18} />07766 355099
               </a>
             </div>
           </div>
