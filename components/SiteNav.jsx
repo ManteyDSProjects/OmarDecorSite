@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import ODLogo from "./ODLogo";
 import Button from "./Button";
@@ -15,10 +16,15 @@ const NAV_LINKS = [
 export default function SiteNav({ variant = "light", current }) {
   const [open, setOpen] = useState(false);
   const [visible, setVisible] = useState(true);
+  const [mounted, setMounted] = useState(false);
   const overlay = variant === "overlay";
   const navy = variant === "navy" || overlay;
   const ink = navy || open ? "var(--od-white)" : "var(--od-navy)";
   const link = { fontFamily: "var(--font-text)", fontWeight: 500, fontSize: 16, lineHeight: 1, textDecoration: "none", whiteSpace: "nowrap" };
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     let idleTimer;
@@ -59,15 +65,20 @@ export default function SiteNav({ variant = "light", current }) {
         <button className={"od-burger" + (open ? " is-open" : "")} type="button" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} onClick={() => setOpen(!open)}>
           {open ? "Close" : "Menu"}
         </button>
-        <div className={"od-drawer" + (open ? " is-open" : "")} style={{ padding: "24px 40px" }}>
-          <nav aria-label="Mobile" style={{ display: "flex", flexDirection: "column", gap: 8, alignItems: "center", justifyContent: "center", minHeight: "100%" }}>
-            {NAV_LINKS.map(([l, href]) => (
-              <Link key={l} href={href} onClick={() => setOpen(false)} className="od-navlink od-drawer-link" style={{ ...link, color: "var(--od-white)", fontSize: 20, minHeight: 44, display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>{l}</Link>
-            ))}
-            <Button as={Link} href="/contact/" onClick={() => setOpen(false)} variant="primary" ground="dark" style={{ marginTop: 24, color: "var(--od-white)", textDecoration: "none" }}>Book a Site Visit</Button>
-          </nav>
-        </div>
       </div>
+      {mounted
+        ? createPortal(
+            <div className={"od-drawer" + (open ? " is-open" : "")} style={{ padding: "24px 40px" }}>
+              <nav aria-label="Mobile" style={{ display: "flex", flexDirection: "column", gap: 8, alignItems: "center", justifyContent: "center", minHeight: "100%" }}>
+                {NAV_LINKS.map(([l, href]) => (
+                  <Link key={l} href={href} onClick={() => setOpen(false)} className="od-navlink od-drawer-link" style={{ ...link, color: "var(--od-white)", fontSize: 20, minHeight: 44, display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>{l}</Link>
+                ))}
+                <Button as={Link} href="/contact/" onClick={() => setOpen(false)} variant="primary" ground="dark" style={{ marginTop: 24, color: "var(--od-white)", textDecoration: "none" }}>Book a Site Visit</Button>
+              </nav>
+            </div>,
+            document.body
+          )
+        : null}
     </>
   );
 }

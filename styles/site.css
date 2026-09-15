@@ -34,6 +34,16 @@ a:hover{color:var(--od-navy)}
   .od-nav-overlay-wrap{height:0}
 }
 
+/* Nav-only breakpoint: the desktop links + CTA read as cramped against each
+   other before the site's main 768px breakpoint, so the burger takes over
+   early here — nothing else about the nav (height, fixed position, colors)
+   changes in this range. */
+@media (max-width:900px) and (min-width:769px){
+  .od-nav-links,.od-nav-cta{display:none!important}
+  .od-burger{display:flex!important}
+  .od-drawer{display:block!important}
+}
+
 /* ---- the one mobile breakpoint: everything below 768 collapses together --- */
 @media (max-width:768px){
   .od-shell{width:100%!important}
