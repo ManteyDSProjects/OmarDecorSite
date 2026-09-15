@@ -15,6 +15,11 @@ a{color:var(--od-brass)}
 a:hover{color:var(--od-navy)}
 .od-shell{width:100%;position:relative}
 .od-band{height:auto!important;min-height:0!important}
+/* Scoped to the Why-Omar-Decor row only — not the shared .od-section-pad
+   class, which every other section also uses. content-box means max-width
+   caps the image+text content itself, not the padding, so a viewport wider
+   than the design canvas becomes centred outer margin instead of stretch. */
+.od-why-row{box-sizing:content-box!important;max-width:1200px;margin:0 auto}
 
 /* Header + drawer furniture. The drawer is display:none until 768, so it has
    no effect on the desktop/tablet layout. */

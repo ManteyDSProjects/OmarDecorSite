@@ -45,11 +45,11 @@ export default function ContactSection({ heading = "h2" }) {
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
           {[
             ["contact-mail", 20, "hello@omardecor.co.uk", "mailto:hello@omardecor.co.uk"],
-            ["whatsapp", 24, "+44 7766 355099", "https://wa.me/447766355099"],
+            ["whatsapp", null, "+44 7766 355099", "https://wa.me/447766355099"],
             ["contact-location", 20, "Based in Vauxhall, London", null],
           ].map(([ic, iconSize, t, href]) => (
             <div key={t} style={{ display: "flex", gap: 16, alignItems: "center" }}>
-              <Icon name={ic} size={iconSize} style={{ color: "var(--od-brass)", flexShrink: 0 }} />
+              <Icon name={ic} size={iconSize} style={{ color: "var(--od-brass)", flexShrink: 0, ...(iconSize == null ? { fontSize: "calc(24px / 2.2)" } : null) }} />
               {href ? (
                 <a href={href} target={href.indexOf("wa.me") !== -1 ? "_blank" : undefined} rel={href.indexOf("wa.me") !== -1 ? "noopener" : undefined} className="od-inline-link" style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 18, lineHeight: "100%", color: "var(--od-white)", textDecoration: "none" }}>{t}</a>
               ) : (
