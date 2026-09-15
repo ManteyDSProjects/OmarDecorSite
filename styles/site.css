@@ -19,12 +19,16 @@ a:hover{color:var(--od-navy)}
 /* Header + drawer furniture. The drawer is display:none until 768, so it has
    no effect on the desktop/tablet layout. */
 .od-nav{position:relative;z-index:50}
+/* The drawer portals to document.body (z-index:60) so it no longer shares
+   the nav's stacking context — without this, the burger's z-index:70 would
+   only win locally inside the nav and the drawer would cover it. */
+.od-nav.is-drawer-open{z-index:65}
 .od-logo-link,.od-burger{position:relative;z-index:70}
 .od-burger{display:none;width:auto;height:40px;padding:8px 4px;background:none;border:none;cursor:pointer;align-items:center;justify-content:center;box-sizing:border-box;font:600 14px/1 var(--font-text);letter-spacing:0.05em;text-transform:uppercase;color:#fff}
 .od-nav-light .od-burger{color:var(--od-navy)}
 .od-nav-light .od-burger.is-open{color:#fff}
-.od-drawer{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:var(--od-navy);transform:translateX(100%);transition:transform 220ms ease;z-index:60;overflow-y:auto}
-.od-drawer.is-open{transform:translateX(0)}
+.od-drawer{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:var(--od-navy);opacity:0;pointer-events:none;transition:opacity 220ms ease;z-index:60;overflow-y:auto}
+.od-drawer.is-open{opacity:1;pointer-events:auto}
 
 .od-nav-spacer{position:relative}
 @media (min-width:769px){.od-nav-spacer{height:110px}}
@@ -142,9 +146,9 @@ a:hover{color:var(--od-navy)}
   .od-footer{padding:56px 20px 32px!important}
 
   .od-lightbox{padding:16px 16px 12px!important}
-  .od-lb-top{justify-content:flex-end!important}
+  .od-lb-top{justify-content:flex-end!important;margin-bottom:0!important}
   .od-lb-top .od-lb-count{display:none!important}
-  .od-lb-stage{padding:0!important;flex:1!important;min-height:0!important;min-width:0!important}
+  .od-lb-stage{padding:0!important;flex:1!important;min-height:0!important;min-width:0!important;margin-bottom:0!important}
   .od-lb-img{height:100%!important;max-height:100%!important;max-width:100%!important}
   .od-lb-prev{left:8px!important}
   .od-lb-next{right:8px!important}
@@ -251,18 +255,18 @@ a:hover{color:var(--od-navy)}
 .od-photo-btn{border:none;padding:0;background:none;cursor:pointer;display:block;font:inherit;text-align:inherit}
 .od-lightbox{position:fixed;inset:0;z-index:200;overflow:auto;background:rgba(15,33,60,.96);display:flex;align-items:center;justify-content:center;padding:32px 40px;box-sizing:border-box;animation:od-lb-in var(--dur-base) var(--ease-out)}
 @keyframes od-lb-in{from{opacity:0}to{opacity:1}}
-.od-lb-inner{width:100%;height:100%;display:flex;flex-direction:column;gap:20px;align-items:center;animation:od-lb-rise var(--dur-base) var(--ease-out)}
+.od-lb-inner{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;animation:od-lb-rise var(--dur-base) var(--ease-out)}
 @keyframes od-lb-rise{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:scale(1)}}
-.od-lb-top{width:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.od-lb-top{width:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:20px}
 .od-lb-count{font:500 14px/1 var(--font-text);letter-spacing:2px;text-transform:uppercase;color:var(--od-brass)}
-.od-lb-stage{position:relative;width:100%;flex:1;min-height:0;min-width:0;overflow:hidden;padding:0 72px;box-sizing:border-box;display:flex;align-items:center;justify-content:center}
+.od-lb-stage{position:relative;width:100%;flex:1;min-height:0;min-width:0;overflow:hidden;padding:0 72px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
 .od-lb-img{width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain;border-radius:12px;display:block;background:var(--od-navy);animation:od-lb-fade var(--dur-base) var(--ease-out)}
 @keyframes od-lb-fade{from{opacity:0}to{opacity:1}}
 .od-lb-prev{position:absolute;left:0;top:50%;transform:translateY(-50%)}
 .od-lb-next{position:absolute;right:0;top:50%;transform:translateY(-50%)}
 .od-arrow-lb{background:transparent;box-shadow:inset 0 0 0 1px rgba(255,255,255,.4)}
 .od-arrow-lb:hover{background:rgba(255,255,255,.1)}
-.od-lb-caption{font:400 14px/1.5 var(--font-text);color:var(--od-text-muted-dark);text-align:center;width:100%;max-width:760px;height:42px;overflow:hidden}
+.od-lb-caption{display:block;font:400 14px/1.5 var(--font-text);color:var(--od-text-muted-dark);text-align:center;width:100%;max-width:760px;height:42px;padding-top:8px;box-sizing:border-box;overflow:hidden}
 .od-lb-thumbs{display:flex;gap:12px;flex-wrap:nowrap;justify-content:center;width:100%;height:64px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none}
 .od-lb-thumbs::-webkit-scrollbar{display:none}
 .od-lb-thumb{width:88px;height:64px;flex:none;border:none;padding:0;border-radius:6px;background-size:cover;background-position:center;background-repeat:no-repeat;cursor:pointer;opacity:.5;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);transition:opacity var(--dur-fast) var(--ease-out),box-shadow var(--dur-fast) var(--ease-out)}

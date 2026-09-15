@@ -13,7 +13,7 @@ export default function CtaBanner({ variant = "visit" }) {
       </div>
       {call ? (
         <Button as="a" href="https://wa.me/447766355099" target="_blank" rel="noopener" variant="primary" ground="dark" style={{ width: 196, height: 48, gap: 10, color: "var(--od-white)", textDecoration: "none" }}>
-          <Icon name="contact-phone" size={20} />07766 355099
+          <Icon name="chat-bubble" size={20} />07766 355099
         </Button>
       ) : (
         <Button as={Link} href="/contact/" variant="primary" ground="dark" style={{ width: 199, color: "var(--od-white)", textDecoration: "none" }}>Book a Free Visit</Button>

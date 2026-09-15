@@ -45,7 +45,7 @@ export default function ContactSection({ heading = "h2" }) {
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
           {[
             ["contact-mail", "hello@omardecor.co.uk", "mailto:hello@omardecor.co.uk"],
-            ["contact-phone", "07766 355099", "https://wa.me/447766355099"],
+            ["chat-bubble", "07766 355099", "https://wa.me/447766355099"],
             ["contact-location", "Based in Vauxhall, London", null],
           ].map(([ic, t, href]) => (
             <div key={t} style={{ display: "flex", gap: 16, alignItems: "center" }}>

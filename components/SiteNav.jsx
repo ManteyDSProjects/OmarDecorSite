@@ -1,9 +1,10 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import ODLogo from "./ODLogo";
 import Button from "./Button";
+import Icon from "./Icon";
 import { odBand } from "@/lib/styles";
 
 const NAV_LINKS = [
@@ -26,30 +27,50 @@ export default function SiteNav({ variant = "light", current }) {
     setMounted(true);
   }, []);
 
+  const hoveringRef = useRef(false);
+  const idleTimerRef = useRef();
+  const startIdleRef = useRef(() => {});
+
   useEffect(() => {
-    let idleTimer;
+    function startIdle() {
+      clearTimeout(idleTimerRef.current);
+      if (hoveringRef.current) return;
+      idleTimerRef.current = setTimeout(() => setVisible(false), 1200);
+    }
+    startIdleRef.current = startIdle;
     function onScroll() {
       if (window.scrollY < 40) {
         setVisible(true);
-        clearTimeout(idleTimer);
+        clearTimeout(idleTimerRef.current);
         return;
       }
       setVisible(true);
-      clearTimeout(idleTimer);
-      idleTimer = setTimeout(() => setVisible(false), 1200);
+      startIdle();
     }
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", onScroll);
-      clearTimeout(idleTimer);
+      clearTimeout(idleTimerRef.current);
     };
   }, []);
+
+  const handleNavEnter = () => {
+    hoveringRef.current = true;
+    clearTimeout(idleTimerRef.current);
+    setVisible(true);
+  };
+  const handleNavLeave = () => {
+    hoveringRef.current = false;
+    if (window.scrollY >= 40) startIdleRef.current();
+  };
 
   return (
     <>
       <a href="#main" className="od-skip">Skip to content</a>
       <div
         className={"od-nav" + (navy ? "" : " od-nav-light") + (overlay ? " od-nav-overlay" : "") + (visible ? " is-nav-visible" : "") + (open ? " is-drawer-open" : "")}
+        onMouseEnter={handleNavEnter}
+        onMouseLeave={handleNavLeave}
         style={{ ...odBand, position: overlay ? "absolute" : "relative", left: overlay ? 0 : undefined, top: overlay ? 0 : undefined, width: overlay ? "100%" : undefined, height: 110, background: overlay ? "rgba(0,0,0,0.35)" : navy ? "var(--od-navy)" : "var(--od-off-white)", display: "flex", padding: "12px 80px", justifyContent: "space-between", alignItems: "center" }}
       >
         <Link href="/" className="od-logo-link" aria-label="Omar Decor home" style={{ display: "flex", gap: 10, alignItems: "center", textDecoration: "none", flexShrink: 0 }}>
@@ -68,12 +89,36 @@ export default function SiteNav({ variant = "light", current }) {
       </div>
       {mounted
         ? createPortal(
-            <div className={"od-drawer" + (open ? " is-open" : "")} style={{ padding: "24px 40px" }}>
-              <nav aria-label="Mobile" style={{ display: "flex", flexDirection: "column", gap: 8, alignItems: "center", justifyContent: "center", minHeight: "100%" }}>
-                {NAV_LINKS.map(([l, href]) => (
-                  <Link key={l} href={href} onClick={() => setOpen(false)} className="od-navlink od-drawer-link" style={{ ...link, color: "var(--od-white)", fontSize: 20, minHeight: 44, display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>{l}</Link>
-                ))}
-                <Button as={Link} href="/contact/" onClick={() => setOpen(false)} variant="primary" ground="dark" style={{ marginTop: 24, color: "var(--od-white)", textDecoration: "none" }}>Book a Site Visit</Button>
+            <div
+              className={"od-drawer" + (open ? " is-open" : "")}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                boxSizing: "border-box",
+                paddingTop: "max(24px, env(safe-area-inset-top))",
+                paddingRight: "max(40px, env(safe-area-inset-right))",
+                paddingBottom: "max(24px, env(safe-area-inset-bottom))",
+                paddingLeft: "max(40px, env(safe-area-inset-left))",
+              }}
+            >
+              <nav aria-label="Mobile" style={{ display: "flex", flexDirection: "column", minHeight: "100%" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 8, alignItems: "center" }}>
+                  {NAV_LINKS.map(([l, href]) => (
+                    <Link key={l} href={href} onClick={() => setOpen(false)} className="od-navlink od-drawer-link" style={{ ...link, color: "var(--od-white)", fontSize: 20, minHeight: 44, display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>{l}</Link>
+                  ))}
+                </div>
+                <div style={{ alignSelf: "stretch", height: 1, background: "var(--od-border-on-navy)", margin: "24px 0" }} />
+                <div style={{ display: "flex", flexDirection: "column", gap: 14, alignItems: "center", marginBottom: 24 }}>
+                  <a href="https://wa.me/447766355099" target="_blank" rel="noopener" onClick={() => setOpen(false)} className="od-inline-link" style={{ display: "flex", gap: 10, alignItems: "center", fontFamily: "var(--font-text)", fontWeight: 500, fontSize: 16, color: "var(--od-white)", textDecoration: "none" }}>
+                    <Icon name="chat-bubble" size={18} style={{ color: "var(--od-brass)", flexShrink: 0 }} />
+                    07766 355099
+                  </a>
+                  <div style={{ display: "flex", gap: 10, alignItems: "center", fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 14, color: "rgba(255,255,255,0.7)" }}>
+                    <Icon name="contact-location" size={18} style={{ color: "var(--od-brass)", flexShrink: 0 }} />
+                    Based in Vauxhall, London
+                  </div>
+                </div>
+                <Button as={Link} href="/contact/" onClick={() => setOpen(false)} variant="primary" ground="dark" style={{ marginTop: "auto", width: "100%", color: "var(--od-white)", textDecoration: "none" }}>Book a Site Visit</Button>
               </nav>
             </div>,
             document.body
