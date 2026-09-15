@@ -58,6 +58,12 @@ a:hover{color:var(--od-navy)}
   .od-shell{width:100%!important}
   .od-stack{flex-direction:column!important;gap:48px!important;align-items:stretch!important}
   .od-fluid,.od-detail-media,.od-form,.od-copy-col{width:100%!important;max-width:100%!important;min-width:0!important;flex:0 1 auto!important}
+  /* V06's fixed-width content wrappers never shipped a mobile release: at
+     768px and below they need to give up both their fixed width AND their
+     own horizontal padding, or that padding alone (48-80px a side) eats
+     most of a ~390px viewport and crushes whatever's inside it (this is
+     what caused the Service Areas pills to overlap). */
+  .od-hero-w1440,.od-why-row,.od-areas-w1280,.od-reviews-w1280,.od-contact-w1280,.od-cta-w1280{width:100%!important;max-width:100%!important;min-width:0!important;padding-left:0!important;padding-right:0!important}
   .od-detail-media .od-photo-wrap{width:100%!important;height:auto!important;aspect-ratio:480/520!important}
   .od-photo{width:100%!important;max-width:100%!important;height:auto!important;aspect-ratio:5/4}
   .od-photo-tall{aspect-ratio:12/13!important}
@@ -75,7 +81,7 @@ a:hover{color:var(--od-navy)}
   .od-h-lg{font-size:36px!important}
   .od-quote{font-size:24px!important}
 
-  .od-grid3{display:grid!important;grid-template-columns:1fr 1fr!important}
+  .od-grid3{display:grid!important;grid-template-columns:1fr!important}
   .od-cat-row{display:flex!important;flex-direction:column!important;height:auto!important}
   .od-cat-row .od-category-card{height:auto!important;aspect-ratio:410/308!important}
   .od-grid2,.od-masonry{display:grid!important;grid-template-columns:1fr!important}
@@ -140,7 +146,7 @@ a:hover{color:var(--od-navy)}
   .od-form-row{flex-direction:column!important}
   .od-about-portrait{width:100%!important;height:420px!important}
   .od-areas-rows>*{flex-direction:column!important;height:auto!important}
-  .od-cta{flex-direction:column!important;align-items:flex-start!important;gap:24px!important;height:auto!important}
+  .od-cta-w1280{flex-direction:column!important;align-items:flex-start!important;gap:24px!important;height:auto!important}
   .od-legal-body{font-size:15px!important}
   .od-benefit-row-3{display:none!important}
   .od-benefit-row-2{display:none!important}
