@@ -4,6 +4,10 @@
    treatment (nav becomes the drawer, two-column bands stack, carousels take
    over). Base rules here are resets and page furniture only. */
 *,*::before,*::after{box-sizing:border-box}
+/* Kills the default mobile tap-highlight box and the ~300ms touch delay
+   that was reading as a phantom flash on an adjacent button (e.g. tapping
+   the lightbox's right arrow flashing the left one). Global by design. */
+a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 html{-webkit-text-size-adjust:100%;overflow-x:clip;scrollbar-width:thin;scrollbar-color:var(--od-navy) var(--od-cream)}
 html::-webkit-scrollbar{width:12px}
 html::-webkit-scrollbar-track{background:var(--od-cream)}
@@ -71,6 +75,11 @@ a:hover{color:var(--od-navy)}
   .od-service-card,.od-value-card{height:auto!important;min-height:0!important}
 
   .od-nav{padding:12px 20px!important;height:88px!important}
+  /* The header stays visibly on top of the drawer at this breakpoint (unlike
+     the 769-900px burger tier, where the drawer still covers the full
+     viewport per the nav-only breakpoint rule above) — start the drawer
+     below the 88px header instead of covering it. */
+  .od-drawer{top:88px!important;height:calc(100% - 88px)!important}
   .od-nav-links,.od-nav-cta{display:none!important}
   .od-burger{display:flex!important}
   .od-drawer{display:block!important}

@@ -20,7 +20,7 @@ export default function SiteNav({ variant = "light", current }) {
   const [mounted, setMounted] = useState(false);
   const overlay = variant === "overlay";
   const navy = variant === "navy" || overlay;
-  const ink = navy || open ? "var(--od-white)" : "var(--od-navy)";
+  const ink = navy ? "var(--od-white)" : "var(--od-navy)";
   const link = { fontFamily: "var(--font-text)", fontWeight: 500, fontSize: 16, lineHeight: 1, textDecoration: "none", whiteSpace: "nowrap" };
 
   useEffect(() => {
@@ -108,12 +108,12 @@ export default function SiteNav({ variant = "light", current }) {
                   ))}
                 </div>
                 <div style={{ alignSelf: "stretch", height: 1, background: "var(--od-border-on-navy)", margin: "24px 0" }} />
-                <div style={{ display: "flex", flexDirection: "column", gap: 14, alignItems: "center", marginBottom: 24 }}>
-                  <a href="https://wa.me/447766355099" target="_blank" rel="noopener" onClick={() => setOpen(false)} className="od-inline-link" style={{ display: "flex", gap: 10, alignItems: "center", fontFamily: "var(--font-text)", fontWeight: 500, fontSize: 16, color: "var(--od-white)", textDecoration: "none" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 20, alignItems: "center", marginBottom: 24 }}>
+                  <a href="https://wa.me/447766355099" target="_blank" rel="noopener" onClick={() => setOpen(false)} className="od-inline-link" style={{ display: "flex", gap: 10, alignItems: "center", fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 16, lineHeight: 1.3, color: "var(--od-white)", textDecoration: "none" }}>
                     <Icon name="whatsapp" size={18} style={{ color: "var(--od-brass)", flexShrink: 0 }} />
                     +44 7766 355099
                   </a>
-                  <div style={{ display: "flex", gap: 10, alignItems: "center", fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 14, color: "rgba(255,255,255,0.7)" }}>
+                  <div style={{ display: "flex", gap: 10, alignItems: "center", fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 16, lineHeight: 1.3, color: "rgba(255,255,255,0.7)" }}>
                     <Icon name="contact-location" size={18} style={{ color: "var(--od-brass)", flexShrink: 0 }} />
                     Based in Vauxhall, London
                   </div>
