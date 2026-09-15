@@ -19,6 +19,7 @@ const ABOUT_SLIDES = [
   ["/uploads/omar-decor-owner-laminate-flooring-installation.webp", "Omar fitting laminate flooring"],
   ["/uploads/omar-decor-owner-gym-equipment-installation.webp", "Omar installing home gym equipment", "center 20%"],
   ["/uploads/omar-decor-owner-gym-fit-out-shelving.webp", "Omar on site at a gym fit-out"],
+  ["/uploads/omar-decor-owner-commercial-fit-out-yellow-wall.webp", "Omar on site at a commercial fit-out"],
 ];
 
 function AboutCarousel() {
