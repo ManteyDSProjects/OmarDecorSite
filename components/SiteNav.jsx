@@ -102,13 +102,13 @@ export default function SiteNav({ variant = "light", current }) {
               }}
             >
               <nav aria-label="Mobile" style={{ display: "flex", flexDirection: "column", minHeight: "100%" }}>
-                <div style={{ display: "flex", flexDirection: "column", gap: 8, alignItems: "center" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 8, alignItems: "flex-start" }}>
                   {NAV_LINKS.map(([l, href]) => (
-                    <Link key={l} href={href} onClick={() => setOpen(false)} className="od-navlink od-drawer-link" style={{ ...link, color: "var(--od-white)", fontSize: 20, minHeight: 44, display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>{l}</Link>
+                    <Link key={l} href={href} onClick={() => setOpen(false)} className="od-navlink od-drawer-link" style={{ ...link, color: "var(--od-white)", fontSize: 20, minHeight: 44, display: "flex", alignItems: "center", justifyContent: "flex-start", textAlign: "left" }}>{l}</Link>
                   ))}
                 </div>
                 <div style={{ alignSelf: "stretch", height: 1, background: "var(--od-border-on-navy)", margin: "24px 0" }} />
-                <div style={{ display: "flex", flexDirection: "column", gap: 20, alignItems: "center", marginBottom: 24 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 20, alignItems: "flex-start", marginTop: "auto", marginBottom: 24 }}>
                   <a href="https://wa.me/447766355099" target="_blank" rel="noopener" onClick={() => setOpen(false)} className="od-inline-link" style={{ display: "flex", gap: 10, alignItems: "center", fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 16, lineHeight: 1.3, color: "var(--od-white)", textDecoration: "none" }}>
                     <Icon name="whatsapp" size={18} style={{ color: "var(--od-brass)", flexShrink: 0 }} />
                     +44 7766 355099
@@ -118,7 +118,7 @@ export default function SiteNav({ variant = "light", current }) {
                     hello@omardecor.co.uk
                   </a>
                 </div>
-                <Button as={Link} href="/contact/" onClick={() => setOpen(false)} variant="primary" ground="dark" style={{ marginTop: "auto", width: "100%", color: "var(--od-white)", textDecoration: "none" }}>Book a Site Visit</Button>
+                <Button as={Link} href="/contact/" onClick={() => setOpen(false)} variant="primary" ground="dark" style={{ width: "100%", color: "var(--od-white)", textDecoration: "none" }}>Book a Site Visit</Button>
               </nav>
             </div>,
             document.body
