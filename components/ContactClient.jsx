@@ -82,11 +82,11 @@ export default function ContactPage() {
         <ContactSection heading="h1" />
 
         <div className="od-band od-section-pad" style={{ ...odBand, background: "var(--od-off-white)", display: "flex", flexDirection: "column", gap: 32, padding: 80, alignItems: "center" }}>
-          <div className="od-fluid" style={{ width: 1100, display: "flex", flexDirection: "column", gap: 16, flexShrink: 0 }}>
+          <div className="od-fluid" style={{ width: 1440, maxWidth: "100%", boxSizing: "border-box", display: "flex", flexDirection: "column", gap: 16, flexShrink: 0 }}>
             <span style={odEyebrow}>About us</span>
             <h2 className="od-h2" style={odH2}>Meet Your Handyman</h2>
           </div>
-          <div className="od-fluid od-stack" style={{ width: 1100, display: "flex", gap: 32, flexShrink: 0 }}>
+          <div className="od-fluid od-stack" style={{ width: 1440, maxWidth: "100%", boxSizing: "border-box", display: "flex", gap: 32, flexShrink: 0 }}>
             <AboutCarousel />
             <div style={{ flexGrow: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 16 }}>
               <p style={aboutP}>{ABOUT[0]}</p>
@@ -99,13 +99,13 @@ export default function ContactPage() {
         <ContactGallerySection />
 
         <div className="od-band od-section-pad" style={{ ...odBand, background: "var(--od-off-white)", display: "flex", flexDirection: "column", gap: 32, padding: 80, alignItems: "center" }}>
-          <div className="od-fluid" style={{ width: 900, display: "flex", flexDirection: "column", gap: 12, flexShrink: 0 }}>
+          <div className="od-fluid" style={{ width: 1280, maxWidth: "100%", boxSizing: "border-box", display: "flex", flexDirection: "column", gap: 12, flexShrink: 0 }}>
             <h2 className="od-h2" style={odH2}>Frequently Asked Questions</h2>
           </div>
-          <div className="od-fluid" style={{ width: 900, display: "flex", flexDirection: "column", flexShrink: 0 }}>
+          <div className="od-fluid" style={{ width: 1280, maxWidth: "100%", boxSizing: "border-box", display: "flex", flexDirection: "column", flexShrink: 0 }}>
             {FAQS.map(([q, a], i) => (
               <div key={q} style={{ borderBottom: i < FAQS.length - 1 ? "1px solid var(--od-border)" : "none" }}>
-                <FaqItem className={"od-faq" + (open === i ? " is-open" : "")} question={q} open={open === i} onToggle={() => setOpen(open === i ? null : i)} style={{ width: "100%", backgroundColor: "transparent", minHeight: 54, height: "auto" }} />
+                <FaqItem className={"od-faq" + (open === i ? " is-open" : "")} question={q} open={open === i} onToggle={() => setOpen(open === i ? null : i)} style={{ width: "100%", backgroundColor: "transparent", minHeight: 54, height: "auto", padding: "22px 0" }} />
                 {open === i ? <p className="od-legal-body" style={{ ...odBody, maxWidth: 760, fontSize: 15, padding: "0 0 20px", margin: 0 }}>{a}</p> : null}
               </div>
             ))}

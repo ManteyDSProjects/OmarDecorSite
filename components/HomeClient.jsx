@@ -44,18 +44,20 @@ function HeroCarousel() {
 
 function Hero() {
   return (
-    <div className="od-hero-static od-stack" style={{ position: "relative", height: 672, display: "flex", gap: 80, padding: "96px 48px", alignItems: "center", boxSizing: "border-box", flexShrink: 0, alignSelf: "stretch", background: "var(--od-white)" }}>
-      <div style={{ position: "relative", display: "flex", flexDirection: "column", gap: 28, justifyContent: "center", alignItems: "flex-start", flexGrow: 1, alignSelf: "stretch" }}>
-        <h1 className="od-h1" style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 64, lineHeight: 1.1, color: "var(--od-navy)", margin: 0, alignSelf: "stretch" }}>Quality Home Improvements, Done Properly.</h1>
-        <span style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 16, lineHeight: 1.6, color: "var(--od-text-muted)", alignSelf: "stretch" }}>Reliable handyman and home improvement services across Central London and surrounding areas.</span>
-        <div className="od-btn-row" style={{ display: "flex", gap: 16, alignItems: "flex-start", flexWrap: "wrap" }}>
-          <Button as={Link} href="/contact/" variant="primary" ground="dark" style={{ width: 220, height: 45, letterSpacing: "0.05em", color: "var(--od-white)", textDecoration: "none" }}>Book a Site Visit</Button>
-          <Button as="a" href="https://wa.me/447766355099" target="_blank" rel="noopener" variant="ghost" ground="light" style={{ width: 220, height: 45, padding: "11px 16px", gap: 10, letterSpacing: "0.05em", fontSize: 16, color: "var(--od-navy)", textDecoration: "none" }}>
-            <Icon name="whatsapp" style={{ fontSize: "calc(22px / 2.2)" }} />+447766 355099
-          </Button>
+    <div className="od-hero-static" style={{ ...odBand, position: "relative", background: "var(--od-white)", padding: "96px 0", boxSizing: "border-box" }}>
+      <div className="od-stack od-hero-w1440" style={{ width: 1440, maxWidth: "100%", margin: "0 auto", padding: "0 48px", boxSizing: "border-box", display: "flex", gap: 80, alignItems: "center" }}>
+        <div style={{ position: "relative", display: "flex", flexDirection: "column", gap: 28, justifyContent: "center", alignItems: "flex-start", flexGrow: 1, alignSelf: "stretch" }}>
+          <h1 className="od-h1" style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 64, lineHeight: 1.1, color: "var(--od-navy)", margin: 0, alignSelf: "stretch" }}>Quality Home Improvements, Done Properly.</h1>
+          <span style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 16, lineHeight: 1.6, color: "var(--od-text-muted)", alignSelf: "stretch" }}>Reliable handyman and home improvement services across Central London and surrounding areas.</span>
+          <div className="od-btn-row" style={{ display: "flex", gap: 16, alignItems: "flex-start", flexWrap: "wrap" }}>
+            <Button as={Link} href="/contact/" variant="primary" ground="dark" style={{ width: 220, height: 45, letterSpacing: "0.05em", color: "var(--od-white)", textDecoration: "none" }}>Book a Site Visit</Button>
+            <Button as="a" href="https://wa.me/447766355099" target="_blank" rel="noopener" variant="ghost" ground="light" style={{ width: 220, height: 45, padding: "11px 16px", gap: 10, letterSpacing: "0.05em", fontSize: 16, color: "var(--od-navy)", textDecoration: "none" }}>
+              <Icon name="whatsapp" style={{ fontSize: "calc(22px / 2.2)" }} />+447766 355099
+            </Button>
+          </div>
         </div>
+        <HeroCarousel />
       </div>
-      <HeroCarousel />
     </div>
   );
 }
@@ -84,36 +86,38 @@ export default function HomePage() {
         <Hero />
         <TrustBar items={["Based In Vauxhall", "12+ Years Trading", "Free Site Viewing", "Fast Response By Text"]} />
 
-        <div className="od-band od-section-pad od-stack od-why-row" style={{ ...odBand, height: 800, background: "var(--od-white)", display: "flex", gap: 80, padding: "120px 80px", alignItems: "center" }}>
-          <div className="od-detail-media" style={{ width: 520, alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
-            <div className="od-photo-wrap" style={{ width: 480, height: 520, borderRadius: 16, overflow: "hidden" }}>
-              <img className="od-photo od-photo-tall od-photo-cell" src="/uploads/omar-decor-owner-slat-wall-socket-detail.webp" width="480" height="520" loading="lazy" alt="Slat wall and socket detail, finished by Omar Decor" style={{ width: 480, height: 520, objectFit: "cover", display: "block" }} />
+        <div className="od-band od-section-pad" style={{ ...odBand, background: "var(--od-white)", padding: "120px 0", boxSizing: "border-box" }}>
+          <div className="od-stack od-why-row" style={{ width: 1440, maxWidth: "100%", margin: "0 auto", padding: "0 80px", boxSizing: "border-box", display: "flex", gap: 80, alignItems: "center" }}>
+            <div className="od-detail-media" style={{ width: 520, alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
+              <div className="od-photo-wrap" style={{ width: 480, height: 520, borderRadius: 16, overflow: "hidden" }}>
+                <img className="od-photo od-photo-tall od-photo-cell" src="/uploads/omar-decor-owner-slat-wall-socket-detail.webp" width="480" height="520" loading="lazy" alt="Slat wall and socket detail, finished by Omar Decor" style={{ width: 480, height: 520, objectFit: "cover", display: "block" }} />
+              </div>
+              <div className="od-quote-card" style={{ position: "absolute", left: 200, top: 415, width: 320, height: 145, borderRadius: 12, background: "var(--od-navy)", boxShadow: "var(--shadow-lift)", display: "flex", flexDirection: "column", gap: 16, padding: 28, boxSizing: "border-box" }}>
+                <span style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 22, lineHeight: 1.3, color: "var(--od-white)", alignSelf: "stretch" }}>&ldquo;Done properly, every time.&rdquo;</span>
+                <span style={{ fontFamily: "var(--font-text)", fontWeight: 600, fontSize: 12, lineHeight: "100%", letterSpacing: "2px", textTransform: "uppercase", color: "var(--od-brass)", whiteSpace: "nowrap" }}>The Omar Decor approach</span>
+              </div>
             </div>
-            <div className="od-quote-card" style={{ position: "absolute", left: 200, top: 415, width: 320, height: 145, borderRadius: 12, background: "var(--od-navy)", boxShadow: "var(--shadow-lift)", display: "flex", flexDirection: "column", gap: 16, padding: 28, boxSizing: "border-box" }}>
-              <span style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 22, lineHeight: 1.3, color: "var(--od-white)", alignSelf: "stretch" }}>&ldquo;Done properly, every time.&rdquo;</span>
-              <span style={{ fontFamily: "var(--font-text)", fontWeight: 600, fontSize: 12, lineHeight: "100%", letterSpacing: "2px", textTransform: "uppercase", color: "var(--od-brass)", whiteSpace: "nowrap" }}>The Omar Decor approach</span>
-            </div>
-          </div>
-          <div style={{ flexGrow: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 40 }}>
-            <span style={{ ...odEyebrow, fontSize: 13 }}>Why Omar Decor</span>
-            <div style={{ display: "flex", flexDirection: "column", gap: 20, alignSelf: "stretch" }}>
-              <h2 className="od-h2" style={odH2}>Small Details. Big Difference.</h2>
-              <span style={odBody}>A home improvement should feel considered &mdash; planned properly, executed cleanly, and finished to a standard you&rsquo;re happy to live with every day.</span>
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 18, alignSelf: "stretch" }}>
-              {HOME_BENEFITS.map((row, i) => (
-                <div key={i} className={"od-grid2" + (i === 2 ? " od-benefit-row-3" : "") + (i === 1 ? " od-benefit-row-2" : "")} style={{ display: "flex", gap: 24 }}>
-                  {row.map((b) => (
-                    <ChecklistItem key={b} style={{ flex: "1 1 0%", minWidth: 0, alignSelf: "stretch" }}>{b}</ChecklistItem>
-                  ))}
-                </div>
-              ))}
-            </div>
-            <div className="od-btn-row od-btn-row-wide" style={{ display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap" }}>
-              <Button as={Link} href="/contact/" variant="primary" ground="light" style={{ width: 189, height: 49, borderRadius: 6, fontWeight: 700, letterSpacing: "normal", textDecoration: "none" }}>Request a Quote</Button>
-              <a href="https://wa.me/447766355099" target="_blank" rel="noopener" className="od-white-btn" style={{ height: 48, borderRadius: 6, background: "var(--od-white)", boxShadow: "var(--hairline-soft)", display: "inline-flex", gap: 10, padding: "15px 24px", alignItems: "center", boxSizing: "border-box", whiteSpace: "nowrap", fontFamily: "var(--font-text)", fontWeight: 700, fontSize: 15, lineHeight: "100%", color: "var(--od-navy)", textDecoration: "none" }}>
-                <Icon name="whatsapp" style={{ fontSize: "calc(18px / 2.2)" }} />+44 7766 355099
-              </a>
+            <div style={{ flexGrow: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 40 }}>
+              <span style={{ ...odEyebrow, fontSize: 13 }}>Why Omar Decor</span>
+              <div style={{ display: "flex", flexDirection: "column", gap: 20, alignSelf: "stretch" }}>
+                <h2 className="od-h2" style={odH2}>Small Details. Big Difference.</h2>
+                <span style={odBody}>A home improvement should feel considered &mdash; planned properly, executed cleanly, and finished to a standard you&rsquo;re happy to live with every day.</span>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 18, alignSelf: "stretch" }}>
+                {HOME_BENEFITS.map((row, i) => (
+                  <div key={i} className={"od-grid2" + (i === 2 ? " od-benefit-row-3" : "") + (i === 1 ? " od-benefit-row-2" : "")} style={{ display: "flex", gap: 24 }}>
+                    {row.map((b) => (
+                      <ChecklistItem key={b} style={{ flex: "1 1 0%", minWidth: 0, alignSelf: "stretch" }}>{b}</ChecklistItem>
+                    ))}
+                  </div>
+                ))}
+              </div>
+              <div className="od-btn-row od-btn-row-wide" style={{ display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap" }}>
+                <Button as={Link} href="/contact/" variant="primary" ground="light" style={{ width: 189, height: 49, borderRadius: 6, fontWeight: 700, letterSpacing: "normal", textDecoration: "none" }}>Request a Quote</Button>
+                <a href="https://wa.me/447766355099" target="_blank" rel="noopener" className="od-white-btn" style={{ height: 48, borderRadius: 6, background: "var(--od-white)", boxShadow: "var(--hairline-soft)", display: "inline-flex", gap: 10, padding: "15px 24px", alignItems: "center", boxSizing: "border-box", whiteSpace: "nowrap", fontFamily: "var(--font-text)", fontWeight: 700, fontSize: 15, lineHeight: "100%", color: "var(--od-navy)", textDecoration: "none" }}>
+                  <Icon name="whatsapp" style={{ fontSize: "calc(18px / 2.2)" }} />+44 7766 355099
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -151,8 +155,8 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="od-band od-section-pad" style={{ ...odBand, height: 622, background: "var(--od-navy)", display: "flex", flexDirection: "column", padding: "120px 80px", boxSizing: "border-box" }}>
-          <div className="od-stack" style={{ display: "flex", gap: 80, alignItems: "center", alignSelf: "stretch", flexShrink: 0 }}>
+        <div className="od-band od-section-pad" style={{ ...odBand, background: "var(--od-navy)", padding: "120px 0", boxSizing: "border-box" }}>
+          <div className="od-stack od-areas-w1280" style={{ width: 1280, maxWidth: "100%", margin: "0 auto", padding: "0 80px", boxSizing: "border-box", display: "flex", gap: 80, alignItems: "center" }}>
             <div style={{ flexGrow: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 32 }}>
               <div style={{ display: "flex", flexDirection: "column", gap: 20, alignSelf: "stretch", flexShrink: 0 }}>
                 <span style={{ ...odEyebrow, fontSize: 14 }}>Service Areas</span>

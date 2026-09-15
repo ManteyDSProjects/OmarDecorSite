@@ -15,11 +15,11 @@ a{color:var(--od-brass)}
 a:hover{color:var(--od-navy)}
 .od-shell{width:100%;position:relative}
 .od-band{height:auto!important;min-height:0!important}
-/* Scoped to the Why-Omar-Decor row only — not the shared .od-section-pad
-   class, which every other section also uses. content-box means max-width
-   caps the image+text content itself, not the padding, so a viewport wider
-   than the design canvas becomes centred outer margin instead of stretch. */
-.od-why-row{box-sizing:content-box!important;max-width:1200px;margin:0 auto}
+/* Fixed-width content wrappers (V06): each section splits its full-bleed
+   .od-band background from a centred, width-capped inner wrapper carrying
+   the actual content. border-box + max-width:100% so the width value is
+   the TOTAL box (content + the wrapper's own padding) and never overflows
+   a narrow viewport between the tablet/mobile override breakpoints. */
 
 /* Header + drawer furniture. The drawer is display:none until 768, so it has
    no effect on the desktop/tablet layout. */
@@ -295,15 +295,15 @@ a:hover{color:var(--od-navy)}
   .od-fluid{width:100%!important;max-width:100%!important;min-width:0!important}
   .od-cta .od-fluid{width:auto!important;max-width:560px!important;flex:1 1 280px!important;min-width:0!important}
   .od-hero-carousel{flex:0 0 calc(50% - 16px)!important;width:auto!important;height:auto!important;aspect-ratio:600/480}
-  .od-hero-static>div:first-child{min-width:0!important}
+  .od-hero-static .od-hero-w1440>div:first-child{min-width:0!important}
   .od-hero-static h1{font-size:clamp(32px,4.5vw,48px)!important}
   .od-about-portrait{flex:0 0 calc(50% - 16px)!important;width:auto!important;height:auto!important;aspect-ratio:560/420}
   .od-detail-media{flex:0 0 calc(50% - 40px)!important;width:auto!important;height:auto!important;align-self:flex-start!important;aspect-ratio:auto!important}
   .od-detail-media .od-photo-wrap{width:100%!important;height:auto!important;aspect-ratio:480/520!important}
   .od-quote-card{position:relative!important;left:auto!important;top:auto!important;margin:-40px 0 0 auto!important;width:80%!important;max-width:320px!important}
   .od-form{width:auto!important;max-width:440px!important;min-width:0!important;flex:1 1 340px!important;padding:32px!important}
-  #contact{gap:48px!important}
-  #contact>div:first-child{flex:1 1 0%!important;min-width:0!important}
+  #contact .od-contact-w1280{gap:48px!important}
+  #contact .od-contact-w1280>div:first-child{flex:1 1 0%!important;min-width:0!important}
   #contact h1,#contact h2{font-size:36px!important}
   .od-strip{height:auto!important;display:grid!important;grid-template-columns:1fr 1fr!important;justify-content:center!important;justify-items:center!important;gap:16px 32px!important;padding:24px 40px!important}
   .od-strip>*{width:auto!important;white-space:normal!important}
