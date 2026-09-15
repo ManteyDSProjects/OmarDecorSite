@@ -62,9 +62,9 @@ function Hero() {
   );
 }
 
-function LocationTag({ name }) {
+function LocationTag({ name, solo }) {
   return (
-    <div style={{ flex: "1 1 0%", minWidth: 0, alignSelf: "stretch", borderRadius: 10, background: "var(--od-navy-tag)", boxShadow: "inset 0 0 0 1px var(--od-brass-tag-border)", display: "flex", gap: 10, padding: "14px 16px", alignItems: "center", boxSizing: "border-box", minHeight: 46 }}>
+    <div style={{ flex: solo ? "0 1 calc(50% - 6px)" : "1 1 0%", minWidth: 0, alignSelf: "stretch", borderRadius: 10, background: "var(--od-navy-tag)", boxShadow: "inset 0 0 0 1px var(--od-brass-tag-border)", display: "flex", gap: 10, padding: "14px 16px", alignItems: "center", boxSizing: "border-box", minHeight: 46 }}>
       <Icon name="location-pin" size={18} style={{ color: "var(--od-brass)", flexShrink: 0 }} />
       <span style={{ flexGrow: 1, fontFamily: "var(--font-text)", fontWeight: 600, fontSize: 15, lineHeight: "100%", color: "var(--od-white)" }}>{name}</span>
     </div>
@@ -171,7 +171,7 @@ export default function HomePage() {
               {AREA_ROWS_HOME.map((row, i) => (
                 <div key={i} className="od-areas-row-desktop" style={{ minHeight: 46, display: "flex", gap: 12, alignSelf: "stretch", flexShrink: 0 }}>
                   {row.map((a) => (
-                    <LocationTag key={a} name={a} />
+                    <LocationTag key={a} name={a} solo={row.length === 1} />
                   ))}
                 </div>
               ))}
@@ -181,7 +181,7 @@ export default function HomePage() {
                     {Array.from({ length: Math.ceil(half.length / 2) }, (_, ri) => half.slice(ri * 2, ri * 2 + 2)).map((row, ri) => (
                       <div key={ri} style={{ minHeight: 46, display: "flex", gap: 12, alignSelf: "stretch", flexShrink: 0 }}>
                         {row.map((a) => (
-                          <LocationTag key={a} name={a} />
+                          <LocationTag key={a} name={a} solo={row.length === 1} />
                         ))}
                       </div>
                     ))}

@@ -74,7 +74,7 @@ a:hover{color:var(--od-navy)}
   .od-nav-links,.od-nav-cta{display:none!important}
   .od-burger{display:flex!important}
   .od-drawer{display:block!important}
-  .od-band{padding-left:20px!important;padding-right:20px!important}
+  .od-band{padding-left:16px!important;padding-right:16px!important}
   .od-section-pad{padding-top:56px!important;padding-bottom:56px!important}
   .od-h1{font-size:40px!important}
   .od-h2{font-size:32px!important}
@@ -91,10 +91,9 @@ a:hover{color:var(--od-navy)}
   .od-gallery-flex>*{display:contents!important}
   .od-gallery-flex .od-photo-wrap{height:auto!important;aspect-ratio:1/1!important}
 
-  .od-reviews{height:auto!important}
+  .od-reviews{height:auto!important;flex-direction:column!important}
   .od-reviews>*{height:auto!important;min-height:0!important;flex:none!important}
-  .od-review-extra{display:none!important}
-  .od-review-primary{width:100%!important}
+  .od-review-primary,.od-review-extra{width:100%!important}
   .od-step-extra{display:none!important}
   .od-step-primary{width:100%!important;height:auto!important}
   .od-steps{flex-wrap:wrap!important}
@@ -134,12 +133,12 @@ a:hover{color:var(--od-navy)}
   .od-strip-contact{grid-template-columns:auto!important;justify-content:center!important;justify-items:start!important;gap:10px!important;padding-left:20px!important;padding-right:20px!important;overflow:visible!important}
   .od-strip-contact span{font-size:16px!important;line-height:1.4!important}
 
-  .od-btn-row{flex-direction:column!important;align-items:stretch!important;max-width:320px!important;margin-left:0!important;margin-right:auto!important}
+  .od-btn-row{flex-direction:column!important;align-items:stretch!important;width:100%!important;margin-left:0!important;margin-right:auto!important}
   .od-btn-row>*{flex:0 0 auto!important;width:100%!important;max-width:none!important;box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important}
   .od-btn-row-wide{max-width:none!important;width:100%!important}
   .od-btn-row-wide>*{flex:0 0 auto!important;width:100%!important;min-width:0!important;justify-content:center!important}
 
-  .od-hero-static{height:auto!important}
+  .od-hero-static{height:auto!important;padding:56px 16px!important}
   .od-hero-carousel{width:100%!important;height:auto!important;aspect-ratio:600/480}
 
   .od-form{padding:28px!important}
