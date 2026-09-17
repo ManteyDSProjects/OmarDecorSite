@@ -57,7 +57,7 @@ a:hover{color:var(--od-navy)}
    early here — nothing else about the nav (height, fixed position, colors)
    changes in this range. */
 @media (max-width:900px) and (min-width:769px){
-  .od-nav-links,.od-nav-cta,.od-nav-gallery-cta{display:none!important}
+  .od-nav-links,.od-nav-gallery-cta{display:none!important}
   .od-burger{display:flex!important}
   .od-drawer{display:block!important}
 }
@@ -91,7 +91,7 @@ a:hover{color:var(--od-navy)}
      viewport per the nav-only breakpoint rule above) — start the drawer
      below the 88px header instead of covering it. */
   .od-drawer{top:88px!important;height:calc(100% - 88px)!important}
-  .od-nav-links,.od-nav-cta,.od-nav-gallery-cta{display:none!important}
+  .od-nav-links,.od-nav-gallery-cta{display:none!important}
   .od-burger{display:flex!important}
   .od-drawer{display:block!important}
   .od-band{padding-left:16px!important;padding-right:16px!important}

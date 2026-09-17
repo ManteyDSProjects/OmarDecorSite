@@ -82,7 +82,6 @@ export default function SiteNav({ variant = "light", current, galleryLabel = "Vi
           ))}
         </nav>
         <Button className="od-nav-gallery-cta" as={Link} href={galleryHref} variant="primary" ground="dark" style={{ letterSpacing: "0.05em", color: "var(--od-white)", textDecoration: "none", whiteSpace: "nowrap" }}>{galleryLabel}</Button>
-        <Button className="od-nav-cta" as={Link} href="/contact/" variant="primary" ground="dark" style={{ width: 177, letterSpacing: "0.05em", color: "var(--od-white)", textDecoration: "none" }}>Book a Site Visit</Button>
         <button className={"od-burger" + (open ? " is-open" : "")} type="button" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} onClick={() => setOpen(!open)}>
           {open ? "Close" : "Menu"}
         </button>
