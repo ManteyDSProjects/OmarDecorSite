@@ -330,7 +330,13 @@ a:hover{color:var(--od-navy)}
 }
 @media (max-width:1100px) and (min-width:769px){
   .od-fluid{width:100%!important;max-width:100%!important;min-width:0!important}
-  .od-cta .od-fluid{width:auto!important;max-width:560px!important;flex:1 1 280px!important;min-width:0!important}
+  /* The CTA banner row (heading+body next to the button) has no gap of its
+     own — it relies on justify-content:space-between, which collapses to
+     0px once the row no longer has slack, and the button (flex-shrink not
+     disabled) then sits flush against the text instead of wrapping or
+     spacing away from it. Stack it, same treatment as the <=768px tier. */
+  .od-cta-w1280{flex-direction:column!important;align-items:flex-start!important;gap:24px!important;height:auto!important}
+  .od-cta .od-fluid{width:100%!important;max-width:100%!important;flex:none!important}
   .od-hero-w1440{gap:48px!important}
   .od-hero-carousel{flex:0 0 calc(62% - 16px)!important;width:auto!important;height:auto!important;aspect-ratio:600/480}
   .od-hero-static .od-hero-w1440>div:first-child{min-width:0!important}

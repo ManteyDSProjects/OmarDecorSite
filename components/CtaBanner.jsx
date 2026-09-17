@@ -9,7 +9,7 @@ export default function CtaBanner({ variant = "visit" }) {
     <div className="od-band od-cta" style={{ ...odBand, background: "var(--od-navy)", padding: "64px 0", boxSizing: "border-box", boxShadow: "inset 0 -1px 0 rgba(255,255,255,0.14)" }}>
       <div className="od-cta-w1280" style={{ width: 1280, maxWidth: "100%", margin: "0 auto", padding: "0 80px", boxSizing: "border-box", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <div className="od-fluid" style={{ width: 800, display: "flex", flexDirection: "column", gap: 8, flexShrink: 0 }}>
-          <span className="od-h-lg" style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 32, lineHeight: "100%", color: "var(--od-white)" }}>{call ? "Prefer To Talk It Through?" : "Need quality renovation work?"}</span>
+          <span className="od-h-lg" style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 32, lineHeight: 1.15, color: "var(--od-white)" }}>{call ? "Prefer To Talk It Through?" : "Need quality renovation work?"}</span>
           <span style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 20, lineHeight: 1.4, color: "var(--od-text-muted-dark)" }}>{call ? "Give us a call and we’ll talk through exactly what you need, no forms required." : "Let us transform your home with precision. Get scheduled for a free site viewing this week."}</span>
         </div>
         {call ? (
