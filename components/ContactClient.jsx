@@ -2,15 +2,59 @@
 import { useEffect, useState } from "react";
 import SiteNav from "@/components/SiteNav";
 import Footer from "@/components/Footer";
-import Carousel from "@/components/Carousel";
 import ContactSection from "@/components/ContactSection";
 import CtaBanner from "@/components/CtaBanner";
 import { BackToTop, CookieBanner } from "@/components/Strips";
-import { CategoryCard, Lightbox } from "@/components/Gallery";
+import { Lightbox } from "@/components/Gallery";
+import Icon from "@/components/Icon";
 import { FaqItem } from "@/components/Markers";
 import { odShell, odBand, odMain, odEyebrow, odH2, odSubline, odBody } from "@/lib/styles";
-import { CATEGORIES } from "@/lib/galleries";
 import { ABOUT, FAQS } from "@/lib/content";
+
+const MIXED_GALLERY_NAMES = [
+  "omar-decor-beige-tile-bathroom-shower-oak-vanity",
+  "omar-decor-hallway-to-ensuite-bathroom-oak-flooring",
+  "omar-decor-bedroom-corner-grey-walls-air-vent",
+  "omar-decor-bedroom-round-mirror-grey-walls",
+  "omar-decor-bedroom-balcony-door-city-view",
+  "omar-decor-living-room-damask-wallpaper-feature-wall",
+  "omar-decor-electrician-fitting-sockets-installation",
+  "omar-decor-dark-tile-bathroom-black-vanity-01",
+  "omar-decor-dark-tile-bathroom-led-niche-shower-02",
+  "omar-decor-white-fitted-media-unit-grey-flooring",
+  "omar-decor-bathroom-wood-vanity-round-sink",
+  "omar-decor-white-fitted-storage-unit-oak-flooring",
+  "omar-decor-living-room-fireplace-alcove-cabinets",
+  "omar-decor-brass-fittings-bathroom-vanity-01",
+  "omar-decor-brass-fittings-bathroom-bath-shower-02",
+  "omar-decor-grey-tile-bathroom-toilet-sink-03",
+  "omar-decor-grey-tile-bathroom-bath-toilet-04",
+  "omar-decor-herringbone-parquet-bedroom-wardrobes-01",
+  "omar-decor-herringbone-parquet-bedroom-drawers-02",
+  "omar-decor-bedroom-headboard-wall-art-lamps",
+  "omar-decor-dark-kitchen-marble-countertop-01",
+  "omar-decor-dark-kitchen-gas-hob-marble-worktop-02",
+  "omar-decor-dark-kitchen-sink-window-03",
+  "omar-decor-bedroom-fitted-wardrobe-tv-unit",
+  "omar-decor-open-plan-living-kitchen-grey-cabinets",
+  "omar-decor-terrazzo-tile-cloakroom-sink",
+  "omar-decor-bedroom-white-fitted-wardrobes-round-mirror",
+  "omar-decor-dark-tile-shower-led-niche-01",
+  "omar-decor-dark-tile-bathroom-vanity-towel-rail-02",
+  "omar-decor-dark-tile-bathroom-bath-toilet-vanity-03",
+  "omar-decor-living-room-tv-alcove-unit-01",
+  "omar-decor-living-room-tv-alcove-unit-02",
+  "omar-decor-living-room-alcove-shelving-led-lighting-01",
+  "omar-decor-living-room-alcove-shelving-fireplace-02",
+  "modern-bedroom-white-gloss-wardrobe-wood-slat-accent-wall",
+  "omar-decor-styled-bedroom-rust-cushions-headboard-01",
+  "omar-decor-styled-bedroom-breakfast-tray",
+  "omar-decor-styled-bedroom-teal-cushions-nightstand-01",
+  "omar-decor-styled-bedroom-dark-feature-wall-02",
+  "omar-decor-styled-living-room-city-view",
+];
+const MIXED_GALLERY = MIXED_GALLERY_NAMES.map((n) => "/uploads/" + n + ".webp");
+const MIXED_GALLERY_ALTS = MIXED_GALLERY_NAMES.map((_, i) => "Omar Decor project photo " + (i + 1) + " of " + MIXED_GALLERY_NAMES.length);
 
 const aboutP = { fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 20, lineHeight: 1.5, color: "var(--od-navy)", margin: 0 };
 
@@ -38,35 +82,37 @@ function AboutCarousel() {
 }
 
 function ContactGallerySection() {
-  const pages = Math.ceil(CATEGORIES.length / 3);
-  const [page, setPage] = useState(0);
-  const [cat, setCat] = useState(null);
+  const [open, setOpen] = useState(false);
   const [shot, setShot] = useState(0);
-  const [expandedCat, setExpandedCat] = useState(null);
-  const shown = CATEGORIES.slice(page * 3, page * 3 + 3);
+  const [expanded, setExpanded] = useState(false);
   return (
-    <div id="gallery" className="od-band od-section-pad" style={{ ...odBand, height: 1272, background: "var(--od-white)", display: "flex", flexDirection: "column", gap: 64, padding: "120px 80px" }}>
-      <div style={{ display: "flex", flexDirection: "column", gap: 16, alignSelf: "stretch", flexShrink: 0 }}>
+    <div id="gallery" className="od-band od-section-pad" style={{ ...odBand, background: "var(--od-white)", display: "flex", flexDirection: "column", gap: 58, padding: "120px 80px", alignItems: "center" }}>
+      <div className="od-fluid" style={{ width: 1100, maxWidth: "100%", boxSizing: "border-box", display: "flex", flexDirection: "column", gap: 16, alignSelf: "center", flexShrink: 0 }}>
         <span style={odEyebrow}>Our Work</span>
         <h2 className="od-h2" style={odH2}>See The Difference Quality Work Makes</h2>
-        <span className="od-fluid" style={{ ...odSubline, width: 760, fontSize: 20 }}>A selection of home improvement projects completed across Central London.</span>
+        <span style={{ ...odSubline, width: 760, fontSize: 20 }}>A selection of home improvement projects completed across Central London.</span>
       </div>
-      <div className="od-cat-row" style={{ display: "flex", gap: 24, alignSelf: "stretch", flexShrink: 0 }}>
-        {shown.map(([name, cover]) => (
-          <CategoryCard key={name} name={name} cover={cover} expanded={expandedCat === name} onToggle={() => setExpandedCat(expandedCat === name ? null : name)} onOpen={() => { setCat(CATEGORIES.findIndex(([c]) => c === name)); setShot(0); }} />
-        ))}
+      <div
+        className={"od-category-card od-work-hero" + (expanded ? " is-expanded" : "")}
+        role="button"
+        tabIndex={0}
+        aria-label="Open Selected Works gallery"
+        onClick={() => { setOpen(true); setShot(0); }}
+        onKeyDown={(e) => { if (e.target === e.currentTarget && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); setOpen(true); setShot(0); } }}
+      >
+        <div className="od-category-img od-work-img" style={{ backgroundImage: "url(/uploads/modern-bedroom-white-gloss-wardrobe-wood-slat-accent-wall.webp)" }} />
+        <div className="od-category-content">
+          <div className="od-category-heading-row">
+            <span className="od-category-name">Selected Works</span>
+            <button type="button" className="od-category-toggle" aria-expanded={expanded} aria-label={(expanded ? "Hide" : "Show") + " Selected Works description"} onClick={(e) => { e.stopPropagation(); setExpanded((v) => !v); }}>
+              <Icon name="plus" size={14} style={{ color: "var(--od-white)", transform: expanded ? "rotate(45deg)" : "none" }} />
+            </button>
+          </div>
+          <span className="od-category-caption">A curated mix of completed projects, showcasing thoughtful spaces across a range of styles and needs.</span>
+        </div>
       </div>
-      <div className="od-steps-carousel" style={{ display: "flex", justifyContent: "center" }}>
-        <Carousel index={page} count={pages} onChange={(n) => setPage(((n % pages) + pages) % pages)} labels={Array.from({ length: pages }, (_, i) => "Gallery " + (i + 1))} />
-      </div>
-      {cat !== null ? (
-        <Lightbox
-          srcs={CATEGORIES[cat][2]}
-          alts={CATEGORIES[cat][2].map((_, i) => CATEGORIES[cat][0] + " project photo " + (i + 1) + " by Omar Decor")}
-          index={shot}
-          onIndex={setShot}
-          onClose={() => setCat(null)}
-        />
+      {open ? (
+        <Lightbox srcs={MIXED_GALLERY} alts={MIXED_GALLERY_ALTS} index={shot} onIndex={setShot} onClose={() => setOpen(false)} />
       ) : null}
     </div>
   );

@@ -113,8 +113,7 @@ a:hover{color:var(--od-navy)}
   .od-services-mobile{display:flex!important;flex-direction:column;gap:24px}
 
   .od-grid3{display:grid!important;grid-template-columns:1fr!important}
-  .od-cat-row{display:flex!important;flex-direction:column!important;height:auto!important}
-  .od-cat-row .od-category-card{height:auto!important;aspect-ratio:410/308!important}
+  .od-work-hero{aspect-ratio:4/3}
   .od-grid2,.od-masonry{display:grid!important;grid-template-columns:1fr!important}
   .od-masonry>*{position:static!important;left:auto!important;top:auto!important;width:auto!important;height:auto!important;aspect-ratio:3/2!important}
   .od-masonry>*>*,.od-gallery-flex .od-photo-cell{object-fit:cover!important;object-position:center!important}
@@ -234,8 +233,8 @@ a:hover{color:var(--od-navy)}
 .od-category-toggle{width:20px;height:20px;flex-shrink:0;border:none;background:none;padding:0;display:flex;align-items:center;justify-content:center;cursor:pointer}
 .od-category-caption{font:500 clamp(12px,1.2vw,14px)/20px var(--font-text);color:var(--od-white);opacity:0;transition:opacity var(--dur-fast) var(--ease-out)}
 .od-category-card.is-expanded .od-category-caption{opacity:1}
-.od-cat-row{height:700px}
-.od-cat-row .od-category-card{flex:1 1 0%;min-width:0;height:100%;aspect-ratio:auto}
+.od-work-hero{position:relative;width:1100px;max-width:100%;aspect-ratio:1100/700;flex-shrink:0}
+.od-work-img{position:absolute;inset:0;background-size:cover;background-position:center}
 
 .od-carousel-count{display:none;font:500 14px/1 var(--font-text);letter-spacing:2px;text-transform:uppercase;color:var(--od-navy);min-width:56px;text-align:center}
 .od-steps-carousel{display:none}
@@ -346,8 +345,6 @@ a:hover{color:var(--od-navy)}
   #contact .od-contact-w1280>div:first-child{flex:1 1 0%!important;min-width:220px!important}
   #contact .od-form{min-width:300px!important}
   #contact h1,#contact h2{font-size:36px!important}
-  .od-cat-row{flex-direction:column!important;height:auto!important;gap:12px!important}
-  .od-cat-row .od-category-card{flex:none!important;width:100%!important;height:auto!important;aspect-ratio:410/308!important}
   .od-strip{height:auto!important;display:grid!important;grid-template-columns:1fr 1fr!important;justify-content:center!important;justify-items:center!important;gap:16px 32px!important;padding:24px 40px!important}
   .od-strip>*{width:auto!important;white-space:normal!important}
   .od-strip-contact{grid-template-columns:1fr!important;justify-items:center!important}
