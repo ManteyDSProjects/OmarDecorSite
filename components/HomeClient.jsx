@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import Button from "@/components/Button";
@@ -10,10 +10,10 @@ import { TrustBar, BackToTop, CookieBanner } from "@/components/Strips";
 import { CategoryCard, Lightbox } from "@/components/Gallery";
 import ReviewsSection from "@/components/ReviewsSection";
 import CtaBanner from "@/components/CtaBanner";
-import { ChecklistItem, ProcessStep } from "@/components/Markers";
+import { ChecklistItem, ProcessStep, ServiceCard } from "@/components/Markers";
 import { odShell, odBand, odMain, odEyebrow, odH2, odBody } from "@/lib/styles";
 import { CATEGORIES } from "@/lib/galleries";
-import { HOME_BENEFITS, STEPS, AREA_ROWS_HOME, AREA_HALVES_HOME } from "@/lib/content";
+import { HOME_BENEFITS, SERVICES, STEPS, AREA_ROWS_HOME, AREA_HALVES_HOME } from "@/lib/content";
 
 const HERO_SLIDES = [
   ["/assets/images/hero-carousel-01-airbnb.webp", "Airbnb-ready interior styled by Omar Decor"],
@@ -36,7 +36,7 @@ function HeroCarousel() {
   return (
     <div className="od-hero-carousel" style={{ position: "relative", width: 600, height: 480, borderRadius: 8, overflow: "hidden", flexShrink: 0, background: "var(--od-navy-deep)" }}>
       {HERO_SLIDES.map(([src, alt], n) => (
-        <img key={src} src={src} alt={alt} decoding="async" fetchPriority={n === 0 ? "high" : "auto"} loading={n === 0 ? "eager" : "lazy"} className={"od-hero-carousel-img" + (n === i ? " is-active" : "")} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+        <img key={src} src={src} alt={alt} decoding="async" fetchPriority={n === 0 ? "high" : "auto"} loading={n === 0 ? "eager" : "lazy"} className={"od-hero-carousel-img" + (n === i ? " is-active" : "")} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "contain" }} />
       ))}
     </div>
   );
@@ -57,6 +57,45 @@ function Hero() {
           </div>
         </div>
         <HeroCarousel />
+      </div>
+    </div>
+  );
+}
+
+function ServicesSection() {
+  const [idx, setIdx] = useState(0);
+  const touchX = useRef(null);
+  const count = SERVICES.length;
+  const advance = (n) => setIdx(((n % count) + count) % count);
+
+  function onTouchStart(e) {
+    touchX.current = e.touches[0].clientX;
+  }
+  function onTouchEnd(e) {
+    if (touchX.current == null) return;
+    const dx = e.changedTouches[0].clientX - touchX.current;
+    touchX.current = null;
+    if (Math.abs(dx) > 40) advance(idx + (dx < 0 ? 1 : -1));
+  }
+
+  return (
+    <div className="od-band od-section-pad" style={{ ...odBand, background: "var(--od-off-white)", padding: "120px 80px", boxSizing: "border-box", display: "flex", flexDirection: "column", gap: 64 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 16, alignItems: "center", alignSelf: "stretch", flexShrink: 0 }}>
+        <span style={{ ...odEyebrow, fontSize: 14 }}>What we do</span>
+        <h2 className="od-h2" style={{ ...odH2, textAlign: "center" }}>Home Improvement Services For Every Project</h2>
+      </div>
+      <div className="od-services-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 32, alignSelf: "stretch" }}>
+        {SERVICES.map(([icon, title, body]) => (
+          <ServiceCard key={title} icon={icon} title={title} body={body} />
+        ))}
+      </div>
+      <div className="od-services-mobile">
+        <div className="od-services-touch" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+          <ServiceCard icon={SERVICES[idx][0]} title={SERVICES[idx][1]} body={SERVICES[idx][2]} style={{ width: "100%" }} />
+        </div>
+        <div className="od-services-carousel od-steps-carousel" style={{ display: "flex", justifyContent: "center" }}>
+          <Carousel index={idx} count={count} onChange={advance} labels={SERVICES.map(([, t]) => t)} />
+        </div>
       </div>
     </div>
   );
@@ -122,10 +161,10 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div id="work" className="od-band od-section-pad" style={{ ...odBand, background: "var(--od-white)", display: "flex", flexDirection: "column", gap: 48, padding: "96px 48px" }}>
+        <div id="work" className="od-band od-section-pad" style={{ ...odBand, background: "var(--od-navy)", display: "flex", flexDirection: "column", gap: 48, padding: "96px 48px" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: 16, alignSelf: "stretch", flexShrink: 0 }}>
-            <h2 className="od-h2" style={{ ...odH2, fontSize: 32 }}>Explore Our Work By Category</h2>
-            <span style={odBody}>Browse recent projects by category. Tap a card to view the full gallery for that room or space.</span>
+            <h2 className="od-h2" style={{ ...odH2, fontSize: 32, color: "var(--od-white)" }}>Explore Our Work By Category</h2>
+            <span style={{ ...odBody, color: "var(--od-text-muted-dark)" }}>Browse recent projects by category. Tap a card to view the full gallery for that room or space.</span>
           </div>
           <div className="od-grid3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 12, alignSelf: "stretch" }}>
             {CATEGORIES.map(([c, cover], i) => (
@@ -142,6 +181,8 @@ export default function HomePage() {
             onClose={() => setCat(null)}
           />
         ) : null}
+
+        <ServicesSection />
 
         <div className="od-band od-section-pad" style={{ ...odBand, height: 557, background: "var(--od-white)", display: "flex", flexDirection: "column", gap: 64, padding: "120px 80px" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: 16, alignItems: "center", alignSelf: "stretch", flexShrink: 0 }}>
@@ -196,7 +237,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <ReviewsSection google />
+        <ReviewsSection />
         <CtaBanner />
       </main>
       <Footer />

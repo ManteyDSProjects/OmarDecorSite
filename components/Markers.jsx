@@ -30,6 +30,20 @@ export function ProcessStep({ number, title, body, accent = false, style, ...res
   );
 }
 
+export function ServiceCard({ icon, title, body, className, style, ...rest }) {
+  return (
+    <div {...rest} className={"od-service-card" + (className ? " " + className : "")} style={{ background: "var(--od-cream)", borderRadius: 6, padding: 32, minHeight: 240, display: "flex", flexDirection: "column", gap: 24, boxSizing: "border-box", ...style }}>
+      <div style={{ width: "100%", height: 48, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <Icon name={icon} size={48} style={{ color: "var(--od-brass)" }} />
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+        <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 22, lineHeight: 1.3, color: "var(--od-navy)", margin: 0 }}>{title}</h3>
+        <span style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 14, lineHeight: 1.5, color: "var(--od-text-muted)" }}>{body}</span>
+      </div>
+    </div>
+  );
+}
+
 export function ReviewCard({ quote, name, location, rating = 5, className, style, ...rest }) {
   return (
     <div {...rest} className={className} style={{ width: 404, minHeight: 237, borderRadius: "var(--radius-md)", backgroundColor: "var(--od-cream)", display: "flex", flexDirection: "column", gap: 16, padding: "var(--space-7)", alignItems: "flex-start", boxSizing: "border-box", ...style }}>

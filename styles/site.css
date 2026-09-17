@@ -95,6 +95,9 @@ a:hover{color:var(--od-navy)}
   .od-h-lg{font-size:36px!important}
   .od-quote{font-size:24px!important}
 
+  .od-services-grid{display:none!important}
+  .od-services-mobile{display:flex!important;flex-direction:column;gap:24px}
+
   .od-grid3{display:grid!important;grid-template-columns:1fr!important}
   .od-cat-row{display:flex!important;flex-direction:column!important;height:auto!important}
   .od-cat-row .od-category-card{height:auto!important;aspect-ratio:410/308!important}
@@ -203,7 +206,7 @@ a:hover{color:var(--od-navy)}
 
 .od-nav-overlay-wrap{position:absolute;left:0;top:0;width:100%;z-index:50}
 .od-nav-overlay{box-shadow:none}
-.od-hero-carousel-img{opacity:0;transition:opacity 800ms var(--ease-out)}
+.od-hero-carousel-img{opacity:0;transition:opacity 400ms var(--ease-out)}
 .od-hero-carousel-img.is-active{opacity:1}
 
 .od-category-card{position:relative;width:100%;aspect-ratio:410/308;border-radius:12px;overflow:hidden;background-color:var(--od-navy-deep);cursor:pointer;display:block}
@@ -224,6 +227,7 @@ a:hover{color:var(--od-navy)}
 .od-steps-carousel{display:none}
 .od-areas-mobile{display:none}
 .od-areas-carousel{display:none}
+.od-services-mobile{display:none}
 #gallery,.od-masonry,.od-gallery-flex{overflow-anchor:none}
 .od-faq{position:relative}
 .od-faq>svg{display:none!important}
