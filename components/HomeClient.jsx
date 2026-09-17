@@ -196,7 +196,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="od-band od-section-pad" style={{ ...odBand, background: "var(--od-navy)", padding: "120px 0", boxSizing: "border-box" }}>
+        <div id="areas" className="od-band od-section-pad" style={{ ...odBand, background: "var(--od-navy)", padding: "120px 0", boxSizing: "border-box" }}>
           <div className="od-stack od-areas-w1280" style={{ width: 1280, maxWidth: "100%", margin: "0 auto", padding: "0 80px", boxSizing: "border-box", display: "flex", gap: 80, alignItems: "center" }}>
             <div style={{ flexGrow: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 32 }}>
               <div style={{ display: "flex", flexDirection: "column", gap: 20, alignSelf: "stretch", flexShrink: 0 }}>

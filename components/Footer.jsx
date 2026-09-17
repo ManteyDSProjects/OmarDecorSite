@@ -38,7 +38,7 @@ export default function Footer({ style, ...rest }) {
           {AREAS.map((a) => (
             <span key={a} style={item}>{a}</span>
           ))}
-          <Link href="/contact/#areas" style={{ ...item, fontWeight: 700, color: "var(--od-brass)" }}>See All Areas &rarr;</Link>
+          <Link href="/#areas" style={{ ...item, fontWeight: 700, color: "var(--od-brass)" }}>See All Areas &rarr;</Link>
         </div>
         <div style={{ width: 240, display: "flex", flexDirection: "column", gap: 16, alignItems: "flex-start" }}>
           <span style={head}>Direct Contact</span>
