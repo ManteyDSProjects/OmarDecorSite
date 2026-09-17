@@ -60,6 +60,11 @@ a:hover{color:var(--od-navy)}
   .od-nav-links,.od-nav-gallery-cta{display:none!important}
   .od-burger{display:flex!important}
   .od-drawer{display:block!important}
+  /* The header (.od-nav) stays fixed and visible on top of the drawer here
+     too (is-drawer-open raises its z-index above the drawer's), so the
+     drawer's content must start below its 110px desktop-tier height —
+     same treatment as the ≤768px fix, just with that tier's header height. */
+  .od-drawer{top:110px!important;height:calc(100% - 110px)!important}
 }
 
 /* ---- the one mobile breakpoint: everything below 768 collapses together --- */
