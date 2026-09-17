@@ -334,7 +334,7 @@ a:hover{color:var(--od-navy)}
   .od-hero-w1440{gap:48px!important}
   .od-hero-carousel{flex:0 0 calc(62% - 16px)!important;width:auto!important;height:auto!important;aspect-ratio:600/480}
   .od-hero-static .od-hero-w1440>div:first-child{min-width:0!important}
-  .od-hero-static h1{font-size:clamp(32px,4.5vw,48px)!important}
+  .od-hero-static h1{font-size:clamp(24px,3.4vw,36px)!important}
   .od-about-portrait{flex:0 0 calc(50% - 16px)!important;width:auto!important;height:auto!important;aspect-ratio:560/420}
   .od-detail-media{flex:0 0 calc(50% - 40px)!important;width:auto!important;height:auto!important;align-self:flex-start!important;aspect-ratio:auto!important}
   .od-detail-media .od-photo-wrap{width:100%!important;height:auto!important;aspect-ratio:480/520!important}
