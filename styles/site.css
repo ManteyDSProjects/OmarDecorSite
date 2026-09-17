@@ -52,11 +52,14 @@ a:hover{color:var(--od-navy)}
   .od-nav-overlay-wrap{height:0}
 }
 
-/* Nav-only breakpoint: the desktop links + CTA read as cramped against each
-   other before the site's main 768px breakpoint, so the burger takes over
-   early here — nothing else about the nav (height, fixed position, colors)
-   changes in this range. */
-@media (max-width:900px) and (min-width:769px){
+/* Nav-only breakpoint: the desktop links + CTA read as cramped/touching
+   against each other before the site's main 768px breakpoint, so the burger
+   takes over early here — nothing else about the nav (height, fixed
+   position, colors) changes in this range. Raised from 900 to 999px once
+   the header CTA became the longer "View Before & After Gallery"/"View
+   Mixed Gallery" label — measured zero gap between every nav group at
+   884px with that button, so 900 was no longer a safe cutoff. */
+@media (max-width:999px) and (min-width:769px){
   .od-nav-links,.od-nav-gallery-cta{display:none!important}
   .od-burger{display:flex!important}
   .od-drawer{display:block!important}
@@ -91,9 +94,9 @@ a:hover{color:var(--od-navy)}
      with no auto-hide/transform logic at this breakpoint. */
   .od-nav{position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;transform:none!important;padding:12px 20px!important;height:88px!important}
   .od-nav-spacer{height:88px!important}
-  /* The header stays visibly on top of the drawer at this breakpoint (unlike
-     the 769-900px burger tier, where the drawer still covers the full
-     viewport per the nav-only breakpoint rule above) — start the drawer
+  /* The header stays visibly on top of the drawer at this breakpoint, same
+     as the 769-999px burger tier above (which uses its own 110px offset
+     matching that tier's taller header) — start the drawer
      below the 88px header instead of covering it. */
   .od-drawer{top:88px!important;height:calc(100% - 88px)!important}
   .od-nav-links,.od-nav-gallery-cta{display:none!important}
