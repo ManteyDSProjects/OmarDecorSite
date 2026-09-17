@@ -8,7 +8,7 @@ const fine = { fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 13, li
 
 const QUICK_LINKS = [
   ["Home", "/"],
-  ["Our Work", "/#work"],
+  ["Services", "/#services"],
   ["Contact", "/contact/"],
 ];
 const AREAS = ["Vauxhall", "Clapham", "Pimlico", "Battersea", "Chelsea"];

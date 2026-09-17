@@ -49,7 +49,7 @@ function ContactGallerySection() {
       <div style={{ display: "flex", flexDirection: "column", gap: 16, alignSelf: "stretch", flexShrink: 0 }}>
         <span style={odEyebrow}>Our Work</span>
         <h2 className="od-h2" style={odH2}>See The Difference Quality Work Makes</h2>
-        <span className="od-fluid" style={{ ...odSubline, width: 760 }}>A selection of home improvement projects completed across Central London.</span>
+        <span className="od-fluid" style={{ ...odSubline, width: 760, fontSize: 20 }}>A selection of home improvement projects completed across Central London.</span>
       </div>
       <div className="od-cat-row" style={{ display: "flex", gap: 24, alignSelf: "stretch", flexShrink: 0 }}>
         {shown.map(([name, cover]) => (
@@ -77,7 +77,7 @@ export default function ContactPage() {
   return (
     <div className="od-shell" style={{ ...odShell, background: "var(--od-off-white)" }}>
       <div className="od-nav-spacer" style={{ alignSelf: "stretch" }}>
-        <SiteNav variant="light" current="Contact" />
+        <SiteNav variant="light" current="Contact" galleryLabel="View Mixed Gallery" galleryHref="#gallery" />
       </div>
       <main id="main" style={odMain}>
         <ContactSection heading="h1" />
@@ -91,8 +91,8 @@ export default function ContactPage() {
             <AboutCarousel />
             <div style={{ flexGrow: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 16 }}>
               <p style={aboutP}>{ABOUT[0]}</p>
-              <p style={{ ...odBody, margin: 0 }}>{ABOUT[1]}</p>
-              <p style={{ ...odBody, margin: 0 }}>{ABOUT[2]}</p>
+              <p style={{ ...odBody, margin: 0, fontSize: 20 }}>{ABOUT[1]}</p>
+              <p style={{ ...odBody, margin: 0, fontSize: 20 }}>{ABOUT[2]}</p>
             </div>
           </div>
         </div>

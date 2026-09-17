@@ -9,12 +9,11 @@ import { odBand } from "@/lib/styles";
 
 const NAV_LINKS = [
   ["Home", "/"],
-  ["Services", "/#work"],
-  ["Gallery", "/contact/#gallery"],
+  ["Services", "/#services"],
   ["Contact", "/contact/"],
 ];
 
-export default function SiteNav({ variant = "light", current }) {
+export default function SiteNav({ variant = "light", current, galleryLabel = "View Before & After Gallery", galleryHref = "/#work" }) {
   const [open, setOpen] = useState(false);
   const [visible, setVisible] = useState(true);
   const [mounted, setMounted] = useState(false);
@@ -82,6 +81,7 @@ export default function SiteNav({ variant = "light", current }) {
             <Link key={l} href={href} className="od-navlink" aria-current={current === l ? "page" : undefined} style={{ ...link, color: ink }}>{l}</Link>
           ))}
         </nav>
+        <Button className="od-nav-gallery-cta" as={Link} href={galleryHref} variant="primary" ground="dark" style={{ letterSpacing: "0.05em", color: "var(--od-white)", textDecoration: "none", whiteSpace: "nowrap" }}>{galleryLabel}</Button>
         <Button className="od-nav-cta" as={Link} href="/contact/" variant="primary" ground="dark" style={{ width: 177, letterSpacing: "0.05em", color: "var(--od-white)", textDecoration: "none" }}>Book a Site Visit</Button>
         <button className={"od-burger" + (open ? " is-open" : "")} type="button" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} onClick={() => setOpen(!open)}>
           {open ? "Close" : "Menu"}
@@ -89,36 +89,25 @@ export default function SiteNav({ variant = "light", current }) {
       </div>
       {mounted
         ? createPortal(
-            <div
-              className={"od-drawer" + (open ? " is-open" : "")}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                boxSizing: "border-box",
-                paddingTop: "max(24px, env(safe-area-inset-top))",
-                paddingRight: "max(40px, env(safe-area-inset-right))",
-                paddingBottom: "max(24px, env(safe-area-inset-bottom))",
-                paddingLeft: "max(40px, env(safe-area-inset-left))",
-              }}
-            >
+            <div className={"od-drawer" + (open ? " is-open" : "")}>
               <nav aria-label="Mobile" style={{ display: "flex", flexDirection: "column", minHeight: "100%" }}>
-                <div style={{ display: "flex", flexDirection: "column", gap: 8, alignItems: "flex-start" }}>
+                <div className="od-drawer-links" style={{ display: "flex", flexDirection: "column", gap: 8, alignItems: "flex-start" }}>
                   {NAV_LINKS.map(([l, href]) => (
                     <Link key={l} href={href} onClick={() => setOpen(false)} className="od-navlink od-drawer-link" style={{ ...link, color: "var(--od-white)", fontSize: 20, minHeight: 44, display: "flex", alignItems: "center", justifyContent: "flex-start", textAlign: "left" }}>{l}</Link>
                   ))}
                 </div>
-                <div style={{ alignSelf: "stretch", height: 1, background: "var(--od-border-on-navy)", margin: "24px 0" }} />
-                <div style={{ display: "flex", flexDirection: "column", gap: 20, alignItems: "flex-start", marginTop: "auto", marginBottom: 24 }}>
-                  <a href="https://wa.me/447766355099" target="_blank" rel="noopener" onClick={() => setOpen(false)} className="od-inline-link" style={{ display: "flex", gap: 10, alignItems: "center", fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 16, lineHeight: 1.3, color: "var(--od-white)", textDecoration: "none" }}>
-                    <Icon name="whatsapp" size={18} style={{ color: "var(--od-brass)", flexShrink: 0 }} />
+                <div className="od-drawer-divider" />
+                <div className="od-drawer-contact">
+                  <a href="https://wa.me/447766355099" target="_blank" rel="noopener" onClick={() => setOpen(false)} className="od-inline-link od-drawer-contact-item">
+                    <span className="od-drawer-icon-tile"><Icon name="whatsapp" size={18} style={{ color: "var(--od-brass)" }} /></span>
                     +44 7766 355099
                   </a>
-                  <a href="mailto:hello@omardecor.co.uk" onClick={() => setOpen(false)} className="od-inline-link" style={{ display: "flex", gap: 10, alignItems: "center", fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 16, lineHeight: 1.3, color: "var(--od-white)", textDecoration: "none" }}>
-                    <Icon name="contact-mail" size={18} style={{ color: "var(--od-brass)", flexShrink: 0 }} />
+                  <a href="mailto:hello@omardecor.co.uk" onClick={() => setOpen(false)} className="od-inline-link od-drawer-contact-item">
+                    <span className="od-drawer-icon-tile"><Icon name="contact-mail" size={18} style={{ color: "var(--od-brass)" }} /></span>
                     hello@omardecor.co.uk
                   </a>
                 </div>
-                <Button as={Link} href="/contact/" onClick={() => setOpen(false)} variant="primary" ground="dark" style={{ width: "100%", color: "var(--od-white)", textDecoration: "none" }}>Book a Site Visit</Button>
+                <Button as={Link} href="/contact/" onClick={() => setOpen(false)} variant="primary" ground="dark" className="od-drawer-cta" style={{ color: "var(--od-white)", textDecoration: "none" }}>Book a Site Visit</Button>
               </nav>
             </div>,
             document.body

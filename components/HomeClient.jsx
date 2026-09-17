@@ -48,7 +48,7 @@ function Hero() {
       <div className="od-stack od-hero-w1440" style={{ width: 1440, maxWidth: "100%", margin: "0 auto", padding: "0 48px", boxSizing: "border-box", display: "flex", gap: 80, alignItems: "center" }}>
         <div style={{ position: "relative", display: "flex", flexDirection: "column", gap: 28, justifyContent: "center", alignItems: "flex-start", flexGrow: 1, alignSelf: "stretch" }}>
           <h1 className="od-h1" style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 64, lineHeight: 1.1, color: "var(--od-navy)", margin: 0, alignSelf: "stretch" }}>Quality Home Improvements, Done Properly.</h1>
-          <span style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 16, lineHeight: 1.6, color: "var(--od-text-muted)", alignSelf: "stretch" }}>Reliable handyman and home improvement services across Central London and surrounding areas.</span>
+          <span style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 20, lineHeight: 1.6, color: "var(--od-text-muted)", alignSelf: "stretch" }}>Reliable handyman and home improvement services across Central London and surrounding areas.</span>
           <div className="od-btn-row" style={{ display: "flex", gap: 16, alignItems: "flex-start", flexWrap: "wrap" }}>
             <Button as={Link} href="/contact/" variant="primary" ground="dark" style={{ width: 220, height: 45, letterSpacing: "0.05em", color: "var(--od-white)", textDecoration: "none" }}>Book a Site Visit</Button>
             <Button as="a" href="https://wa.me/447766355099" target="_blank" rel="noopener" variant="ghost" ground="light" style={{ width: 220, height: 45, padding: "11px 16px", gap: 10, letterSpacing: "0.05em", fontSize: 16, color: "var(--od-navy)", textDecoration: "none" }}>
@@ -79,7 +79,7 @@ function ServicesSection() {
   }
 
   return (
-    <div className="od-band od-section-pad" style={{ ...odBand, background: "var(--od-off-white)", padding: "120px 80px", boxSizing: "border-box", display: "flex", flexDirection: "column", gap: 64 }}>
+    <div id="services" className="od-band od-section-pad" style={{ ...odBand, background: "var(--od-off-white)", padding: "120px 80px", boxSizing: "border-box", display: "flex", flexDirection: "column", gap: 64 }}>
       <div style={{ display: "flex", flexDirection: "column", gap: 16, alignItems: "center", alignSelf: "stretch", flexShrink: 0 }}>
         <span style={{ ...odEyebrow, fontSize: 14 }}>What we do</span>
         <h2 className="od-h2" style={{ ...odH2, textAlign: "center" }}>Home Improvement Services For Every Project</h2>
@@ -119,7 +119,7 @@ export default function HomePage() {
   return (
     <div className="od-shell" style={odShell}>
       <div className="od-nav-spacer" style={{ alignSelf: "stretch" }}>
-        <SiteNav variant="navy" current="Home" />
+        <SiteNav variant="navy" current="Home" galleryLabel="View Before & After Gallery" galleryHref="/#work" />
       </div>
       <main id="main" style={odMain}>
         <Hero />
@@ -140,7 +140,7 @@ export default function HomePage() {
               <span style={{ ...odEyebrow, fontSize: 13 }}>Why Omar Decor</span>
               <div style={{ display: "flex", flexDirection: "column", gap: 20, alignSelf: "stretch" }}>
                 <h2 className="od-h2" style={odH2}>Small Details. Big Difference.</h2>
-                <span style={odBody}>A home improvement should feel considered &mdash; planned properly, executed cleanly, and finished to a standard you&rsquo;re happy to live with every day.</span>
+                <span style={{ ...odBody, fontSize: 20 }}>A home improvement should feel considered &mdash; planned properly, executed cleanly, and finished to a standard you&rsquo;re happy to live with every day.</span>
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: 18, alignSelf: "stretch" }}>
                 {HOME_BENEFITS.map((row, i) => (
@@ -164,7 +164,7 @@ export default function HomePage() {
         <div id="work" className="od-band od-section-pad" style={{ ...odBand, background: "var(--od-navy)", display: "flex", flexDirection: "column", gap: 48, padding: "96px 48px" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: 16, alignSelf: "stretch", flexShrink: 0 }}>
             <h2 className="od-h2" style={{ ...odH2, fontSize: 32, color: "var(--od-white)" }}>Explore Our Work By Category</h2>
-            <span style={{ ...odBody, color: "var(--od-text-muted-dark)" }}>Browse recent projects by category. Tap a card to view the full gallery for that room or space.</span>
+            <span style={{ ...odBody, color: "var(--od-text-muted-dark)", fontSize: 20 }}>Browse recent projects by category. Tap a card to view the full gallery for that room or space.</span>
           </div>
           <div className="od-grid3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 12, alignSelf: "stretch" }}>
             {CATEGORIES.map(([c, cover], i) => (
@@ -202,7 +202,7 @@ export default function HomePage() {
               <div style={{ display: "flex", flexDirection: "column", gap: 20, alignSelf: "stretch", flexShrink: 0 }}>
                 <span style={{ ...odEyebrow, fontSize: 14 }}>Service Areas</span>
                 <h2 className="od-h2" style={{ ...odH2, color: "var(--od-white)", lineHeight: 1.15 }}>Serving Homeowners Across Central London</h2>
-                <span style={{ ...odBody, color: "var(--od-text-muted-dark)" }}>Omar Decor works with homeowners across Central London and the surrounding areas &mdash; bringing careful, considered improvements to homes throughout the city.</span>
+                <span style={{ ...odBody, color: "var(--od-text-muted-dark)", fontSize: 20 }}>Omar Decor works with homeowners across Central London and the surrounding areas &mdash; bringing careful, considered improvements to homes throughout the city.</span>
               </div>
               <Button as={Link} href="/contact/" variant="primary" ground="dark" style={{ width: 267, height: 49, gap: 12, padding: "16px 32px", fontWeight: 700, letterSpacing: "1px", color: "var(--od-white)", textDecoration: "none" }}>
                 Discuss Your Project<Icon name="arrow-right" size={16} />

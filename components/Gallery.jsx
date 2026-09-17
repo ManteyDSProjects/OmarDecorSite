@@ -51,6 +51,7 @@ export function CategoryCard({ name, cover, onOpen, expanded, onToggle }) {
 
 export function Lightbox({ names, srcs, alts, index, onIndex, onClose }) {
   const closeRef = useRef(null);
+  const thumbsRef = useRef(null);
   const count = (srcs || names).length;
   const srcFor = (i) => (srcs ? srcs[i] : names[i].includes("/") ? names[i] : GALLERY_IMG + names[i] + ".webp");
   const altFor2 = (i) => (alts ? alts[i] : altFor(names[i]));
@@ -89,6 +90,12 @@ export function Lightbox({ names, srcs, alts, index, onIndex, onClose }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count]);
 
+  useEffect(() => {
+    const container = thumbsRef.current;
+    const active = container && container.children[index];
+    if (active) active.scrollIntoView({ behavior: "smooth", inline: "nearest", block: "nearest" });
+  }, [index]);
+
   const arrow = { width: 48, height: 48, borderRadius: 24, border: "none", padding: 0, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", flexShrink: 0 };
 
   return (
@@ -116,7 +123,7 @@ export function Lightbox({ names, srcs, alts, index, onIndex, onClose }) {
         <div className="od-lb-bottom">
           <span className="od-lb-caption">{altFor2(index)}</span>
           {count > 1 ? (
-            <div className="od-lb-thumbs" role="tablist" aria-label="Photographs in this project">
+            <div ref={thumbsRef} className="od-lb-thumbs" role="tablist" aria-label="Photographs in this project">
               {(srcs || names).map((n, i) => (
                 <button key={i} type="button" role="tab" aria-selected={i === index} aria-label={altFor2(i)} className={"od-lb-thumb" + (i === index ? " is-current" : "")} onClick={() => onIndex(i)} style={{ backgroundImage: "url(" + srcFor(i) + ")" }} />
               ))}

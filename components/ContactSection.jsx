@@ -42,7 +42,7 @@ export default function ContactSection({ heading = "h2" }) {
       <div className="od-stack od-contact-w1280" style={{ width: 1440, maxWidth: "100%", margin: "0 auto", padding: "0 80px", boxSizing: "border-box", display: "flex", gap: 120, alignItems: "center" }}>
         <div style={{ flexGrow: 1, minWidth: 0, height: 375, display: "flex", flexDirection: "column", gap: 32, justifyContent: "center" }}>
           <H className="od-h2" style={{ ...odH2, color: "var(--od-white)", whiteSpace: "pre-line" }}>{"Have A Project in\nMind?"}</H>
-          <span style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 18, lineHeight: 1.6, color: "var(--od-text-muted-dark)" }}>Whether you need a small repair, a home improvement project, or help transforming a room, get in touch with Omar Decor to discuss what you need.</span>
+          <span style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 20, lineHeight: 1.6, color: "var(--od-text-muted-dark)" }}>Whether you need a small repair, a home improvement project, or help transforming a room, get in touch with Omar Decor to discuss what you need.</span>
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             {[
               ["contact-mail", "hello@omardecor.co.uk", "mailto:hello@omardecor.co.uk"],
@@ -84,11 +84,11 @@ export default function ContactSection({ heading = "h2" }) {
             </p>
             <span style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 28, lineHeight: "100%", color: "var(--od-white)" }}>Book a Free Visit</span>
             <div className="od-form-row" style={{ display: "flex", gap: 16, alignSelf: "stretch" }}>
-              <Field label="Full Name" name="name" placeholder="Your name" autoComplete="name" required />
+              <Field label="Name" name="name" placeholder="Your name" autoComplete="name" required />
               <Field label="Phone Number" name="phone" type="tel" placeholder="e.g. 07700 900077" autoComplete="tel" required />
             </div>
             <Field label="Email Address" name="email" type="email" placeholder="you@example.com" autoComplete="email" required />
-            <Field label="Your Location" name="location" placeholder="e.g. Clapham, Pimlico, Vauxhall" />
+            <Field label="Postcode" name="location" placeholder="e.g. Clapham, Pimlico, Vauxhall" />
             <Field label="Project Details" name="details" type="textarea" placeholder="Briefly describe what you need done..." />
             <div style={{ padding: "12px 0", alignSelf: "stretch" }}>
               <Button as="button" type="submit" variant="primary" ground="dark" disabled={sending} aria-disabled={sending} style={{ width: "100%" }}>{sending ? "Sending" : "Send Enquiry"}</Button>
