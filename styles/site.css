@@ -243,7 +243,7 @@ a:hover{color:var(--od-navy)}
 .od-work-cell{position:relative;display:block;aspect-ratio:1/1;padding:0;border:none;border-radius:6px;overflow:hidden;background:var(--od-cream);cursor:pointer}
 .od-work-cell img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 500ms var(--ease-snap)}
 .od-work-cell:hover img{transform:scale(1.06)}
-.od-work-empty{cursor:default;opacity:.5}
+.od-work-empty{cursor:default;background:transparent}
 .od-work-cell:focus-visible{outline:2px solid var(--od-brass);outline-offset:2px}
 @media (max-width:768px){.od-work-grid{grid-template-columns:repeat(4,1fr);gap:6px}.od-work-empty{display:none}}
 

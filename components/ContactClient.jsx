@@ -54,15 +54,16 @@ const MIXED_GALLERY_NAMES = [
   "omar-decor-styled-living-room-city-view",
 ];
 const MIXED_GALLERY = MIXED_GALLERY_NAMES.map((n) => "/uploads/" + n + ".webp");
-// Grid is laid out 6 columns x 8 rows. Unfilled slots render as empty tiles until more
-// photos are added: one per row (varied columns) so every row, including the last, holds
-// photos. Photos keep their order; as photos are added, the last rows fill in first.
+// Grid is laid out 6 columns x 8 rows. Unfilled slots are blank tiles at the end of a row
+// (one per row, bottom rows first) so every row, including the last, holds photos. Photos
+// keep their order and reflow as more are added; the blanks disappear from the top down.
 const GRID_COLS = 6;
-const GRID_SLOTS = 48;
-const EMPTY_COL_BY_ROW = [5, 2, 4, 0, 3, 1, 5, 2];
+const GRID_ROWS = 8;
+const GRID_SLOTS = GRID_COLS * GRID_ROWS;
 const GRID_CELLS = (() => {
   const emptyN = Math.max(0, GRID_SLOTS - MIXED_GALLERY.length);
-  const empty = new Set(EMPTY_COL_BY_ROW.slice(0, emptyN).map((c, r) => r * GRID_COLS + c));
+  const empty = new Set();
+  for (let r = GRID_ROWS - 1; r >= 0 && empty.size < emptyN; r--) empty.add(r * GRID_COLS + GRID_COLS - 1);
   for (let slot = GRID_SLOTS - 1; empty.size < emptyN; slot--) empty.add(slot);
   let next = 0;
   return Array.from({ length: GRID_SLOTS }, (_, slot) => (empty.has(slot) ? -1 : next++));
