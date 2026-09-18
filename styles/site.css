@@ -343,10 +343,20 @@ a:hover{color:var(--od-navy)}
      spacing away from it. Stack it, same treatment as the <=768px tier. */
   .od-cta-w1280{flex-direction:column!important;align-items:flex-start!important;gap:24px!important;height:auto!important}
   .od-cta .od-fluid{width:100%!important;max-width:100%!important;flex:none!important}
-  .od-hero-w1440{gap:48px!important}
-  .od-hero-carousel{flex:0 0 calc(62% - 16px)!important;width:auto!important;height:auto!important;aspect-ratio:600/480}
-  .od-hero-static .od-hero-w1440>div:first-child{min-width:0!important}
-  .od-hero-static h1{font-size:clamp(24px,3.4vw,36px)!important}
+  /* Heading spans full width on its own row, sized the same as every other
+     section heading (odH2's 48px) instead of being squeezed into a narrow
+     text column and shrunk to fit -- description+buttons sit in a left
+     column with the image in a right column on the row below, same
+     grouping as desktop just reflowed. display:contents on the original
+     text-column wrapper exposes its children (h1, subline, button row) as
+     direct grid items without any JSX/DOM change -- desktop and mobile,
+     which don't hit this media query, are completely unaffected. */
+  .od-hero-w1440{display:grid!important;grid-template-columns:1fr 1.2fr!important;grid-template-areas:"heading heading" "subline image" "buttons image"!important;column-gap:48px!important;row-gap:20px!important;align-items:center!important}
+  .od-hero-w1440>div:first-child{display:contents!important}
+  .od-hero-static h1{grid-area:heading!important;font-size:48px!important}
+  .od-hero-subline{grid-area:subline!important}
+  .od-hero-w1440 .od-btn-row{grid-area:buttons!important;align-self:start!important}
+  .od-hero-carousel{grid-area:image!important;flex:none!important;width:auto!important;height:auto!important;aspect-ratio:600/480}
   .od-about-portrait{flex:0 0 calc(50% - 16px)!important;width:auto!important;height:auto!important;align-self:flex-start!important;aspect-ratio:560/420}
   .od-detail-media{flex:0 0 calc(50% - 40px)!important;width:auto!important;height:auto!important;align-self:flex-start!important;aspect-ratio:auto!important}
   .od-detail-media .od-photo-wrap{width:100%!important;height:auto!important;aspect-ratio:480/520!important}
