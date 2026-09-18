@@ -6,8 +6,14 @@
 *,*::before,*::after{box-sizing:border-box}
 /* Kills the default mobile tap-highlight box and the ~300ms touch delay
    that was reading as a phantom flash on an adjacent button (e.g. tapping
-   the lightbox's right arrow flashing the left one). Global by design. */
-a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+   the lightbox's right arrow flashing the left one). Global by design.
+   Extended to [role="button"] and .od-faq/.od-category-card specifically:
+   several custom interactive elements (FAQ rows, category cards, the
+   Contact page's "Selected Works" hero card) are plain divs with an
+   onClick, not real <button>/<a> elements, so the bare a,button selector
+   never covered them and tapping one still showed the browser's default
+   blue highlight overlay. */
+a,button,[role="button"],.od-faq,.od-category-card{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 html{-webkit-text-size-adjust:100%;overflow-x:clip;scrollbar-width:thin;scrollbar-color:var(--od-navy) var(--od-cream)}
 html::-webkit-scrollbar{width:12px}
 html::-webkit-scrollbar-track{background:var(--od-cream)}
@@ -341,7 +347,7 @@ a:hover{color:var(--od-navy)}
   .od-hero-carousel{flex:0 0 calc(62% - 16px)!important;width:auto!important;height:auto!important;aspect-ratio:600/480}
   .od-hero-static .od-hero-w1440>div:first-child{min-width:0!important}
   .od-hero-static h1{font-size:clamp(24px,3.4vw,36px)!important}
-  .od-about-portrait{flex:0 0 calc(50% - 16px)!important;width:auto!important;height:auto!important;aspect-ratio:560/420}
+  .od-about-portrait{flex:0 0 calc(50% - 16px)!important;width:auto!important;height:auto!important;align-self:flex-start!important;aspect-ratio:560/420}
   .od-detail-media{flex:0 0 calc(50% - 40px)!important;width:auto!important;height:auto!important;align-self:flex-start!important;aspect-ratio:auto!important}
   .od-detail-media .od-photo-wrap{width:100%!important;height:auto!important;aspect-ratio:480/520!important}
   .od-quote-card{position:relative!important;left:auto!important;top:auto!important;margin:-40px 0 0 auto!important;width:80%!important;max-width:320px!important}

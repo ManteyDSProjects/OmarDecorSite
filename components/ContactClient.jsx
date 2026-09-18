@@ -90,7 +90,7 @@ function ContactGallerySection() {
       <div className="od-fluid" style={{ width: 1100, maxWidth: "100%", boxSizing: "border-box", display: "flex", flexDirection: "column", gap: 16, alignSelf: "center", flexShrink: 0 }}>
         <span style={odEyebrow}>Our Work</span>
         <h2 className="od-h2" style={odH2}>See The Difference Quality Work Makes</h2>
-        <span style={{ ...odSubline, width: 760, fontSize: 20 }}>A selection of home improvement projects completed across Central London.</span>
+        <span className="od-fluid" style={{ ...odSubline, width: 760, fontSize: 20 }}>A selection of home improvement projects completed across Central London.</span>
       </div>
       <div
         className={"od-category-card od-work-hero" + (expanded ? " is-expanded" : "")}
