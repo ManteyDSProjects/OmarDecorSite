@@ -58,7 +58,7 @@ const MIXED_GALLERY = MIXED_GALLERY_NAMES.map((n) => "/uploads/" + n + ".webp");
 // end stay blank (keeping the seven-row height) until more photos are added.
 const GRID_SLOTS = 6 * 7;
 const GRID_CELLS = Array.from({ length: Math.max(GRID_SLOTS, MIXED_GALLERY.length) }, (_, slot) => (slot < MIXED_GALLERY.length ? slot : -1));
-const MIXED_GALLERY_ALTS = MIXED_GALLERY_NAMES.map((_, i) => "Omar Decor project photo " + (i + 1) + " of " + MIXED_GALLERY_NAMES.length);
+const MIXED_GALLERY_ALTS = MIXED_GALLERY_NAMES.map((_, i) => "Mixed Gallery photo " + (i + 1) + " by Omar Decor");
 
 const aboutP = { fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 20, lineHeight: 1.5, color: "var(--od-navy)", margin: 0 };
 

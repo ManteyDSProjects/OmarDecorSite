@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { memo, useEffect, useLayoutEffect, useRef } from "react";
 import Icon from "./Icon";
 import { md } from "@/lib/img";
 import { altFor, GALLERY_IMG, CATEGORY_LABELS, CATEGORY_CAPTIONS } from "@/lib/galleries";
@@ -78,6 +78,15 @@ function whenScrollSettles(el, cb) {
   }
   requestAnimationFrame(tick);
 }
+
+// Memoised so the arrow/close glyphs aren't torn down and rebuilt (innerHTML) on every photo change,
+// which flashed both arrows.
+const LbChevron = memo(function LbChevron({ dir }) {
+  return <Icon name={"chevron-" + dir} size={16} style={{ width: 10, height: 16, color: "var(--od-white)" }} />;
+});
+const LbClose = memo(function LbClose() {
+  return <Icon name="plus" size={18} style={{ color: "var(--od-white)", transform: "rotate(45deg)" }} />;
+});
 
 export function Lightbox({ names, srcs, alts, index, onIndex, onClose, variant }) {
   const clean = variant === "clean";
@@ -175,24 +184,24 @@ export function Lightbox({ names, srcs, alts, index, onIndex, onClose, variant }
         <div className="od-lb-top">
           {clean ? <span /> : <span className="od-lb-count">{index + 1} of {count}</span>}
           <button ref={closeRef} type="button" className="od-arrow od-arrow-brass od-lb-close" aria-label="Close" onClick={onClose} style={{ ...arrow, background: "var(--od-brass)" }}>
-            <Icon name="plus" size={18} style={{ color: "var(--od-white)", transform: "rotate(45deg)" }} />
+            <LbClose />
           </button>
         </div>
         <div className="od-lb-stage">
           {count > 1 ? (
             <button type="button" className="od-arrow od-arrow-lb od-lb-prev" aria-label="Previous photograph" onClick={() => onIndex((index + count - 1) % count)} style={arrow}>
-              <Icon name="chevron-left" size={16} style={{ width: 10, height: 16, color: "var(--od-white)" }} />
+              <LbChevron dir="left" />
             </button>
           ) : null}
-          <img key={index} className="od-lb-img" src={srcFor(index)} alt={altFor2(index)} decoding="async" />
+          <img className="od-lb-img" src={srcFor(index)} alt={altFor2(index)} decoding="async" />
           {count > 1 ? (
             <button type="button" className="od-arrow od-arrow-lb od-lb-next" aria-label="Next photograph" onClick={() => onIndex((index + 1) % count)} style={arrow}>
-              <Icon name="chevron-right" size={16} style={{ width: 10, height: 16, color: "var(--od-white)" }} />
+              <LbChevron dir="right" />
             </button>
           ) : null}
         </div>
         <div className="od-lb-bottom">
-          {clean ? null : <span className="od-lb-caption">{altFor2(index)}</span>}
+          <span className="od-lb-caption">{altFor2(index)}</span>
           {count > 1 && !clean ? (
             <div ref={thumbsRef} className="od-lb-thumbs" role="tablist" aria-label="Photographs in this project">
               {/* Leading/trailing clones create the infinite-loop illusion (see the
