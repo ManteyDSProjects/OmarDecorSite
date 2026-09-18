@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import Icon from "./Icon";
 import { altFor, GALLERY_IMG, CATEGORY_LABELS, CATEGORY_CAPTIONS } from "@/lib/galleries";
 
@@ -49,9 +49,39 @@ export function CategoryCard({ name, cover, onOpen, expanded, onToggle }) {
   );
 }
 
+/* Waits for a scroll (however it was triggered — smooth CSS scroll or
+   scrollIntoView) to come to rest, then fires the callback. Polls via rAF
+   instead of relying on the "scrollend" event, which some browsers still
+   don't support, so the loop-snap trick below works everywhere. */
+function whenScrollSettles(el, cb) {
+  let hasMoved = false;
+  let last = el.scrollLeft;
+  let stableFrames = 0;
+  let framesWaited = 0;
+  const maxWaitFrames = 12;
+  function tick() {
+    framesWaited++;
+    const cur = el.scrollLeft;
+    if (cur !== last) {
+      hasMoved = true;
+      stableFrames = 0;
+      last = cur;
+    } else if (hasMoved || framesWaited > maxWaitFrames) {
+      stableFrames++;
+      if (stableFrames >= 3) {
+        cb();
+        return;
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
 export function Lightbox({ names, srcs, alts, index, onIndex, onClose }) {
   const closeRef = useRef(null);
   const thumbsRef = useRef(null);
+  const prevIndexRef = useRef(index);
   const count = (srcs || names).length;
   const srcFor = (i) => (srcs ? srcs[i] : names[i].includes("/") ? names[i] : GALLERY_IMG + names[i] + ".webp");
   const altFor2 = (i) => (alts ? alts[i] : altFor(names[i]));
@@ -90,11 +120,50 @@ export function Lightbox({ names, srcs, alts, index, onIndex, onClose }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count]);
 
+  useLayoutEffect(() => {
+    // The strip's DOM starts with a leading clone-of-last thumb (for the
+    // loop illusion), so a natural scrollLeft of 0 would show a sliver of
+    // that clone instead of the real first thumb. Jump instantly (no
+    // animation, no flash) to the real thumb at mount.
+    const container = thumbsRef.current;
+    if (container && count > 1) container.scrollLeft = container.children[index + 1].offsetLeft;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     const container = thumbsRef.current;
-    const active = container && container.children[index];
-    if (active) active.scrollIntoView({ behavior: "smooth", inline: "nearest", block: "nearest" });
-  }, [index]);
+    if (!container) return;
+    const prev = prevIndexRef.current;
+    prevIndexRef.current = index;
+    if (count < 2) return;
+
+    // Thumbs render as [clone-of-last, ...real 0..count-1, clone-of-first],
+    // so real index i lives at DOM position i+1.
+    const forwardWrap = prev === count - 1 && index === 0;
+    const backwardWrap = prev === 0 && index === count - 1;
+
+    if (forwardWrap) {
+      // Scroll into the trailing clone-of-first (looks identical to the
+      // real one) so the strip appears to keep sliding forward past the
+      // last thumb, then snap invisibly back to the real first thumb.
+      const clone = container.children[count + 1];
+      const real = container.children[1];
+      clone.scrollIntoView({ behavior: "smooth", inline: "nearest", block: "nearest" });
+      whenScrollSettles(container, () => {
+        container.scrollLeft -= clone.offsetLeft - real.offsetLeft;
+      });
+    } else if (backwardWrap) {
+      const clone = container.children[0];
+      const real = container.children[count];
+      clone.scrollIntoView({ behavior: "smooth", inline: "nearest", block: "nearest" });
+      whenScrollSettles(container, () => {
+        container.scrollLeft += real.offsetLeft - clone.offsetLeft;
+      });
+    } else {
+      const active = container.children[index + 1];
+      if (active) active.scrollIntoView({ behavior: "smooth", inline: "nearest", block: "nearest" });
+    }
+  }, [index, count]);
 
   const arrow = { width: 48, height: 48, borderRadius: 24, border: "none", padding: 0, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", flexShrink: 0 };
 
@@ -124,9 +193,14 @@ export function Lightbox({ names, srcs, alts, index, onIndex, onClose }) {
           <span className="od-lb-caption">{altFor2(index)}</span>
           {count > 1 ? (
             <div ref={thumbsRef} className="od-lb-thumbs" role="tablist" aria-label="Photographs in this project">
+              {/* Leading/trailing clones create the infinite-loop illusion (see the
+                  index effect above) — hidden from a11y/tab order since the real
+                  thumbs already cover every photo. */}
+              <button type="button" tabIndex={-1} aria-hidden="true" className="od-lb-thumb" onClick={() => onIndex(count - 1)} style={{ backgroundImage: "url(" + srcFor(count - 1) + ")" }} />
               {(srcs || names).map((n, i) => (
                 <button key={i} type="button" role="tab" aria-selected={i === index} aria-label={altFor2(i)} className={"od-lb-thumb" + (i === index ? " is-current" : "")} onClick={() => onIndex(i)} style={{ backgroundImage: "url(" + srcFor(i) + ")" }} />
               ))}
+              <button type="button" tabIndex={-1} aria-hidden="true" className="od-lb-thumb" onClick={() => onIndex(0)} style={{ backgroundImage: "url(" + srcFor(0) + ")" }} />
             </div>
           ) : null}
           {count > 1 ? (

@@ -40,10 +40,10 @@ export default function ContactSection({ heading = "h2" }) {
   return (
     <div id="contact" className="od-band od-section-pad" style={{ ...odBand, background: "var(--od-navy)", padding: "120px 0", boxSizing: "border-box" }}>
       <div className="od-stack od-contact-w1280" style={{ width: 1440, maxWidth: "100%", margin: "0 auto", padding: "0 80px", boxSizing: "border-box", display: "flex", gap: 120, alignItems: "center" }}>
-        <div style={{ flexGrow: 1, minWidth: 0, height: 375, display: "flex", flexDirection: "column", gap: 32, justifyContent: "center" }}>
-          <H className="od-h2" style={{ ...odH2, color: "var(--od-white)", whiteSpace: "pre-line" }}>{"Have A Project in\nMind?"}</H>
-          <span style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 20, lineHeight: 1.6, color: "var(--od-text-muted-dark)" }}>Whether you need a small repair, a home improvement project, or help transforming a room, get in touch with Omar Decor to discuss what you need.</span>
-          <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+        <div className="od-contact-text" style={{ flexGrow: 1, minWidth: 0, height: 375, display: "flex", flexDirection: "column", gap: 32, justifyContent: "center" }}>
+          <H className="od-h2 od-contact-heading" style={{ ...odH2, color: "var(--od-white)", whiteSpace: "pre-line" }}>{"Have A Project in\nMind?"}</H>
+          <span className="od-contact-subline" style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 20, lineHeight: 1.6, color: "var(--od-text-muted-dark)" }}>Whether you need a small repair, a home improvement project, or help transforming a room, get in touch with Omar Decor to discuss what you need.</span>
+          <div className="od-contact-details" style={{ display: "flex", flexDirection: "column", gap: 28 }}>
             {[
               ["contact-mail", "hello@omardecor.co.uk", "mailto:hello@omardecor.co.uk"],
               ["whatsapp", "+44 7766 355099", "https://wa.me/447766355099"],
@@ -54,9 +54,9 @@ export default function ContactSection({ heading = "h2" }) {
                     must match their siblings, not scale off the 18px text. */}
                 <Icon name={ic} size={20} style={{ color: "var(--od-brass)", flexShrink: 0 }} />
                 {href ? (
-                  <a href={href} target={href.indexOf("wa.me") !== -1 ? "_blank" : undefined} rel={href.indexOf("wa.me") !== -1 ? "noopener" : undefined} className="od-inline-link" style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 18, lineHeight: "100%", color: "var(--od-white)", textDecoration: "none" }}>{t}</a>
+                  <a href={href} target={href.indexOf("wa.me") !== -1 ? "_blank" : undefined} rel={href.indexOf("wa.me") !== -1 ? "noopener" : undefined} className="od-inline-link" style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 18, lineHeight: 1.4, color: "var(--od-white)", textDecoration: "none" }}>{t}</a>
                 ) : (
-                  <span style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 18, lineHeight: "100%", color: "var(--od-white)" }}>{t}</span>
+                  <span style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 18, lineHeight: 1.4, color: "var(--od-white)" }}>{t}</span>
                 )}
               </div>
             ))}

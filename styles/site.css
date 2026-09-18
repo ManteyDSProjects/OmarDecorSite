@@ -369,9 +369,18 @@ a:hover{color:var(--od-navy)}
      touch -- at tablet widths that alone ate most of the band's already-
      narrower interior, leaving huge dead gutters either side of the actual
      text/form content. The band's 48px already provides the side margin. */
-  #contact .od-contact-w1280{gap:48px!important;padding-left:0!important;padding-right:0!important}
-  #contact .od-contact-w1280>div:first-child{flex:1 1 0%!important;min-width:220px!important}
-  #contact .od-form{min-width:300px!important}
+  /* Same grid-areas move as .od-hero-w1440 above: the heading was being
+     squeezed into a narrow text column and wrapping onto 3 short lines
+     with no hierarchy. Span it full width on its own row instead, with
+     the description+contact-details column and the form sitting side by
+     side on the row below -- display:contents on the text wrapper exposes
+     heading/subline/details as direct grid items with no DOM change. */
+  #contact .od-contact-w1280{display:grid!important;grid-template-columns:1fr 1fr!important;grid-template-areas:"heading heading" "subline form" "details form"!important;column-gap:48px!important;row-gap:24px!important;align-items:start!important}
+  #contact .od-contact-text{display:contents!important}
+  #contact .od-contact-heading{grid-area:heading!important}
+  #contact .od-contact-subline{grid-area:subline!important}
+  #contact .od-contact-details{grid-area:details!important}
+  #contact .od-form{grid-area:form!important;min-width:300px!important}
   #contact h1,#contact h2{font-size:36px!important}
   .od-strip{height:auto!important;display:grid!important;grid-template-columns:1fr 1fr!important;justify-content:center!important;justify-items:center!important;gap:16px 32px!important;padding:24px 40px!important}
   .od-strip>*{width:auto!important;white-space:normal!important}
