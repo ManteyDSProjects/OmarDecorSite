@@ -195,12 +195,13 @@ a:hover{color:var(--od-navy)}
   .od-lb-top .od-lb-count{display:none!important}
   .od-lb-stage{padding:0!important;flex:1!important;min-height:0!important;min-width:0!important;margin-bottom:0!important}
   .od-lb-img{height:100%!important;max-height:100%!important;max-width:100%!important}
+  .od-lightbox-clean .od-lb-inner{padding-bottom:112px!important}
   .od-lb-prev{left:8px!important}
   .od-lb-next{right:8px!important}
   .od-arrow-lb{background:rgba(15,33,60,.55)!important}
   .od-lb-thumbs{display:none!important}
-  .od-lb-inner{gap:10px!important;padding-bottom:96px!important}
-  .od-lb-bottom{position:fixed!important;left:0;right:0;bottom:0;display:flex!important;flex-direction:column!important;align-items:center;gap:10px!important;padding:12px 16px 20px;background:rgba(15,33,60,.96)}
+  .od-lb-inner{gap:10px!important;padding-bottom:152px!important}
+  .od-lb-bottom{position:fixed!important;left:0;right:0;bottom:0;display:flex!important;flex-direction:column!important;align-items:center;gap:10px!important;padding:14px 16px calc(44px + env(safe-area-inset-bottom))!important;background:rgba(15,33,60,.96)}
   .od-lb-ticker{display:flex!important;flex-direction:column;align-items:center;gap:14px!important;width:100%}
   .od-lb-ticker-track{display:flex;gap:6px;width:100%;max-width:260px}
   .od-lb-tick{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.25)}
