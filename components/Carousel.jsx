@@ -3,7 +3,7 @@ import Icon from "./Icon";
 export default function Carousel({ index, count, onChange, labels, dark }) {
   const arrow = { width: 48, height: 48, borderRadius: 24, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", border: "none", background: "none", padding: 0, cursor: "pointer", flexShrink: 0 };
   return (
-    <div className="od-carousel" style={{ height: 80, display: "flex", padding: "16px 0", justifyContent: "center", alignItems: "center", boxSizing: "border-box", alignSelf: "stretch", flexShrink: 0 }}>
+    <div className={"od-carousel" + (dark ? " od-carousel-dark" : "")} style={{ height: 80, display: "flex", padding: "16px 0", justifyContent: "center", alignItems: "center", boxSizing: "border-box", alignSelf: "stretch", flexShrink: 0 }}>
       <div className="od-carousel-inner" style={{ height: 48, display: "flex", gap: 32, justifyContent: "center", alignItems: "center" }}>
         <button type="button" className="od-arrow od-arrow-ghost" aria-label="Previous project" style={{ ...arrow, boxShadow: "inset 0 0 0 1.5px rgba(27,42,64,0.2)" }} onClick={() => onChange((index + count - 1) % count)}>
           <Icon name="chevron-left" size={16} style={{ width: 10, height: 16, color: "var(--od-navy)" }} />

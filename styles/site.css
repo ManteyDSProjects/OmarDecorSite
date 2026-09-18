@@ -134,22 +134,21 @@ a:hover{color:var(--od-navy)}
   .od-steps{flex-wrap:wrap!important}
   .od-steps>*{width:100%!important;flex:0 0 100%!important;height:auto!important}
   .od-steps-carousel{display:flex!important;width:100%}
-  .od-steps-carousel .od-carousel{width:100%!important}
-  .od-steps-carousel .od-carousel-inner{position:relative;width:100%!important;justify-content:center!important}
-  .od-steps-carousel .od-arrow{display:none!important}
-  .od-steps-carousel .od-dots{display:flex!important}
-  .od-steps-carousel .od-carousel-count{display:block!important;position:absolute;left:0;top:50%;transform:translateY(-50%);min-width:auto;text-align:left}
+  /* Dots ticker on top; below it prev arrow, the "n / N" count, next arrow. The count used
+     to be absolutely positioned over the first dot and the arrows were hidden. */
+  .od-steps-carousel .od-carousel{width:100%!important;height:auto!important;padding:8px 0!important}
+  .od-steps-carousel .od-carousel-inner{display:grid!important;grid-template-columns:48px 1fr 48px;grid-template-areas:"dots dots dots" "prev count next";justify-items:center;align-items:center;row-gap:6px;column-gap:0!important;height:auto!important;width:100%!important}
+  .od-steps-carousel .od-dots{display:flex!important;grid-area:dots;gap:4px!important}
+  .od-steps-carousel .od-dot{width:28px!important}
+  .od-steps-carousel .od-arrow-ghost{display:flex!important;grid-area:prev}
+  .od-steps-carousel .od-arrow-brass{display:flex!important;grid-area:next}
+  .od-steps-carousel .od-carousel-count{display:block!important;grid-area:count;position:static;transform:none;min-width:auto;text-align:center}
 
   .od-areas-row-desktop{display:none!important}
   .od-areas-mobile{display:flex!important;flex-direction:column;gap:12px}
   .od-areas-half{display:none!important}
   .od-areas-half.is-active{display:flex!important}
   .od-areas-carousel{display:flex!important;justify-content:center!important}
-  .od-areas-carousel .od-carousel{width:100%!important}
-  .od-areas-carousel .od-carousel-inner{justify-content:center!important}
-  .od-areas-carousel .od-arrow{display:none!important}
-  .od-areas-carousel .od-dots{display:flex!important}
-  .od-areas-carousel .od-carousel-count{display:block!important;position:absolute;left:0;top:50%;transform:translateY(-50%);min-width:auto;text-align:left}
 
   .od-carousel{padding:16px 0!important}
   .od-carousel-inner{gap:16px!important;width:100%!important;justify-content:space-between!important;position:relative}
@@ -284,6 +283,8 @@ a:hover{color:var(--od-navy)}
 .od-service-card:hover{box-shadow:inset 0 0 0 1px var(--od-brass)!important;transform:translateY(-3px)}
 .od-faq:hover{background-color:rgba(27,42,64,.03)!important}
 .od-arrow-ghost:hover{box-shadow:inset 0 0 0 1.5px var(--od-navy)!important}
+.od-carousel-dark .od-arrow-ghost,.od-carousel-dark .od-arrow-ghost:hover{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.4)!important}
+.od-carousel-dark .od-arrow-ghost svg{color:var(--od-white)!important}
 .od-arrow-brass:hover{background:var(--brass-hover)!important}
 .od-dot:hover span{background:var(--od-brass)!important}
 .od-photo-cell{transition:transform 500ms var(--ease-snap);transform:scale(1.06)}
