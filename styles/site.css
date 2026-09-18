@@ -376,7 +376,7 @@ a:hover{color:var(--od-navy)}
      the description+contact-details column and the form sitting side by
      side on the row below -- display:contents on the text wrapper exposes
      heading/subline/details as direct grid items with no DOM change. */
-  #contact .od-contact-w1280{display:grid!important;grid-template-columns:1fr 1fr!important;grid-template-areas:"heading heading" "subline form" "details form"!important;column-gap:48px!important;row-gap:24px!important;align-items:start!important;padding-left:0!important;padding-right:0!important}
+  #contact .od-contact-w1280{display:grid!important;grid-template-columns:35fr 65fr!important;grid-template-areas:"heading heading" "subline form" "details form"!important;column-gap:48px!important;row-gap:24px!important;align-items:start!important;padding-left:0!important;padding-right:0!important}
   #contact .od-contact-text{display:contents!important}
   #contact .od-contact-heading{grid-area:heading!important;font-size:48px!important}
   #contact .od-contact-subline{grid-area:subline!important}
