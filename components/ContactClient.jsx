@@ -54,8 +54,19 @@ const MIXED_GALLERY_NAMES = [
   "omar-decor-styled-living-room-city-view",
 ];
 const MIXED_GALLERY = MIXED_GALLERY_NAMES.map((n) => "/uploads/" + n + ".webp");
-// Grid is laid out 6 columns x 8 rows; unfilled slots render as empty tiles until more photos are added.
+// Grid is laid out 6 columns x 8 rows. Unfilled slots render as empty tiles until more
+// photos are added: one per row (varied columns) so every row, including the last, holds
+// photos. Photos keep their order; as photos are added, the last rows fill in first.
+const GRID_COLS = 6;
 const GRID_SLOTS = 48;
+const EMPTY_COL_BY_ROW = [5, 2, 4, 0, 3, 1, 5, 2];
+const GRID_CELLS = (() => {
+  const emptyN = Math.max(0, GRID_SLOTS - MIXED_GALLERY.length);
+  const empty = new Set(EMPTY_COL_BY_ROW.slice(0, emptyN).map((c, r) => r * GRID_COLS + c));
+  for (let slot = GRID_SLOTS - 1; empty.size < emptyN; slot--) empty.add(slot);
+  let next = 0;
+  return Array.from({ length: GRID_SLOTS }, (_, slot) => (empty.has(slot) ? -1 : next++));
+})();
 const MIXED_GALLERY_ALTS = MIXED_GALLERY_NAMES.map((_, i) => "Omar Decor project photo " + (i + 1) + " of " + MIXED_GALLERY_NAMES.length);
 
 const aboutP = { fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 20, lineHeight: 1.5, color: "var(--od-navy)", margin: 0 };
@@ -94,14 +105,15 @@ function ContactGallerySection() {
         <span className="od-fluid" style={{ ...odSubline, width: 760, fontSize: 20 }}>A selection of home improvement projects completed across Central London.</span>
       </div>
       <div className="od-work-grid">
-        {MIXED_GALLERY.map((src, i) => (
-          <button key={src} type="button" className="od-work-cell" aria-label={"View larger: " + MIXED_GALLERY_ALTS[i]} onClick={() => { setShot(i); setOpen(true); }}>
-            <img src={sq(src)} alt={MIXED_GALLERY_ALTS[i]} width="400" height="400" loading="lazy" decoding="async" />
-          </button>
-        ))}
-        {Array.from({ length: Math.max(0, GRID_SLOTS - MIXED_GALLERY.length) }, (_, i) => (
-          <div key={"empty-" + i} className="od-work-cell od-work-empty" aria-hidden="true" />
-        ))}
+        {GRID_CELLS.map((i, slot) =>
+          i < 0 ? (
+            <div key={"empty-" + slot} className="od-work-cell od-work-empty" aria-hidden="true" />
+          ) : (
+            <button key={MIXED_GALLERY[i]} type="button" className="od-work-cell" aria-label={"View larger: " + MIXED_GALLERY_ALTS[i]} onClick={() => { setShot(i); setOpen(true); }}>
+              <img src={sq(MIXED_GALLERY[i])} alt={MIXED_GALLERY_ALTS[i]} width="400" height="400" loading="lazy" decoding="async" />
+            </button>
+          )
+        )}
       </div>
       {open ? (
         <Lightbox variant="clean" srcs={MIXED_GALLERY} alts={MIXED_GALLERY_ALTS} index={shot} onIndex={setShot} onClose={() => setOpen(false)} />
