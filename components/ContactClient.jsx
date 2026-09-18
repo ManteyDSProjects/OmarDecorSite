@@ -54,10 +54,18 @@ const MIXED_GALLERY_NAMES = [
   "omar-decor-styled-living-room-city-view",
 ];
 const MIXED_GALLERY = MIXED_GALLERY_NAMES.map((n) => "/uploads/" + n + ".webp");
-// Grid is 6 columns x 8 rows. Photos fill left to right, row by row; any slots left at the
-// end stay blank (they keep the eight-row height) until more photos are added.
+// Grid is 6 columns x 8 rows. Photos fill left to right, row by row, except the last two,
+// which sit at the start of the eighth row. Unfilled slots stay blank (keeping the
+// eight-row height). Once there are enough photos to fill past row 7 it is a plain fill.
 const GRID_SLOTS = 6 * 8;
-const GRID_CELLS = Array.from({ length: Math.max(GRID_SLOTS, MIXED_GALLERY.length) }, (_, slot) => (slot < MIXED_GALLERY.length ? slot : -1));
+const GRID_CELLS = (() => {
+  const n = MIXED_GALLERY.length;
+  const cells = Array(Math.max(GRID_SLOTS, n)).fill(-1);
+  const tail = n < GRID_SLOTS - 6 + 2 ? 2 : 0;
+  for (let i = 0; i < n - tail; i++) cells[i] = i;
+  for (let k = 0; k < tail; k++) cells[GRID_SLOTS - 6 + k] = n - tail + k;
+  return cells;
+})();
 const MIXED_GALLERY_ALTS = MIXED_GALLERY_NAMES.map((_, i) => "Omar Decor project photo " + (i + 1) + " of " + MIXED_GALLERY_NAMES.length);
 
 const aboutP = { fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 20, lineHeight: 1.5, color: "var(--od-navy)", margin: 0 };
