@@ -6,7 +6,7 @@ export const metadata = {
   openGraph: {
     title: "Omar Decor | Home Improvements & Handyman Services in London",
     description: "Reliable handyman and home improvement services across Central London and surrounding areas. Free site visits, transparent quotes, quality work done properly.",
-    images: ["/assets/images/hero-carousel-01-airbnb.webp"],
+    images: [{ url: "/assets/images/og-omar-decor.jpg", width: 1200, height: 630, alt: "Bright bedroom with a grey feature wall, finished by Omar Decor" }],
   },
 };
 

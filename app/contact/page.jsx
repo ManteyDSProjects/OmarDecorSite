@@ -7,7 +7,7 @@ export const metadata = {
   openGraph: {
     title: "Contact Omar Decor | Book a Free Site Visit",
     description: "Get in touch with Omar Decor for a free site visit and transparent quote. Handyman and home improvement services across Vauxhall and Central London.",
-    images: ["/assets/images/hero-carousel-01-airbnb.webp"],
+    images: [{ url: "/assets/images/og-omar-decor.jpg", width: 1200, height: 630, alt: "Bright bedroom with a grey feature wall, finished by Omar Decor" }],
   },
 };
 

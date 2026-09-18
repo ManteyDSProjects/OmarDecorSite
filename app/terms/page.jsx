@@ -7,7 +7,7 @@ export const metadata = {
   openGraph: {
     title: "Terms & Conditions | Omar Decor",
     description: "The terms covering home improvement and handyman work carried out by Omar Decor for private homeowners in London.",
-    images: ["/assets/images/hero-carousel-01-airbnb.webp"],
+    images: [{ url: "/assets/images/og-omar-decor.jpg", width: 1200, height: 630, alt: "Bright bedroom with a grey feature wall, finished by Omar Decor" }],
   },
 };
 
