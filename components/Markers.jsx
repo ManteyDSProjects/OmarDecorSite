@@ -14,7 +14,7 @@ export function ChecklistItem({ children, style, ...rest }) {
       <div style={{ width: 20, height: 20, borderRadius: 10, backgroundColor: "rgba(176,141,87,0.13)", display: "flex", justifyContent: "center", alignItems: "center", flexShrink: 0 }}>
         <Icon name="tick" size={10} style={{ color: "var(--od-brass)" }} />
       </div>
-      <span style={{ fontFamily: "var(--font-text)", fontWeight: 500, fontSize: 15, lineHeight: "normal", color: "var(--od-navy)" }}>{children}</span>
+      <span style={{ fontFamily: "var(--font-text)", fontWeight: 500, fontSize: 16, lineHeight: "normal", color: "var(--od-navy)" }}>{children}</span>
     </div>
   );
 }
@@ -38,7 +38,7 @@ export function ServiceCard({ icon, title, body, className, style, ...rest }) {
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
         <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 22, lineHeight: 1.3, color: "var(--od-navy)", margin: 0 }}>{title}</h3>
-        <span style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 14, lineHeight: 1.5, color: "var(--od-text-muted)" }}>{body}</span>
+        <span style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 16, lineHeight: 1.5, color: "var(--od-text-muted)" }}>{body}</span>
       </div>
     </div>
   );
@@ -52,10 +52,10 @@ export function ReviewCard({ quote, name, location, rating = 5, className, style
           <Icon key={i} name={i < rating ? "star" : "star-outline"} size={16} style={{ flexShrink: 0, color: "var(--od-brass)" }} />
         ))}
       </div>
-      <span style={{ alignSelf: "stretch", fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 14, lineHeight: 1.6, color: "var(--od-text-muted)" }}>{quote}</span>
+      <span style={{ alignSelf: "stretch", fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 16, lineHeight: 1.6, color: "var(--od-text-muted)" }}>{quote}</span>
       <div style={{ marginTop: "auto", alignSelf: "stretch", display: "flex", flexDirection: "column", gap: 4, alignItems: "flex-start" }}>
-        <span style={{ fontFamily: "var(--font-text)", fontWeight: 600, fontSize: 14, lineHeight: "normal", color: "var(--od-navy)" }}>{name}</span>
-        <span style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 13, lineHeight: "normal", color: "var(--od-text-muted)" }}>{location}</span>
+        <span style={{ fontFamily: "var(--font-text)", fontWeight: 600, fontSize: 16, lineHeight: "normal", color: "var(--od-navy)" }}>{name}</span>
+        <span style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 16, lineHeight: "normal", color: "var(--od-text-muted)" }}>{location}</span>
       </div>
     </div>
   );
@@ -69,7 +69,7 @@ export function FaqItem({ question, open = false, onToggle, className, style, ..
       onClick={onToggle}
       style={{ width: 900, backgroundColor: "rgba(255,255,255,0.67)", display: "flex", flexDirection: "row", padding: "16px 0", justifyContent: "space-between", alignItems: "center", boxSizing: "border-box", cursor: onToggle ? "pointer" : "default", ...style }}
     >
-      <span style={{ flexGrow: 1, fontFamily: "var(--font-text)", fontWeight: 600, fontSize: 18, lineHeight: "normal", color: "var(--od-navy)" }}>{question}</span>
+      <span style={{ flexGrow: 1, fontFamily: "var(--font-text)", fontWeight: 600, fontSize: 20, lineHeight: "normal", color: "var(--od-navy)" }}>{question}</span>
       <Icon name="plus" size={14} style={{ flexShrink: 0, color: "var(--od-navy)", transform: open ? "rotate(45deg)" : "none", transition: "transform .15s ease" }} />
     </div>
   );

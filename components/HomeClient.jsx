@@ -81,7 +81,7 @@ function ServicesSection() {
   return (
     <div id="services" className="od-band od-section-pad" style={{ ...odBand, background: "var(--od-off-white)", padding: "120px 80px", boxSizing: "border-box", display: "flex", flexDirection: "column", gap: 64 }}>
       <div style={{ display: "flex", flexDirection: "column", gap: 16, alignItems: "center", alignSelf: "stretch", flexShrink: 0 }}>
-        <span style={{ ...odEyebrow, fontSize: 14 }}>What we do</span>
+        <span style={odEyebrow}>What we do</span>
         <h2 className="od-h2" style={{ ...odH2, textAlign: "center" }}>Home Improvement Services For Every Project</h2>
       </div>
       <div className="od-services-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 32, alignSelf: "stretch" }}>
@@ -105,7 +105,7 @@ function LocationTag({ name, solo }) {
   return (
     <div style={{ flex: solo ? "0 1 calc(50% - 6px)" : "1 1 0%", minWidth: 0, alignSelf: "stretch", borderRadius: 10, background: "var(--od-navy-tag)", boxShadow: "inset 0 0 0 1px var(--od-brass-tag-border)", display: "flex", gap: 10, padding: "14px 16px", alignItems: "center", boxSizing: "border-box", minHeight: 46 }}>
       <Icon name="location-pin" size={18} style={{ color: "var(--od-brass)", flexShrink: 0 }} />
-      <span style={{ flexGrow: 1, fontFamily: "var(--font-text)", fontWeight: 600, fontSize: 15, lineHeight: "100%", color: "var(--od-white)" }}>{name}</span>
+      <span style={{ flexGrow: 1, fontFamily: "var(--font-text)", fontWeight: 600, fontSize: 16, lineHeight: "100%", color: "var(--od-white)" }}>{name}</span>
     </div>
   );
 }
@@ -133,11 +133,11 @@ export default function HomePage() {
               </div>
               <div className="od-quote-card" style={{ position: "absolute", left: 200, top: 415, width: 320, height: 145, borderRadius: 12, background: "var(--od-navy)", boxShadow: "var(--shadow-lift)", display: "flex", flexDirection: "column", gap: 16, padding: 28, boxSizing: "border-box" }}>
                 <span style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 22, lineHeight: 1.3, color: "var(--od-white)", alignSelf: "stretch" }}>&ldquo;Done properly, every time.&rdquo;</span>
-                <span style={{ fontFamily: "var(--font-text)", fontWeight: 600, fontSize: 12, lineHeight: "100%", letterSpacing: "2px", textTransform: "uppercase", color: "var(--od-brass)", whiteSpace: "nowrap" }}>The Omar Decor approach</span>
+                <span style={{ fontFamily: "var(--font-text)", fontWeight: 600, fontSize: 16, lineHeight: "100%", letterSpacing: "2px", textTransform: "uppercase", color: "var(--od-brass)", whiteSpace: "nowrap" }}>The Omar Decor approach</span>
               </div>
             </div>
             <div style={{ flexGrow: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 40 }}>
-              <span style={{ ...odEyebrow, fontSize: 13 }}>Why Omar Decor</span>
+              <span style={odEyebrow}>Why Omar Decor</span>
               <div style={{ display: "flex", flexDirection: "column", gap: 20, alignSelf: "stretch" }}>
                 <h2 className="od-h2" style={odH2}>Small Details. Big Difference.</h2>
                 <span style={{ ...odBody, fontSize: 20 }}>A home improvement should feel considered &mdash; planned properly, executed cleanly, and finished to a standard you&rsquo;re happy to live with every day.</span>
@@ -186,7 +186,7 @@ export default function HomePage() {
 
         <div className="od-band od-section-pad" style={{ ...odBand, height: 557, background: "var(--od-white)", display: "flex", flexDirection: "column", gap: 64, padding: "120px 80px" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: 16, alignItems: "center", alignSelf: "stretch", flexShrink: 0 }}>
-            <span style={{ ...odEyebrow, fontSize: 14 }}>How it works</span>
+            <span style={odEyebrow}>How it works</span>
             <h2 className="od-h2" style={odH2}>Simple, Transparent Process</h2>
           </div>
           <div className="od-steps" style={{ display: "flex", flexWrap: "wrap", gap: 32, alignSelf: "stretch", flexShrink: 0 }}>
@@ -200,7 +200,7 @@ export default function HomePage() {
           <div className="od-stack od-areas-w1280" style={{ width: 1280, maxWidth: "100%", margin: "0 auto", padding: "0 80px", boxSizing: "border-box", display: "flex", gap: 80, alignItems: "center" }}>
             <div style={{ flexGrow: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 32 }}>
               <div style={{ display: "flex", flexDirection: "column", gap: 20, alignSelf: "stretch", flexShrink: 0 }}>
-                <span style={{ ...odEyebrow, fontSize: 14 }}>Service Areas</span>
+                <span style={odEyebrow}>Service Areas</span>
                 <h2 className="od-h2" style={{ ...odH2, color: "var(--od-white)", lineHeight: 1.15 }}>Serving Homeowners Across Central London</h2>
                 <span style={{ ...odBody, color: "var(--od-text-muted-dark)", fontSize: 20 }}>Omar Decor works with homeowners across Central London and the surrounding areas &mdash; bringing careful, considered improvements to homes throughout the city.</span>
               </div>
@@ -232,7 +232,7 @@ export default function HomePage() {
                   <Carousel dark index={areaHalf} count={AREA_HALVES_HOME.length} onChange={(n) => setAreaHalf(((n % AREA_HALVES_HOME.length) + AREA_HALVES_HOME.length) % AREA_HALVES_HOME.length)} labels={["Areas 1", "Areas 2"]} />
                 </div>
               </div>
-              <span style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 13, lineHeight: 1.5, color: "rgba(255,255,255,0.5)" }}>...and surrounding areas.</span>
+              <span style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 16, lineHeight: 1.5, color: "rgba(255,255,255,0.5)" }}>...and surrounding areas.</span>
             </div>
           </div>
         </div>

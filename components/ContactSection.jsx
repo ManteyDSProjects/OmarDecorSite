@@ -21,7 +21,7 @@ function Field({ label, name, type = "text", placeholder, required, autoComplete
   const clear = (e) => {
     if (err && e.target.validity.valid) setErr("");
   };
-  const box = { height: type === "textarea" ? 120 : 48, width: "100%", borderRadius: "var(--radius-sm)", backgroundColor: "var(--od-form-field)", boxShadow: "inset 0 0 0 1px var(--od-border-field-on-navy)", border: "none", outline: "none", padding: 14, fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 14, lineHeight: type === "textarea" ? 1.5 : "100%", color: "var(--od-white)", boxSizing: "border-box", resize: "none", display: "block" };
+  const box = { height: type === "textarea" ? 120 : 48, width: "100%", borderRadius: "var(--radius-sm)", backgroundColor: "var(--od-form-field)", boxShadow: "inset 0 0 0 1px var(--od-border-field-on-navy)", border: "none", outline: "none", padding: 14, fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 16, lineHeight: type === "textarea" ? 1.5 : "100%", color: "var(--od-white)", boxSizing: "border-box", resize: "none", display: "block" };
   const id = "f-" + name;
   const fieldProps = { id, name, placeholder, required, style: box, className: "od-field" + (err ? " is-error" : ""), onBlur: check, onInvalid: flag, onInput: clear, "aria-invalid": err ? "true" : undefined, "aria-describedby": err ? id + "-msg" : undefined };
   return (
@@ -54,9 +54,9 @@ export default function ContactSection({ heading = "h2" }) {
                     must match their siblings, not scale off the 18px text. */}
                 <Icon name={ic} size={20} style={{ color: "var(--od-brass)", flexShrink: 0 }} />
                 {href ? (
-                  <a href={href} target={href.indexOf("wa.me") !== -1 ? "_blank" : undefined} rel={href.indexOf("wa.me") !== -1 ? "noopener" : undefined} className="od-inline-link" style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 18, lineHeight: 1.4, color: "var(--od-white)", textDecoration: "none" }}>{t}</a>
+                  <a href={href} target={href.indexOf("wa.me") !== -1 ? "_blank" : undefined} rel={href.indexOf("wa.me") !== -1 ? "noopener" : undefined} className="od-inline-link" style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 20, lineHeight: 1.4, color: "var(--od-white)", textDecoration: "none" }}>{t}</a>
                 ) : (
-                  <span style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 18, lineHeight: 1.4, color: "var(--od-white)" }}>{t}</span>
+                  <span style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 20, lineHeight: 1.4, color: "var(--od-white)" }}>{t}</span>
                 )}
               </div>
             ))}

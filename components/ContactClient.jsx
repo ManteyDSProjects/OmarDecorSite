@@ -153,7 +153,7 @@ export default function ContactPage() {
             {FAQS.map(([q, a], i) => (
               <div key={q} style={{ borderBottom: i < FAQS.length - 1 ? "1px solid var(--od-border)" : "none" }}>
                 <FaqItem className={"od-faq" + (open === i ? " is-open" : "")} question={q} open={open === i} onToggle={() => setOpen(open === i ? null : i)} style={{ width: "100%", backgroundColor: "transparent", minHeight: 54, height: "auto", padding: "22px 0" }} />
-                {open === i ? <p className="od-legal-body" style={{ ...odBody, maxWidth: 760, fontSize: 15, padding: "0 0 20px", margin: 0 }}>{a}</p> : null}
+                {open === i ? <p className="od-legal-body" style={{ ...odBody, maxWidth: 760, fontSize: 16, padding: "0 0 20px", margin: 0 }}>{a}</p> : null}
               </div>
             ))}
           </div>

@@ -60,7 +60,7 @@ export function CookieBanner() {
   };
   return (
     <div className="od-cookie" role="region" aria-label="Cookie notice">
-      <span style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 14, lineHeight: 1.6, color: "var(--od-text-muted-dark)", maxWidth: 760 }}>
+      <span style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 16, lineHeight: 1.6, color: "var(--od-text-muted-dark)", maxWidth: 760 }}>
         We use only the cookies needed to make this site work and to understand how it is used. Read our{" "}
         <a href="/privacy/" style={{ color: "var(--od-brass)" }}>Privacy Policy</a>.
       </span>

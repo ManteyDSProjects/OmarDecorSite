@@ -2,9 +2,9 @@ import Link from "next/link";
 import ODLogo from "./ODLogo";
 import { odBand } from "@/lib/styles";
 
-const head = { fontFamily: "var(--font-text)", fontWeight: 700, fontSize: 14, lineHeight: "normal", color: "var(--od-white)" };
-const item = { fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 14, lineHeight: "normal", color: "rgba(255,255,255,0.7)", textDecoration: "none" };
-const fine = { fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 13, lineHeight: "normal", color: "rgba(255,255,255,0.7)" };
+const head = { fontFamily: "var(--font-text)", fontWeight: 700, fontSize: 16, lineHeight: "normal", color: "var(--od-white)" };
+const item = { fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 16, lineHeight: "normal", color: "rgba(255,255,255,0.7)", textDecoration: "none" };
+const fine = { fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 16, lineHeight: "normal", color: "rgba(255,255,255,0.7)" };
 
 const QUICK_LINKS = [
   ["Home", "/"],
