@@ -88,7 +88,7 @@ export default function ContactSection({ heading = "h2" }) {
               <Field label="Phone Number" name="phone" type="tel" placeholder="e.g. 07700 900077" autoComplete="tel" required />
             </div>
             <Field label="Email Address" name="email" type="email" placeholder="you@example.com" autoComplete="email" required />
-            <Field label="Postcode" name="location" placeholder="e.g. Clapham, Pimlico, Vauxhall" />
+            <Field label="Postcode" name="location" placeholder="e.g. SW11 1AA" />
             <Field label="Project Details" name="details" type="textarea" placeholder="Briefly describe what you need done..." />
             <div style={{ padding: "12px 0", alignSelf: "stretch" }}>
               <Button as="button" type="submit" variant="primary" ground="dark" disabled={sending} aria-disabled={sending} style={{ width: "100%" }}>{sending ? "Sending" : "Send Enquiry"}</Button>
