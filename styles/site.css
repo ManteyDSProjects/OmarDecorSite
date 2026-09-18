@@ -378,7 +378,11 @@ a:hover{color:var(--od-navy)}
      heading/subline/details as direct grid items with no DOM change. */
   #contact .od-contact-w1280{display:grid!important;grid-template-columns:35fr 65fr!important;grid-template-areas:"heading heading" "subline form" "details form"!important;column-gap:48px!important;row-gap:24px!important;align-items:start!important;padding-left:0!important;padding-right:0!important}
   #contact .od-contact-text{display:contents!important}
-  #contact .od-contact-heading{grid-area:heading!important;font-size:48px!important}
+  /* The heading's hardcoded \n line break (via white-space:pre-line) was
+     tuned for the narrow desktop text column -- now that it spans the
+     full band width here, force it back to normal wrapping so it flows
+     naturally like the homepage hero's heading does at this tier. */
+  #contact .od-contact-heading{grid-area:heading!important;font-size:48px!important;white-space:normal!important}
   #contact .od-contact-subline{grid-area:subline!important}
   #contact .od-contact-details{grid-area:details!important}
   #contact .od-form{grid-area:form!important;min-width:300px!important}
