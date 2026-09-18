@@ -54,20 +54,10 @@ const MIXED_GALLERY_NAMES = [
   "omar-decor-styled-living-room-city-view",
 ];
 const MIXED_GALLERY = MIXED_GALLERY_NAMES.map((n) => "/uploads/" + n + ".webp");
-// Grid is laid out 6 columns x 8 rows. Unfilled slots are blank tiles at the end of a row
-// (one per row, bottom rows first) so every row, including the last, holds photos. Photos
-// keep their order and reflow as more are added; the blanks disappear from the top down.
-const GRID_COLS = 6;
-const GRID_ROWS = 8;
-const GRID_SLOTS = GRID_COLS * GRID_ROWS;
-const GRID_CELLS = (() => {
-  const emptyN = Math.max(0, GRID_SLOTS - MIXED_GALLERY.length);
-  const empty = new Set();
-  for (let r = GRID_ROWS - 1; r >= 0 && empty.size < emptyN; r--) empty.add(r * GRID_COLS + GRID_COLS - 1);
-  for (let slot = GRID_SLOTS - 1; empty.size < emptyN; slot--) empty.add(slot);
-  let next = 0;
-  return Array.from({ length: GRID_SLOTS }, (_, slot) => (empty.has(slot) ? -1 : next++));
-})();
+// Grid is 6 columns x 8 rows. Photos fill left to right, row by row; any slots left at the
+// end stay blank (they keep the eight-row height) until more photos are added.
+const GRID_SLOTS = 6 * 8;
+const GRID_CELLS = Array.from({ length: Math.max(GRID_SLOTS, MIXED_GALLERY.length) }, (_, slot) => (slot < MIXED_GALLERY.length ? slot : -1));
 const MIXED_GALLERY_ALTS = MIXED_GALLERY_NAMES.map((_, i) => "Omar Decor project photo " + (i + 1) + " of " + MIXED_GALLERY_NAMES.length);
 
 const aboutP = { fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 20, lineHeight: 1.5, color: "var(--od-navy)", margin: 0 };
