@@ -382,7 +382,7 @@ a:hover{color:var(--od-navy)}
      tuned for the narrow desktop text column -- now that it spans the
      full band width here, force it back to normal wrapping so it flows
      naturally like the homepage hero's heading does at this tier. */
-  #contact .od-contact-heading{grid-area:heading!important;font-size:48px!important;white-space:normal!important}
+  #contact .od-contact-heading{grid-area:heading!important;font-size:48px!important;white-space:normal!important;margin-bottom:24px!important}
   #contact .od-contact-subline{grid-area:subline!important}
   #contact .od-contact-details{grid-area:details!important}
   #contact .od-form{grid-area:form!important;min-width:300px!important}
