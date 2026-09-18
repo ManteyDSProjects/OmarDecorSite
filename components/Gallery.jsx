@@ -1,5 +1,5 @@
 "use client";
-import { memo, useEffect, useLayoutEffect, useRef } from "react";
+import { memo, useEffect, useLayoutEffect, useRef, useState } from "react";
 import Icon from "./Icon";
 import { md } from "@/lib/img";
 import { altFor, GALLERY_IMG, CATEGORY_LABELS, CATEGORY_CAPTIONS } from "@/lib/galleries";
@@ -88,8 +88,16 @@ const LbClose = memo(function LbClose() {
   return <Icon name="plus" size={18} style={{ color: "var(--od-white)", transform: "rotate(45deg)" }} />;
 });
 
+// Touch-first device (phone, tablet, desktop-site mode on either): any size. Mouse-first
+// devices, including touch laptops, keep the arrows.
+function isTouchDevice() {
+  const mq = (q) => window.matchMedia(q).matches;
+  return mq("(pointer: coarse)") || mq("(hover: none)") || (navigator.maxTouchPoints > 0 && !mq("(pointer: fine)"));
+}
+
 export function Lightbox({ names, srcs, alts, index, onIndex, onClose, variant }) {
   const clean = variant === "clean";
+  const [touch] = useState(isTouchDevice);
   const closeRef = useRef(null);
   const thumbsRef = useRef(null);
   const prevIndexRef = useRef(index);
@@ -179,10 +187,10 @@ export function Lightbox({ names, srcs, alts, index, onIndex, onClose, variant }
     }
   }, [index, count]);
 
-  // Touch swipe carousel (phones, and touch tablets up to 1100px): the photo sits between its
-  // neighbours on a track that follows the finger, then slides fully across and snaps in.
-  // Mouse users at any width keep the arrows.
-  const swipeMode = () => window.matchMedia("(max-width: 768px), (max-width: 1100px) and (pointer: coarse)").matches;
+  // Touch swipe carousel (any touch device, any screen size, plus narrow windows <=768px): the
+  // photo sits between its neighbours on a track that follows the finger, then slides fully
+  // across and snaps in. Mouse users on wider windows keep the arrows.
+  const swipeMode = () => touch || window.matchMedia("(max-width: 768px)").matches;
   const setTrack = (x, ms) => {
     const t = trackRef.current;
     if (!t) return;
@@ -251,7 +259,7 @@ export function Lightbox({ names, srcs, alts, index, onIndex, onClose, variant }
   const arrow = { width: 48, height: 48, borderRadius: 24, border: "none", padding: 0, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", flexShrink: 0 };
 
   return (
-    <div className={"od-lightbox" + (clean ? " od-lightbox-clean" : "")} role="dialog" aria-modal="true" aria-label="Project photograph" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
+    <div className={"od-lightbox" + (clean ? " od-lightbox-clean" : "") + (touch ? " od-lb-touch" : "")} role="dialog" aria-modal="true" aria-label="Project photograph" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
       <div className="od-lb-inner">
         <div className="od-lb-top">
           {clean ? <span /> : <span className="od-lb-count">{index + 1} of {count}</span>}

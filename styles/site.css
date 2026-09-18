@@ -321,8 +321,11 @@ a:hover{color:var(--od-navy)}
 .od-lb-slide{flex:0 0 100%;min-width:0;height:100%;display:flex;align-items:center;justify-content:center}
 .od-lb-img{width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain;border-radius:12px;display:block;background:var(--od-navy)}
 @keyframes od-lb-fade{from{opacity:0}to{opacity:1}}
-/* Swipe mode: phones, and touch tablets up to 1100px. Arrows off, stage full width. */
-@media (max-width:768px),(max-width:1100px) and (pointer:coarse){
+/* Swipe mode: any touch device (.od-lb-touch, set from device detection) at any width, and
+   narrow windows. Arrows off, stage full width. */
+.od-lb-touch .od-lb-prev,.od-lb-touch .od-lb-next{display:none!important}
+.od-lb-touch .od-lb-stage{touch-action:pan-y pinch-zoom;padding:0!important}
+@media (max-width:768px){
   .od-lb-prev,.od-lb-next{display:none!important}
   .od-lb-stage{touch-action:pan-y pinch-zoom;padding:0!important}
 }
