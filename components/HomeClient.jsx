@@ -163,7 +163,7 @@ export default function HomePage() {
 
         <div id="work" className="od-band od-section-pad" style={{ ...odBand, background: "var(--od-navy)", display: "flex", flexDirection: "column", gap: 48, padding: "96px 48px" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: 16, alignSelf: "stretch", flexShrink: 0 }}>
-            <h2 className="od-h2" style={{ ...odH2, fontSize: 32, color: "var(--od-white)" }}>Explore Our Work By Category</h2>
+            <h2 className="od-h2" style={{ ...odH2, fontSize: 32, color: "var(--od-white)" }}>Explore Our Before and After Gallery</h2>
             <span style={{ ...odBody, color: "var(--od-text-muted-dark)", fontSize: 20 }}>Browse recent projects by category. Tap a card to view the full gallery for that room or space.</span>
           </div>
           <div className="od-grid3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 12, alignSelf: "stretch" }}>
