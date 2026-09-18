@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import SiteNav from "@/components/SiteNav";
 import Footer from "@/components/Footer";
+import { md, sq } from "@/lib/img";
 import ContactSection from "@/components/ContactSection";
 import CtaBanner from "@/components/CtaBanner";
 import { BackToTop, CookieBanner } from "@/components/Strips";
@@ -74,7 +75,7 @@ function AboutCarousel() {
   return (
     <div className="od-photo-wrap od-about-portrait" style={{ position: "relative", width: 560, height: 420, borderRadius: 6, overflow: "hidden", flexShrink: 0, background: "var(--od-navy-deep)" }}>
       {ABOUT_SLIDES.map(([src, alt, pos], n) => (
-        <img key={src} src={src} alt={alt} decoding="async" fetchPriority={n === 0 ? "high" : "auto"} loading={n === 0 ? "eager" : "lazy"} className={"od-hero-carousel-img" + (n === i ? " is-active" : "")} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: pos || "center" }} />
+        <img key={src} src={md(src)} alt={alt} decoding="async" fetchPriority={n === 0 ? "high" : "low"} loading={n === 0 ? "eager" : "lazy"} className={"od-hero-carousel-img" + (n === i ? " is-active" : "")} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: pos || "center" }} />
       ))}
     </div>
   );
@@ -93,7 +94,7 @@ function ContactGallerySection() {
       <div className="od-work-grid">
         {MIXED_GALLERY.map((src, i) => (
           <button key={src} type="button" className="od-work-cell" aria-label={"View larger: " + MIXED_GALLERY_ALTS[i]} onClick={() => { setShot(i); setOpen(true); }}>
-            <img src={src} alt={MIXED_GALLERY_ALTS[i]} loading="lazy" decoding="async" />
+            <img src={sq(src)} alt={MIXED_GALLERY_ALTS[i]} width="400" height="400" loading="lazy" decoding="async" />
           </button>
         ))}
       </div>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import Button from "@/components/Button";
 import Icon from "@/components/Icon";
+import { md } from "@/lib/img";
 import Footer from "@/components/Footer";
 import Carousel from "@/components/Carousel";
 import { TrustBar, BackToTop, CookieBanner } from "@/components/Strips";
@@ -36,7 +37,7 @@ function HeroCarousel() {
   return (
     <div className="od-hero-carousel" style={{ position: "relative", width: 600, height: 480, borderRadius: 8, overflow: "hidden", flexShrink: 0, background: "var(--od-navy-deep)" }}>
       {HERO_SLIDES.map(([src, alt], n) => (
-        <img key={src} src={src} alt={alt} decoding="async" fetchPriority={n === 0 ? "high" : "auto"} loading={n === 0 ? "eager" : "lazy"} className={"od-hero-carousel-img" + (n === i ? " is-active" : "")} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "contain" }} />
+        <img key={src} src={md(src)} alt={alt} decoding="async" fetchPriority={n === 0 ? "high" : "low"} loading={n === 0 ? "eager" : "lazy"} className={"od-hero-carousel-img" + (n === i ? " is-active" : "")} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "contain" }} />
       ))}
     </div>
   );
@@ -129,7 +130,7 @@ export default function HomePage() {
           <div className="od-stack od-why-row" style={{ width: 1440, maxWidth: "100%", margin: "0 auto", padding: "0 80px", boxSizing: "border-box", display: "flex", gap: 80, alignItems: "center" }}>
             <div className="od-detail-media" style={{ width: 520, alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
               <div className="od-photo-wrap" style={{ width: 480, height: 520, borderRadius: 16, overflow: "hidden" }}>
-                <img className="od-photo od-photo-tall od-photo-cell" src="/uploads/omar-decor-owner-slat-wall-socket-detail.webp" width="480" height="520" loading="lazy" alt="Slat wall and socket detail, finished by Omar Decor" style={{ width: 480, height: 520, objectFit: "cover", display: "block" }} />
+                <img className="od-photo od-photo-tall od-photo-cell" src={md("/uploads/omar-decor-owner-slat-wall-socket-detail.webp")} width="480" height="520" loading="lazy" alt="Slat wall and socket detail, finished by Omar Decor" style={{ width: 480, height: 520, objectFit: "cover", display: "block" }} />
               </div>
               <div className="od-quote-card" style={{ position: "absolute", left: 200, top: 415, width: 320, height: 145, borderRadius: 12, background: "var(--od-navy)", boxShadow: "var(--shadow-lift)", display: "flex", flexDirection: "column", gap: 16, padding: 28, boxSizing: "border-box" }}>
                 <span style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 22, lineHeight: 1.3, color: "var(--od-white)", alignSelf: "stretch" }}>&ldquo;Done properly, every time.&rdquo;</span>

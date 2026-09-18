@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useLayoutEffect, useRef } from "react";
 import Icon from "./Icon";
+import { md } from "@/lib/img";
 import { altFor, GALLERY_IMG, CATEGORY_LABELS, CATEGORY_CAPTIONS } from "@/lib/galleries";
 
 /* The wrapper owns the layout rect and clips; the image inside is what scales on
@@ -35,7 +36,7 @@ export function CategoryCard({ name, cover, onOpen, expanded, onToggle }) {
   };
   return (
     <div className={"od-category-card" + (expanded ? " is-expanded" : "")} role="button" tabIndex={0} onClick={onOpen} onKeyDown={(e) => { if (e.target === e.currentTarget && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); onOpen(); } }} aria-label={"View " + label + " gallery"}>
-      <img className="od-category-img" src={cover} alt={label + " project by Omar Decor"} loading="lazy" decoding="async" />
+      <img className="od-category-img" src={md(cover)} alt={label + " project by Omar Decor"} loading="lazy" decoding="async" />
       <div className="od-category-content">
         <div className="od-category-heading-row">
           <span className="od-category-name">{label}</span>
@@ -114,12 +115,12 @@ export function Lightbox({ names, srcs, alts, index, onIndex, onClose, variant }
   }, [index, count, onIndex, onClose]);
 
   useEffect(() => {
-    for (let i = 0; i < count; i++) {
+    for (const i of [(index + 1) % count, (index + count - 1) % count]) {
       const im = new window.Image();
       im.src = srcFor(i);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [count]);
+  }, [index, count]);
 
   useLayoutEffect(() => {
     // The strip's DOM starts with a leading clone-of-last thumb (for the
