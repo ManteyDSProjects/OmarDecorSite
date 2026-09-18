@@ -194,6 +194,7 @@ a:hover{color:var(--od-navy)}
   .od-lb-top .od-lb-count{display:none!important}
   .od-lb-stage{padding:0!important;flex:1!important;min-height:0!important;min-width:0!important;margin-bottom:0!important}
   .od-lb-img{height:100%!important;max-height:100%!important;max-width:100%!important}
+  .od-lb-stage{touch-action:pan-y pinch-zoom}
   .od-lb-prev{left:8px!important}
   .od-lb-next{right:8px!important}
   .od-arrow-lb{background:rgba(15,33,60,.55)!important}

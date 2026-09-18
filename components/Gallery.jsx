@@ -93,6 +93,7 @@ export function Lightbox({ names, srcs, alts, index, onIndex, onClose, variant }
   const closeRef = useRef(null);
   const thumbsRef = useRef(null);
   const prevIndexRef = useRef(index);
+  const swipeRef = useRef(null);
   const count = (srcs || names).length;
   const srcFor = (i) => (srcs ? srcs[i] : names[i].includes("/") ? names[i] : GALLERY_IMG + names[i] + ".webp");
   const altFor2 = (i) => (alts ? alts[i] : altFor(names[i]));
@@ -176,6 +177,21 @@ export function Lightbox({ names, srcs, alts, index, onIndex, onClose, variant }
     }
   }, [index, count]);
 
+  // Phone-width swipe: left = next, right = previous (loops like the arrows). Mostly-vertical
+  // drags and multi-finger pinches are ignored.
+  const swipeStart = (e) => {
+    swipeRef.current = e.touches.length === 1 ? { x: e.touches[0].clientX, y: e.touches[0].clientY } : null;
+  };
+  const swipeEnd = (e) => {
+    const start = swipeRef.current;
+    swipeRef.current = null;
+    if (!start || count < 2 || !window.matchMedia("(max-width: 768px)").matches) return;
+    const dx = e.changedTouches[0].clientX - start.x;
+    const dy = e.changedTouches[0].clientY - start.y;
+    if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+    onIndex(dx < 0 ? (index + 1) % count : (index + count - 1) % count);
+  };
+
   const arrow = { width: 48, height: 48, borderRadius: 24, border: "none", padding: 0, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", flexShrink: 0 };
 
   return (
@@ -187,7 +203,7 @@ export function Lightbox({ names, srcs, alts, index, onIndex, onClose, variant }
             <LbClose />
           </button>
         </div>
-        <div className="od-lb-stage">
+        <div className="od-lb-stage" onTouchStart={swipeStart} onTouchEnd={swipeEnd}>
           {count > 1 ? (
             <button type="button" className="od-arrow od-arrow-lb od-lb-prev" aria-label="Previous photograph" onClick={() => onIndex((index + count - 1) % count)} style={arrow}>
               <LbChevron dir="left" />
