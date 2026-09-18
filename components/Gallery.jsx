@@ -93,7 +93,9 @@ export function Lightbox({ names, srcs, alts, index, onIndex, onClose, variant }
   const closeRef = useRef(null);
   const thumbsRef = useRef(null);
   const prevIndexRef = useRef(index);
-  const swipeRef = useRef(null);
+  const trackRef = useRef(null);
+  const dragRef = useRef(null);
+  const commitTimer = useRef(null);
   const count = (srcs || names).length;
   const srcFor = (i) => (srcs ? srcs[i] : names[i].includes("/") ? names[i] : GALLERY_IMG + names[i] + ".webp");
   const altFor2 = (i) => (alts ? alts[i] : altFor(names[i]));
@@ -177,20 +179,74 @@ export function Lightbox({ names, srcs, alts, index, onIndex, onClose, variant }
     }
   }, [index, count]);
 
-  // Phone-width swipe: left = next, right = previous (loops like the arrows). Mostly-vertical
-  // drags and multi-finger pinches are ignored.
-  const swipeStart = (e) => {
-    swipeRef.current = e.touches.length === 1 ? { x: e.touches[0].clientX, y: e.touches[0].clientY } : null;
+  // Touch swipe carousel (phones, and touch tablets up to 1100px): the photo sits between its
+  // neighbours on a track that follows the finger, then slides fully across and snaps in.
+  // Mouse users at any width keep the arrows.
+  const swipeMode = () => window.matchMedia("(max-width: 768px), (max-width: 1100px) and (pointer: coarse)").matches;
+  const setTrack = (x, ms) => {
+    const t = trackRef.current;
+    if (!t) return;
+    t.style.transition = ms ? "transform " + ms + "ms ease-out" : "none";
+    t.style.transform = "translate3d(" + x + ",0,0)";
   };
-  const swipeEnd = (e) => {
-    const start = swipeRef.current;
-    swipeRef.current = null;
-    if (!start || count < 2 || !window.matchMedia("(max-width: 768px)").matches) return;
-    const dx = e.changedTouches[0].clientX - start.x;
-    const dy = e.changedTouches[0].clientY - start.y;
-    if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
-    onIndex(dx < 0 ? (index + 1) % count : (index + count - 1) % count);
+  const onTouchStart = (e) => {
+    if (commitTimer.current || e.touches.length !== 1 || count < 2 || !swipeMode()) {
+      dragRef.current = null;
+      return;
+    }
+    dragRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY, t: Date.now(), axis: null, dx: 0 };
   };
+  const onTouchMove = (e) => {
+    const d = dragRef.current;
+    if (!d) return;
+    if (e.touches.length !== 1) {
+      dragRef.current = null;
+      setTrack("-100%", 180);
+      return;
+    }
+    const dx = e.touches[0].clientX - d.x;
+    const dy = e.touches[0].clientY - d.y;
+    if (!d.axis) {
+      if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+      d.axis = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
+    }
+    if (d.axis !== "x") return;
+    d.dx = dx;
+    setTrack("calc(-100% + " + dx + "px)", 0);
+  };
+  const onTouchEnd = (e) => {
+    const d = dragRef.current;
+    dragRef.current = null;
+    if (!d || d.axis !== "x") return;
+    const w = trackRef.current.parentElement.clientWidth;
+    const velocity = Math.abs(d.dx) / Math.max(1, Date.now() - d.t);
+    const commit = e.type === "touchend" && (Math.abs(d.dx) > w * 0.2 || (velocity > 0.4 && Math.abs(d.dx) > 30));
+    if (!commit) {
+      setTrack("-100%", 220);
+      return;
+    }
+    const dir = d.dx < 0 ? 1 : -1;
+    const track = trackRef.current;
+    // Swap the index when the slide animation actually ends (timer is only a fallback).
+    const finish = () => {
+      if (!commitTimer.current) return;
+      clearTimeout(commitTimer.current);
+      commitTimer.current = null;
+      track.removeEventListener("transitionend", finish);
+      onIndex((index + dir + count) % count);
+    };
+    commitTimer.current = setTimeout(finish, 400);
+    track.addEventListener("transitionend", finish);
+    setTrack(dir === 1 ? "-200%" : "0%", 240);
+  };
+  useLayoutEffect(() => {
+    // New photo is now the middle slide: put the track back with no animation, same frame.
+    setTrack("-100%", 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [index]);
+  useEffect(() => () => clearTimeout(commitTimer.current), []);
+
+  const slides = count > 1 ? [(index + count - 1) % count, index, (index + 1) % count] : [index];
 
   const arrow = { width: 48, height: 48, borderRadius: 24, border: "none", padding: 0, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", flexShrink: 0 };
 
@@ -203,13 +259,24 @@ export function Lightbox({ names, srcs, alts, index, onIndex, onClose, variant }
             <LbClose />
           </button>
         </div>
-        <div className="od-lb-stage" onTouchStart={swipeStart} onTouchEnd={swipeEnd}>
+        <div className="od-lb-stage" onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd} onTouchCancel={onTouchEnd}>
           {count > 1 ? (
             <button type="button" className="od-arrow od-arrow-lb od-lb-prev" aria-label="Previous photograph" onClick={() => onIndex((index + count - 1) % count)} style={arrow}>
               <LbChevron dir="left" />
             </button>
           ) : null}
-          <img className="od-lb-img" src={srcFor(index)} alt={altFor2(index)} decoding="async" />
+          <div className="od-lb-viewport">
+          <div ref={trackRef} className="od-lb-track">
+            {slides.map((i, pos) => {
+              const current = i === index && (slides.length === 1 || pos === 1);
+              return (
+                <div key={i + "-" + (count < 3 ? pos : "")} className="od-lb-slide" aria-hidden={current ? undefined : "true"}>
+                  <img className="od-lb-img" src={srcFor(i)} alt={current ? altFor2(i) : ""} decoding="async" fetchPriority={current ? "high" : "low"} />
+                </div>
+              );
+            })}
+          </div>
+          </div>
           {count > 1 ? (
             <button type="button" className="od-arrow od-arrow-lb od-lb-next" aria-label="Next photograph" onClick={() => onIndex((index + 1) % count)} style={arrow}>
               <LbChevron dir="right" />
