@@ -351,7 +351,8 @@ a:hover{color:var(--od-navy)}
      text-column wrapper exposes its children (h1, subline, button row) as
      direct grid items without any JSX/DOM change -- desktop and mobile,
      which don't hit this media query, are completely unaffected. */
-  .od-hero-w1440{display:grid!important;grid-template-columns:1fr 1.2fr!important;grid-template-areas:"heading heading" "subline image" "buttons image"!important;column-gap:48px!important;row-gap:20px!important;align-items:center!important}
+  .od-hero-static{padding:56px 0!important}
+  .od-hero-w1440{display:grid!important;grid-template-columns:1fr 1.2fr!important;grid-template-areas:"heading heading" "subline image" "buttons image"!important;column-gap:48px!important;row-gap:32px!important;align-items:center!important}
   .od-hero-w1440>div:first-child{display:contents!important}
   .od-hero-static h1{grid-area:heading!important;font-size:48px!important}
   .od-hero-subline{grid-area:subline!important}
