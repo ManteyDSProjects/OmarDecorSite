@@ -363,25 +363,26 @@ a:hover{color:var(--od-navy)}
   .od-detail-media .od-photo-wrap{width:100%!important;height:auto!important;aspect-ratio:480/520!important}
   .od-quote-card{position:relative!important;left:auto!important;top:auto!important;margin:-40px 0 0 auto!important;width:80%!important;max-width:320px!important}
   .od-form{width:auto!important;max-width:440px!important;min-width:0!important;flex:1 1 340px!important;padding:32px!important}
-  #contact{padding:120px 48px!important}
-  /* The band's own padding is reduced above, but the inner content wrapper
-     carries its own hardcoded inline padding:"0 80px" that this didn't
-     touch -- at tablet widths that alone ate most of the band's already-
-     narrower interior, leaving huge dead gutters either side of the actual
-     text/form content. The band's 48px already provides the side margin. */
+  #contact{padding:56px 48px!important}
+  /* The band's own padding provides the side margin, but the inner content
+     wrapper carries its own hardcoded inline padding:"0 80px" that this
+     didn't touch -- at tablet widths that alone ate most of the band's
+     already-narrower interior, leaving huge dead gutters either side of
+     the actual text/form content and making it look like it doesn't span
+     full width. Zero it out here so the band's 48px is the only gutter. */
   /* Same grid-areas move as .od-hero-w1440 above: the heading was being
      squeezed into a narrow text column and wrapping onto 3 short lines
      with no hierarchy. Span it full width on its own row instead, with
      the description+contact-details column and the form sitting side by
      side on the row below -- display:contents on the text wrapper exposes
      heading/subline/details as direct grid items with no DOM change. */
-  #contact .od-contact-w1280{display:grid!important;grid-template-columns:1fr 1fr!important;grid-template-areas:"heading heading" "subline form" "details form"!important;column-gap:48px!important;row-gap:24px!important;align-items:start!important}
+  #contact .od-contact-w1280{display:grid!important;grid-template-columns:1fr 1fr!important;grid-template-areas:"heading heading" "subline form" "details form"!important;column-gap:48px!important;row-gap:24px!important;align-items:start!important;padding-left:0!important;padding-right:0!important}
   #contact .od-contact-text{display:contents!important}
-  #contact .od-contact-heading{grid-area:heading!important}
+  #contact .od-contact-heading{grid-area:heading!important;font-size:48px!important}
   #contact .od-contact-subline{grid-area:subline!important}
   #contact .od-contact-details{grid-area:details!important}
   #contact .od-form{grid-area:form!important;min-width:300px!important}
-  #contact h1,#contact h2{font-size:36px!important}
+  #contact h2{font-size:36px!important}
   .od-strip{height:auto!important;display:grid!important;grid-template-columns:1fr 1fr!important;justify-content:center!important;justify-items:center!important;gap:16px 32px!important;padding:24px 40px!important}
   .od-strip>*{width:auto!important;white-space:normal!important}
   .od-strip-contact{grid-template-columns:1fr!important;justify-items:center!important}
