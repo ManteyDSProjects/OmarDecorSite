@@ -89,7 +89,7 @@ function ContactGallerySection() {
     <div id="gallery" className="od-band od-section-pad" style={{ ...odBand, background: "var(--od-white)", display: "flex", flexDirection: "column", gap: 58, padding: "120px 80px", alignItems: "center" }}>
       <div className="od-fluid" style={{ width: 1100, maxWidth: "100%", boxSizing: "border-box", display: "flex", flexDirection: "column", gap: 16, alignSelf: "center", flexShrink: 0 }}>
         <span style={odEyebrow}>Our Work</span>
-        <h2 className="od-h2" style={odH2}>See The Difference Quality Work Makes</h2>
+        <h2 className="od-h2" style={{ ...odH2, lineHeight: 1.25 }}>View Our Mixed Gallery Below and See The Difference Quality Work Makes</h2>
         <span className="od-fluid" style={{ ...odSubline, width: 760, fontSize: 20 }}>A selection of home improvement projects completed across Central London.</span>
       </div>
       <div
