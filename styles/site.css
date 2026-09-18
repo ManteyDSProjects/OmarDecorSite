@@ -367,6 +367,12 @@ a:hover{color:var(--od-navy)}
   .od-strip-contact{grid-template-columns:1fr!important;justify-items:center!important}
   .od-stack:has(.od-detail-media){flex-direction:column!important;height:auto!important;gap:48px!important;align-items:stretch!important}
   .od-stack:has(.od-detail-media) .od-detail-media{flex:none!important;width:100%!important;max-width:480px!important;height:auto!important;align-self:center!important}
+  /* Same treatment as .od-detail-media above: a compact-aspect photo next
+     to several paragraphs of copy leaves a large dead gap under the photo
+     once side-by-side. Stack instead, image on top (already first in the
+     DOM) then text below -- matches the Home page's equivalent section. */
+  .od-stack:has(.od-about-portrait){flex-direction:column!important;height:auto!important;gap:32px!important;align-items:stretch!important}
+  .od-stack:has(.od-about-portrait) .od-about-portrait{flex:none!important;width:100%!important;max-width:480px!important;height:auto!important;align-self:center!important;aspect-ratio:560/420}
   .od-stack:has(.od-areas-col){flex-direction:column!important;height:auto!important;gap:32px!important;align-items:stretch!important}
   .od-band:has(.od-areas-col){height:auto!important}
   .od-areas-col{flex:none!important;width:100%!important;max-width:none!important}
