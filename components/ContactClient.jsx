@@ -6,7 +6,6 @@ import ContactSection from "@/components/ContactSection";
 import CtaBanner from "@/components/CtaBanner";
 import { BackToTop, CookieBanner } from "@/components/Strips";
 import { Lightbox } from "@/components/Gallery";
-import Icon from "@/components/Icon";
 import { FaqItem } from "@/components/Markers";
 import { odShell, odBand, odMain, odEyebrow, odH2, odSubline, odBody } from "@/lib/styles";
 import { ABOUT, FAQS } from "@/lib/content";
@@ -84,7 +83,6 @@ function AboutCarousel() {
 function ContactGallerySection() {
   const [open, setOpen] = useState(false);
   const [shot, setShot] = useState(0);
-  const [expanded, setExpanded] = useState(false);
   return (
     <div id="gallery" className="od-band od-section-pad" style={{ ...odBand, background: "var(--od-white)", display: "flex", flexDirection: "column", gap: 58, padding: "120px 80px", alignItems: "center" }}>
       <div className="od-fluid" style={{ width: 1100, maxWidth: "100%", boxSizing: "border-box", display: "flex", flexDirection: "column", gap: 16, alignSelf: "center", flexShrink: 0 }}>
@@ -92,27 +90,15 @@ function ContactGallerySection() {
         <h2 className="od-h2" style={{ ...odH2, lineHeight: 1.25 }}>View Our Mixed Gallery Below and See The Difference Quality Work Makes</h2>
         <span className="od-fluid" style={{ ...odSubline, width: 760, fontSize: 20 }}>A selection of home improvement projects completed across Central London.</span>
       </div>
-      <div
-        className={"od-category-card od-work-hero" + (expanded ? " is-expanded" : "")}
-        role="button"
-        tabIndex={0}
-        aria-label="Open Selected Works gallery"
-        onClick={() => { setOpen(true); setShot(0); }}
-        onKeyDown={(e) => { if (e.target === e.currentTarget && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); setOpen(true); setShot(0); } }}
-      >
-        <div className="od-category-img od-work-img" style={{ backgroundImage: "url(/uploads/modern-bedroom-white-gloss-wardrobe-wood-slat-accent-wall.webp)" }} />
-        <div className="od-category-content">
-          <div className="od-category-heading-row">
-            <span className="od-category-name">Selected Works</span>
-            <button type="button" className="od-category-toggle" aria-expanded={expanded} aria-label={(expanded ? "Hide" : "Show") + " Selected Works description"} onClick={(e) => { e.stopPropagation(); setExpanded((v) => !v); }}>
-              <Icon name="plus" size={14} style={{ color: "var(--od-white)", transform: expanded ? "rotate(45deg)" : "none" }} />
-            </button>
-          </div>
-          <span className="od-category-caption">A curated mix of completed projects, showcasing thoughtful spaces across a range of styles and needs.</span>
-        </div>
+      <div className="od-work-grid">
+        {MIXED_GALLERY.map((src, i) => (
+          <button key={src} type="button" className="od-work-cell" aria-label={"View larger: " + MIXED_GALLERY_ALTS[i]} onClick={() => { setShot(i); setOpen(true); }}>
+            <img src={src} alt={MIXED_GALLERY_ALTS[i]} loading="lazy" decoding="async" />
+          </button>
+        ))}
       </div>
       {open ? (
-        <Lightbox srcs={MIXED_GALLERY} alts={MIXED_GALLERY_ALTS} index={shot} onIndex={setShot} onClose={() => setOpen(false)} />
+        <Lightbox variant="clean" srcs={MIXED_GALLERY} alts={MIXED_GALLERY_ALTS} index={shot} onIndex={setShot} onClose={() => setOpen(false)} />
       ) : null}
     </div>
   );

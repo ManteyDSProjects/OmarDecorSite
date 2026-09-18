@@ -78,7 +78,8 @@ function whenScrollSettles(el, cb) {
   requestAnimationFrame(tick);
 }
 
-export function Lightbox({ names, srcs, alts, index, onIndex, onClose }) {
+export function Lightbox({ names, srcs, alts, index, onIndex, onClose, variant }) {
+  const clean = variant === "clean";
   const closeRef = useRef(null);
   const thumbsRef = useRef(null);
   const prevIndexRef = useRef(index);
@@ -168,10 +169,10 @@ export function Lightbox({ names, srcs, alts, index, onIndex, onClose }) {
   const arrow = { width: 48, height: 48, borderRadius: 24, border: "none", padding: 0, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", flexShrink: 0 };
 
   return (
-    <div className="od-lightbox" role="dialog" aria-modal="true" aria-label="Project photograph" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
+    <div className={"od-lightbox" + (clean ? " od-lightbox-clean" : "")} role="dialog" aria-modal="true" aria-label="Project photograph" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
       <div className="od-lb-inner">
         <div className="od-lb-top">
-          <span className="od-lb-count">{index + 1} of {count}</span>
+          {clean ? <span /> : <span className="od-lb-count">{index + 1} of {count}</span>}
           <button ref={closeRef} type="button" className="od-arrow od-arrow-brass od-lb-close" aria-label="Close" onClick={onClose} style={{ ...arrow, background: "var(--od-brass)" }}>
             <Icon name="plus" size={18} style={{ color: "var(--od-white)", transform: "rotate(45deg)" }} />
           </button>
@@ -190,8 +191,8 @@ export function Lightbox({ names, srcs, alts, index, onIndex, onClose }) {
           ) : null}
         </div>
         <div className="od-lb-bottom">
-          <span className="od-lb-caption">{altFor2(index)}</span>
-          {count > 1 ? (
+          {clean ? null : <span className="od-lb-caption">{altFor2(index)}</span>}
+          {count > 1 && !clean ? (
             <div ref={thumbsRef} className="od-lb-thumbs" role="tablist" aria-label="Photographs in this project">
               {/* Leading/trailing clones create the infinite-loop illusion (see the
                   index effect above) — hidden from a11y/tab order since the real
