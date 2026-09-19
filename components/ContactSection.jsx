@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import Button from "./Button";
 import Icon from "./Icon";
 import { odBand, odH2 } from "@/lib/styles";
@@ -35,8 +35,34 @@ function Field({ label, name, type = "text", placeholder, required, autoComplete
 
 export default function ContactSection({ heading = "h2" }) {
   const H = heading;
-  const [sending, setSending] = useState(false);
+  const [status, setStatus] = useState("idle"); // idle | sending | success | error
   const [tried, setTried] = useState(false);
+  const thanksRef = useRef(null);
+  const sending = status === "sending";
+
+  useEffect(() => {
+    if (status === "success" && thanksRef.current) thanksRef.current.focus();
+  }, [status]);
+
+  // Posts to Netlify Forms in the background and shows the result here, instead of
+  // navigating to Netlify's default success page. The static form markup below is what
+  // Netlify detects at deploy time, so it must keep name/data-netlify/form-name.
+  async function submit(e) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    setStatus("sending");
+    try {
+      const res = await fetch("/contact/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(new FormData(form)).toString(),
+      });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      setStatus("success");
+    } catch (err) {
+      setStatus("error");
+    }
+  }
   return (
     <div id="contact" className="od-band od-section-pad" style={{ ...odBand, background: "var(--od-navy)", padding: "120px 0", boxSizing: "border-box" }}>
       <div className="od-stack od-contact-w1280" style={{ width: 1440, maxWidth: "100%", margin: "0 auto", padding: "0 80px", boxSizing: "border-box", display: "flex", gap: 120, alignItems: "center" }}>
@@ -67,7 +93,7 @@ export default function ContactSection({ heading = "h2" }) {
           method="POST"
           data-netlify="true"
           netlify-honeypot="bot-field"
-          onSubmit={() => setSending(true)}
+          onSubmit={submit}
           onInvalidCapture={() => setTried(true)}
           onClickCapture={(e) => {
             if (e.target.closest && e.target.closest("[type=submit]")) setTried(true);
@@ -76,6 +102,15 @@ export default function ContactSection({ heading = "h2" }) {
           style={{ width: 600, minHeight: 668, height: "auto", borderRadius: 8, boxShadow: "var(--hairline-on-navy)", display: "flex", flexDirection: "column", gap: 24, padding: 48, boxSizing: "border-box", flexShrink: 0 }}
         >
           <input type="hidden" name="form-name" value="contact" />
+          {status === "success" ? (
+            <div ref={thanksRef} tabIndex={-1} role="status" aria-live="polite" style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "flex-start", gap: 20, outline: "none" }}>
+              <span style={{ width: 56, height: 56, borderRadius: 28, background: "var(--od-brass)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <Icon name="check" size={26} style={{ color: "var(--od-navy)" }} />
+              </span>
+              <span style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 28, lineHeight: 1.25, color: "var(--od-white)" }}>Thank you, your enquiry has been sent</span>
+              <span style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 20, lineHeight: 1.6, color: "var(--od-text-muted-dark)" }}>Omar will be in touch shortly to arrange your free site visit. If it&rsquo;s urgent, call or WhatsApp 07766 355099.</span>
+            </div>
+          ) : (
           <ODSubmitted.Provider value={tried}>
             <p hidden>
               <label>
@@ -90,10 +125,14 @@ export default function ContactSection({ heading = "h2" }) {
             <Field label="Email Address" name="email" type="email" placeholder="you@example.com" autoComplete="email" required />
             <Field label="Postcode" name="location" placeholder="e.g. SW11 1AA" />
             <Field label="Project Details" name="details" type="textarea" placeholder="Briefly describe what you need done..." />
+            {status === "error" ? (
+              <p role="alert" style={{ margin: 0, fontFamily: "var(--font-text)", fontWeight: 500, fontSize: 16, lineHeight: 1.5, color: "var(--od-white)" }}>Sorry, your enquiry didn&rsquo;t send. Please try again, or call or WhatsApp 07766 355099.</p>
+            ) : null}
             <div style={{ padding: "12px 0", alignSelf: "stretch" }}>
               <Button as="button" type="submit" variant="primary" ground="dark" disabled={sending} aria-disabled={sending} style={{ width: "100%" }}>{sending ? "Sending" : "Send Enquiry"}</Button>
             </div>
           </ODSubmitted.Provider>
+          )}
         </form>
       </div>
     </div>
