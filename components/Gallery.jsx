@@ -2,6 +2,7 @@
 import { memo, useEffect, useLayoutEffect, useRef, useState } from "react";
 import Icon from "./Icon";
 import { md } from "@/lib/img";
+import { lockBodyScroll, unlockBodyScroll } from "@/lib/scrollLock";
 import { altFor, GALLERY_IMG, CATEGORY_LABELS, CATEGORY_CAPTIONS } from "@/lib/galleries";
 
 /* The wrapper owns the layout rect and clips; the image inside is what scales on
@@ -110,11 +111,8 @@ export function Lightbox({ names, srcs, alts, index, onIndex, onClose, variant }
 
   useEffect(() => {
     if (closeRef.current) closeRef.current.focus();
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = prevOverflow;
-    };
+    lockBodyScroll();
+    return unlockBodyScroll;
   }, []);
 
   useEffect(() => {

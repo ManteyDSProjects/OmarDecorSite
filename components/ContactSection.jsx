@@ -78,11 +78,18 @@ export default function ContactSection({ heading = "h2" }) {
               <div key={t} style={{ display: "flex", gap: 16, alignItems: "center" }}>
                 {/* Fixed 20px, not the em-based default: this row's icons
                     must match their siblings, not scale off the 18px text. */}
-                <Icon name={ic} size={20} style={{ color: "var(--od-brass)", flexShrink: 0 }} />
                 {href ? (
-                  <a href={href} target={href.indexOf("wa.me") !== -1 ? "_blank" : undefined} rel={href.indexOf("wa.me") !== -1 ? "noopener" : undefined} className="od-inline-link" style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 20, lineHeight: 1.4, color: "var(--od-white)", textDecoration: "none" }}>{t}</a>
+                  // Icon lives inside the <a>, not beside it -- otherwise tapping the icon
+                  // (a third of the row's width, including its gap) does nothing on touch.
+                  <a href={href} target={href.indexOf("wa.me") !== -1 ? "_blank" : undefined} rel={href.indexOf("wa.me") !== -1 ? "noopener" : undefined} className="od-inline-link" style={{ display: "flex", gap: 16, alignItems: "center", fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 20, lineHeight: 1.4, color: "var(--od-white)", textDecoration: "none" }}>
+                    <Icon name={ic} size={20} style={{ color: "var(--od-brass)", flexShrink: 0 }} />
+                    {t}
+                  </a>
                 ) : (
-                  <span style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 20, lineHeight: 1.4, color: "var(--od-white)" }}>{t}</span>
+                  <>
+                    <Icon name={ic} size={20} style={{ color: "var(--od-brass)", flexShrink: 0 }} />
+                    <span style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 20, lineHeight: 1.4, color: "var(--od-white)" }}>{t}</span>
+                  </>
                 )}
               </div>
             ))}

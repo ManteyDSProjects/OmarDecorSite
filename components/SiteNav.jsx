@@ -6,6 +6,7 @@ import ODLogo from "./ODLogo";
 import Button from "./Button";
 import Icon from "./Icon";
 import { odBand } from "@/lib/styles";
+import { lockBodyScroll, unlockBodyScroll } from "@/lib/scrollLock";
 
 const NAV_LINKS = [
   ["Home", "/"],
@@ -25,6 +26,14 @@ export default function SiteNav({ variant = "light", current, galleryLabel = "Vi
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // The drawer is fixed and full-screen, but on iOS Safari the page behind it can still
+  // scroll under the user's finger unless the body itself is pinned (see lib/scrollLock).
+  useEffect(() => {
+    if (!open) return;
+    lockBodyScroll();
+    return unlockBodyScroll;
+  }, [open]);
 
   const hoveringRef = useRef(false);
   const idleTimerRef = useRef();

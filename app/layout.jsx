@@ -1,6 +1,13 @@
 import "@/styles/tokens.css";
 import "@/styles/site.css";
 
+// viewportFit:"cover" lets the page draw under the iPhone notch/Dynamic Island and home
+// indicator instead of leaving black bars there, which is also what makes the
+// env(safe-area-inset-*) values used in site.css report anything other than 0. Zoom is left
+// enabled (no maximumScale/userScalable) -- restricting pinch-zoom is an accessibility issue,
+// not a fix.
+export const viewport = { width: "device-width", initialScale: 1, viewportFit: "cover" };
+
 export const metadata = {
   metadataBase: new URL("https://omardecor.co.uk"),
   title: { default: "Omar Decor", template: "%s" },
