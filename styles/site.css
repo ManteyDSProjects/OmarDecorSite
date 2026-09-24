@@ -14,7 +14,10 @@
    never covered them and tapping one still showed the browser's default
    blue highlight overlay. */
 a,button,[role="button"],.od-faq,.od-category-card{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
-html{-webkit-text-size-adjust:100%;overflow-x:clip;scrollbar-width:thin;scrollbar-color:var(--od-navy) var(--od-cream)}
+/* iOS Safari's rubber-band overscroll paints whatever is behind <body> when it stretches
+   past the end of the page. <html> had no background, so that strip fell back to the
+   browser's default white. Every page ends with the navy Footer, so match it there. */
+html{-webkit-text-size-adjust:100%;overflow-x:clip;scrollbar-width:thin;scrollbar-color:var(--od-navy) var(--od-cream);background:var(--od-navy)}
 html::-webkit-scrollbar{width:12px}
 html::-webkit-scrollbar-track{background:var(--od-cream)}
 html::-webkit-scrollbar-thumb{background:var(--od-navy);border:3px solid var(--od-cream)}
