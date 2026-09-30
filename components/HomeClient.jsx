@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import Button from "@/components/Button";
@@ -7,6 +7,7 @@ import Icon from "@/components/Icon";
 import { md } from "@/lib/img";
 import Footer from "@/components/Footer";
 import Carousel from "@/components/Carousel";
+import Ring3D from "@/components/Ring3D";
 import { TrustBar, BackToTop, CookieBanner } from "@/components/Strips";
 import { CategoryCard, Lightbox } from "@/components/Gallery";
 import ReviewsSection from "@/components/ReviewsSection";
@@ -16,36 +17,31 @@ import { odShell, odBand, odMain, odEyebrow, odH2, odBody } from "@/lib/styles";
 import { CATEGORIES } from "@/lib/galleries";
 import { HOME_BENEFITS, SERVICES, STEPS, AREA_ROWS_HOME, AREA_HALVES_HOME } from "@/lib/content";
 
+// Six project photos on the rotating 3D ring (client-approved hero). Same -md files
+// the old slideshow used. See components/Ring3D.jsx.
 const HERO_SLIDES = [
+  ["/assets/images/hero-carousel-09-painting.webp", "Bedroom painted and decorated by Omar Decor"],
+  ["/assets/images/hero-carousel-05-fashion-studios.webp", "Living space finished by Omar Decor"],
   ["/assets/images/hero-carousel-01-airbnb.webp", "Airbnb-ready interior styled by Omar Decor"],
-  ["/assets/images/hero-carousel-02-bathrooms.webp", "Bathroom renovation by Omar Decor"],
-  ["/assets/images/hero-carousel-03-carpentry.webp", "Carpentry project by Omar Decor"],
-  ["/assets/images/hero-carousel-04-commercials.webp", "Commercial fit-out by Omar Decor"],
-  ["/assets/images/hero-carousel-05-fashion-studios.webp", "Fashion studio fit-out by Omar Decor"],
-  ["/assets/images/hero-carousel-06-flooring.webp", "Flooring installation by Omar Decor"],
-  ["/assets/images/hero-carousel-07-full-renovation.webp", "Full renovation by Omar Decor"],
-  ["/assets/images/hero-carousel-08-kitchens.webp", "Kitchen renovation by Omar Decor"],
-  ["/assets/images/hero-carousel-09-painting.webp", "Painting and decorating by Omar Decor"],
+  ["/assets/images/hero-carousel-02-bathrooms.webp", "Kitchen renovation by Omar Decor"],
+  ["/assets/images/hero-carousel-04-commercials.webp", "Living room finished by Omar Decor"],
+  ["/assets/images/hero-carousel-03-carpentry.webp", "Kitchen and carpentry project by Omar Decor"],
 ];
 
 function HeroCarousel() {
-  const [i, setI] = useState(0);
-  useEffect(() => {
-    const t = setInterval(() => setI((v) => (v + 1) % HERO_SLIDES.length), 4000);
-    return () => clearInterval(t);
-  }, []);
   return (
-    <div className="od-hero-carousel" style={{ position: "relative", width: 600, height: 480, borderRadius: 8, overflow: "hidden", flexShrink: 0, background: "var(--od-navy-deep)" }}>
-      {HERO_SLIDES.map(([src, alt], n) => (
-        <img key={src} src={md(src)} alt={alt} decoding="async" fetchPriority={n === 0 ? "high" : "low"} loading={n === 0 ? "eager" : "lazy"} className={"od-hero-carousel-img" + (n === i ? " is-active" : "")} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "contain" }} />
-      ))}
-    </div>
+    <Ring3D slides={HERO_SLIDES} label="Recent Omar Decor projects" className="od-hero-carousel" style={{ position: "relative", width: 600, height: 480, borderRadius: 8, overflow: "hidden", flexShrink: 0, background: "var(--od-form-field)" }}>
+      <figure className="od-hero3d-quote">
+        <blockquote>&ldquo;It is such a master piece!!&rdquo;</blockquote>
+        <figcaption>Ms Laure Caron, Fulham</figcaption>
+      </figure>
+    </Ring3D>
   );
 }
 
 function Hero() {
   return (
-    <div className="od-hero-static" style={{ ...odBand, position: "relative", background: "var(--od-white)", padding: "96px 0", boxSizing: "border-box" }}>
+    <div className="od-hero-static od-home-hero" style={{ ...odBand, position: "relative", background: "var(--od-white)", padding: "96px 0", boxSizing: "border-box" }}>
       <div className="od-stack od-hero-w1440" style={{ width: 1440, maxWidth: "100%", margin: "0 auto", padding: "0 48px", boxSizing: "border-box", display: "flex", gap: 80, alignItems: "center" }}>
         <div style={{ position: "relative", display: "flex", flexDirection: "column", gap: 28, justifyContent: "center", alignItems: "flex-start", flexGrow: 1, alignSelf: "stretch" }}>
           <h1 className="od-h1" style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 64, lineHeight: 1.1, color: "var(--od-navy)", margin: 0, alignSelf: "stretch" }}>Quality Home Improvements, Done Properly.</h1>

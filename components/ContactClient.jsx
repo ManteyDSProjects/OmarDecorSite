@@ -1,8 +1,9 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SiteNav from "@/components/SiteNav";
 import Footer from "@/components/Footer";
-import { md, sq } from "@/lib/img";
+import { sq } from "@/lib/img";
+import Ring3D from "@/components/Ring3D";
 import ContactSection from "@/components/ContactSection";
 import CtaBanner from "@/components/CtaBanner";
 import { BackToTop, CookieBanner } from "@/components/Strips";
@@ -80,18 +81,8 @@ const ABOUT_SLIDES = [
 ];
 
 function AboutCarousel() {
-  const [i, setI] = useState(0);
-  useEffect(() => {
-    const t = setInterval(() => setI((v) => (v + 1) % ABOUT_SLIDES.length), 4000);
-    return () => clearInterval(t);
-  }, []);
-  return (
-    <div className="od-photo-wrap od-about-portrait" style={{ position: "relative", width: 560, height: 420, borderRadius: 6, overflow: "hidden", flexShrink: 0, background: "var(--od-navy-deep)" }}>
-      {ABOUT_SLIDES.map(([src, alt, pos], n) => (
-        <img key={src} src={md(src)} alt={alt} decoding="async" fetchPriority={n === 0 ? "high" : "low"} loading={n === 0 ? "eager" : "lazy"} className={"od-hero-carousel-img" + (n === i ? " is-active" : "")} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: pos || "center" }} />
-      ))}
-    </div>
-  );
+  // 9 cards, so a wider ring than the hero's six; --dur keeps the per-card speed similar.
+  return <Ring3D slides={ABOUT_SLIDES} label="Omar at work on recent projects" className="od-photo-wrap od-about-portrait" style={{ position: "relative", width: 560, height: 420, borderRadius: 6, overflow: "hidden", flexShrink: 0, background: "var(--od-form-field)" }} vars={{ "--w": "36cqw", "--h": "54cqw", "--r": "56cqw", "--dur": "42s" }} />;
 }
 
 function ContactGallerySection() {
