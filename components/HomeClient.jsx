@@ -51,7 +51,7 @@ function Hero() {
           <h1 className="od-h1" style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 64, lineHeight: 1.1, color: "var(--od-navy)", margin: 0, alignSelf: "stretch" }}>Quality Home Improvements, Done Properly.</h1>
           <span className="od-hero-subline" style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 20, lineHeight: 1.6, color: "var(--od-text-muted)", alignSelf: "stretch" }}>Reliable handyman and home improvement services across Central London and surrounding areas.</span>
           <div className="od-btn-row" style={{ display: "flex", gap: 16, alignItems: "flex-start", flexWrap: "wrap" }}>
-            <Button as={Link} href="/contact/" variant="primary" ground="dark" style={{ width: 220, height: 45, letterSpacing: "0.05em", color: "var(--od-white)", textDecoration: "none" }}>Book a Site Visit</Button>
+            <Button as={Link} href="/#work" variant="primary" ground="dark" style={{ height: 45, whiteSpace: "nowrap", letterSpacing: "0.05em", color: "var(--od-white)", textDecoration: "none" }}>View Before &amp; After Gallery</Button>
             <Button as="a" href="https://wa.me/447766355099" target="_blank" rel="noopener" variant="ghost" ground="light" style={{ width: 220, height: 45, padding: "11px 16px", gap: 10, letterSpacing: "0.05em", fontSize: 16, color: "var(--od-navy)", textDecoration: "none" }}>
               <Icon name="whatsapp" style={{ fontSize: "calc(22px / 2.2)" }} />+447766 355099
             </Button>
@@ -120,7 +120,7 @@ export default function HomePage() {
   return (
     <div className="od-shell" style={odShell}>
       <div className="od-nav-spacer" style={{ alignSelf: "stretch" }}>
-        <SiteNav variant="navy" current="Home" galleryLabel="View Before & After Gallery" galleryHref="/#work" />
+        <SiteNav variant="navy" current="Home" galleryLabel="Book a Site Visit" galleryHref="/contact/" />
       </div>
       <main id="main" style={odMain}>
         <Hero />

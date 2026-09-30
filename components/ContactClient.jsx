@@ -52,11 +52,16 @@ const MIXED_GALLERY_NAMES = [
   "omar-decor-styled-bedroom-teal-cushions-nightstand-01",
   "omar-decor-styled-bedroom-dark-feature-wall-02",
   "omar-decor-styled-living-room-city-view",
+  "omar-decor-hallway-framed-prints-london-underground",
+  "omar-decor-hallway-waterfall-canvas-artwork",
+  "omar-decor-airbnb-bedroom-desk-tv-unit-towels",
+  "omar-decor-bathroom-brass-fittings-oval-mirror",
+  "omar-decor-dining-room-wood-table-white-chairs",
 ];
 const MIXED_GALLERY = MIXED_GALLERY_NAMES.map((n) => "/uploads/" + n + ".webp");
-// Grid is 6 columns x 7 rows. Photos fill left to right, row by row; any slots left at the
-// end stay blank (keeping the seven-row height) until more photos are added.
-const GRID_SLOTS = 6 * 7;
+// Grid is 6 columns x 8 rows (48 photos fill it exactly). Photos fill left to right, row by
+// row; any slots left at the end stay blank until more photos are added.
+const GRID_SLOTS = 6 * 8;
 const GRID_CELLS = Array.from({ length: Math.max(GRID_SLOTS, MIXED_GALLERY.length) }, (_, slot) => (slot < MIXED_GALLERY.length ? slot : -1));
 const MIXED_GALLERY_ALTS = MIXED_GALLERY_NAMES.map((_, i) => "Mixed Gallery photo " + (i + 1) + " by Omar Decor");
 
@@ -68,6 +73,10 @@ const ABOUT_SLIDES = [
   ["/uploads/omar-decor-owner-gym-equipment-installation.webp", "Omar installing home gym equipment", "center 20%"],
   ["/uploads/omar-decor-owner-gym-fit-out-shelving.webp", "Omar on site at a gym fit-out"],
   ["/uploads/omar-decor-owner-commercial-fit-out-yellow-wall.webp", "Omar on site at a commercial fit-out"],
+  ["/uploads/omar-decor-owner-slat-wall-panel-installation.webp", "Omar fitting a slat wall panel"],
+  ["/uploads/omar-decor-owner-wood-shelving-installation.webp", "Omar fitting wood wall shelving on a commercial site", "center 15%"],
+  ["/uploads/omar-decor-owner-kitchen-unit-fitting.webp", "Omar fitting a kitchen wall unit", "center 15%"],
+  ["/uploads/omar-decor-owner-wall-art-installation.webp", "Omar hanging wall art in a finished room"],
 ];
 
 function AboutCarousel() {
