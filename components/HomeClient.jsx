@@ -63,19 +63,15 @@ function Hero() {
     <div className="od-hero-static od-home-hero" style={{ ...odBand, position: "relative", background: "var(--od-white)", padding: "96px 0", boxSizing: "border-box" }}>
       <div className="od-stack od-hero-w1440" style={{ width: 1440, maxWidth: "100%", margin: "0 auto", padding: "0 48px", boxSizing: "border-box", display: "flex", gap: 80, alignItems: "center" }}>
         <div style={{ position: "relative", display: "flex", flexDirection: "column", gap: 28, justifyContent: "center", alignItems: "flex-start", flexGrow: 1, alignSelf: "stretch" }}>
-          <h1 className="od-h1" style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 64, lineHeight: 1.1, color: "var(--od-navy)", margin: 0, alignSelf: "stretch" }}>Quality Home Improvements, Done Properly.</h1>
+          <h1 className="od-h1" style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 64, lineHeight: 1.1, color: "var(--od-navy)", margin: 0, alignSelf: "stretch" }}>Quality Home Renovations, Done Properly.</h1>
           <span className="od-hero-subline" style={{ fontFamily: "var(--font-text)", fontWeight: 400, fontSize: 20, lineHeight: 1.6, color: "var(--od-text-muted)", alignSelf: "stretch" }}>Kitchens, bathrooms, flooring and carpentry across Central London. Free site visit, clear fixed quote.</span>
           <div className="od-btn-row" style={{ display: "flex", gap: 16, alignItems: "flex-start", flexWrap: "wrap" }}>
-            <Button as={Link} href="/#work" variant="primary" ground="dark" className="od-hide-mobile" style={{ height: 45, whiteSpace: "nowrap", letterSpacing: "0.05em", color: "var(--od-white)", textDecoration: "none" }}>View Before &amp; After Gallery</Button>
-            {/* Phones lead with booking instead of the gallery (same target as the header CTA). */}
-            <Button as={Link} href="/contact/" variant="primary" ground="dark" className="od-show-mobile" style={{ height: 45, whiteSpace: "nowrap", letterSpacing: "0.05em", color: "var(--od-white)", textDecoration: "none" }}>Book a Free Site Visit</Button>
+            <Button as={Link} href="/#work" variant="primary" ground="dark" style={{ height: 45, whiteSpace: "nowrap", letterSpacing: "0.05em", color: "var(--od-white)", textDecoration: "none" }}>View Before &amp; After Gallery</Button>
             <Button as="a" href="https://wa.me/447766355099" target="_blank" rel="noopener" variant="ghost" ground="light" style={{ width: 220, height: 45, padding: "11px 16px", gap: 10, letterSpacing: "0.05em", fontSize: 16, color: "var(--od-navy)", textDecoration: "none" }}>
-              <Icon name="whatsapp" style={{ fontSize: "calc(22px / 2.2)" }} /><span className="od-hide-mobile">+447766 355099</span><span className="od-show-mobile">WhatsApp Omar</span>
+              <Icon name="whatsapp" style={{ fontSize: "calc(22px / 2.2)" }} />+447766 355099
             </Button>
           </div>
         </div>
-        {/* Phones only: its own flex item, so space-between centres it between the buttons and the stage. */}
-        <Link href="/#work" className="od-show-mobile od-hero-gallery-link">See before &amp; after work <span aria-hidden="true">&darr;</span></Link>
         <HeroCarousel />
       </div>
     </div>

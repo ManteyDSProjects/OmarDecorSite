@@ -223,14 +223,6 @@ a:hover{color:var(--od-navy)}
   .od-footer>div:first-child>div:nth-child(1){grid-column:1 / span 2!important}
 }
 
-/* Phone-only / not-on-phone content (e.g. the hero buttons' labels). The extra
-   .od-btn-row selectors out-rank the row's own display:flex!important on phones. */
-.od-show-mobile{display:none!important}
-@media (max-width:768px){
-  .od-hide-mobile,.od-btn-row>.od-hide-mobile{display:none!important}
-  .od-btn-row>.od-show-mobile{display:flex!important}
-  span.od-show-mobile{display:inline!important}
-}
 .od-nav-overlay-wrap{position:absolute;left:0;top:0;width:100%;z-index:50}
 .od-nav-overlay{box-shadow:none}
 .od-hero-carousel-img{opacity:0;transition:opacity 400ms var(--ease-out)}
@@ -270,8 +262,8 @@ a:hover{color:var(--od-navy)}
      so it holds even with the browser chrome showing. */
   .od-home-hero{padding:16px 16px 20px!important;min-height:calc(100svh - 60px - 104px);display:flex!important;flex-direction:column!important}
   .od-home-hero .od-hero-w1440{gap:10px!important;flex:1 1 auto!important;justify-content:space-between!important}
-  .od-home-hero .od-hero-gallery-link{display:block!important;align-self:center!important;font:600 15px/22px var(--font-text);color:var(--od-navy);text-decoration:underline;text-decoration-color:var(--od-brass);text-decoration-thickness:2px;text-underline-offset:4px}
-  .od-home-hero .od-hero-w1440>div:first-child{gap:12px!important;flex:0 0 auto!important}
+  /* auto margins share any spare height equally above and below the text block, so it sits centred between the header and the photo box */
+  .od-home-hero .od-hero-w1440>div:first-child{gap:12px!important;flex:0 0 auto!important;margin-block:auto!important}
   .od-home-hero h1{font-size:28px!important;line-height:1.1!important}
   .od-home-hero .od-hero-subline{font-size:15px!important;line-height:1.45!important}
   .od-home-hero .od-btn-row{gap:10px!important}
@@ -280,8 +272,6 @@ a:hover{color:var(--od-navy)}
   .od-home-hero .od-hero-carousel{aspect-ratio:auto!important;flex:1 1 0!important;min-height:170px;max-height:calc((100vw - 32px) * .75)}
   .od-home-hero .od-hero3d{--h:min(59cqw,calc(var(--sh,9999px) * .78));--w:calc(var(--h) * .8136);--r:calc(var(--w) * .896)}
   /* 44px touch targets without changing the layout (iOS HIG) */
-  .od-home-hero .od-hero-gallery-link{position:relative}
-  .od-home-hero .od-hero-gallery-link::after{content:"";position:absolute;left:-12px;right:-12px;top:-11px;bottom:-11px}
   .od-logo-link::after{content:"";position:absolute;inset:-3px -8px}
   .od-drawer-contact-item{min-height:44px}
 }
@@ -305,10 +295,6 @@ a:hover{color:var(--od-navy)}
   .od-strip span{font-size:13px!important}
   /* 'THE OMAR DECOR APPROACH' (nowrap, letter-spaced) was 284px in a 232px box */
   .od-quote-card span:last-of-type{font-size:12.5px!important;letter-spacing:1.5px!important}
-}
-/* Very short screens (iPhone SE 1st gen, 568px): drop the gallery link so the strip still fits. */
-@media (max-width:768px) and (max-height:600px){
-  .od-home-hero .od-hero-gallery-link{display:none!important}
 }
 
 /* iOS 15 and older (no container query units): fixed sizes instead of the cqw/cqh maths. */
