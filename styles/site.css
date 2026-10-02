@@ -289,6 +289,24 @@ a:hover{color:var(--od-navy)}
   .od-home-hero .od-hero3d{--w:48cqw;--h:59cqw;--r:43cqw}
 }
 
+/* Tablet portrait (iPad mini / Air / Pro, 600-1100px wide): neither the phone layout (stretched, 28px
+   heading) nor the 2-column tablet grid (tiny photo box) suits it. Stack instead: bigger type, buttons side
+   by side, and a full-width photo box that uses the height. The double class beats the tablet grid rules. */
+@media (min-width:600px) and (max-width:1100px) and (orientation:portrait){
+  .od-hero-static.od-home-hero{padding:48px 48px 40px!important;display:flex!important;flex-direction:column!important}
+  .od-hero-static.od-home-hero .od-hero-w1440{display:flex!important;flex-direction:column!important;grid-template-columns:none!important;grid-template-areas:none!important;gap:36px!important;flex:1 1 auto!important;justify-content:space-between!important;align-items:stretch!important;padding-left:0!important;padding-right:0!important}
+  .od-hero-static.od-home-hero .od-hero-w1440>div:first-child{display:flex!important;flex-direction:column!important;gap:20px!important;flex:0 0 auto!important;margin-block:auto!important;align-self:stretch!important}
+  .od-hero-static.od-home-hero h1{grid-area:auto!important;font-size:clamp(44px,6.4vw,64px)!important;line-height:1.08!important}
+  .od-hero-static.od-home-hero .od-hero-subline{grid-area:auto!important;font-size:22px!important;line-height:1.5!important}
+  .od-hero-static.od-home-hero .od-hero-w1440 .od-btn-row{grid-area:auto!important;flex-direction:row!important;align-items:center!important;align-self:flex-start!important;width:auto!important;margin:0!important;gap:16px!important}
+  .od-hero-static.od-home-hero .od-btn-row>*{flex:0 0 auto!important;width:auto!important}
+  .od-hero-static.od-home-hero .od-hero-carousel{grid-area:auto!important;flex:1 1 auto!important;width:100%!important;height:auto!important;aspect-ratio:auto!important;min-height:380px;max-height:calc((100vw - 96px) * .75)}
+  .od-hero-static.od-home-hero .od-hero3d{--h:min(59cqw,calc(var(--sh,9999px) * .78));--w:calc(var(--h) * .8136);--r:calc(var(--w) * .896)}
+}
+@media (min-width:769px) and (max-width:1100px) and (orientation:portrait){
+  .od-hero-static.od-home-hero{min-height:calc(100svh - 110px - 114px)}
+}
+
 /* 320px-wide phones (iPhone SE 1st gen): the trust strip was ~8px wider than the screen. */
 @media (max-width:359px){
   .od-strip{gap:12px 10px!important;min-height:104px;align-content:center}
