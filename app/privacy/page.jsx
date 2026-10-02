@@ -7,7 +7,7 @@ export const metadata = {
   openGraph: {
     title: "Privacy Policy | Omar Decor",
     description: "How Omar Decor collects, uses, and protects your personal information when you get in touch about home improvement work.",
-    images: [{ url: "/assets/images/og-omar-decor.jpg", width: 1200, height: 630, alt: "Bright bedroom with a grey feature wall, finished by Omar Decor" }],
+    images: [{ url: "/assets/images/og-omar-decor-flooring.jpg", width: 1200, height: 630, alt: "Bright living room with oak flooring, finished by Omar Decor" }],
   },
 };
 
